@@ -1,0 +1,6 @@
+trackpy.Track.reset_counter
+===========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: Track.reset_counter

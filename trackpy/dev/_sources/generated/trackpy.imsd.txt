@@ -1,0 +1,6 @@
+trackpy.imsd
+============
+
+.. currentmodule:: trackpy
+
+.. autofunction:: imsd

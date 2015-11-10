@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Subpixel Accuracy and Uncertainty Estimation &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="../index.html" />
+    <link rel="next" title="Advanced Linking: Subnetworks and search_range" href="subnets.html" />
+    <link rel="prev" title="Feature finding in 3D confocal images" href="tracking-3d.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Subpixel Accuracy and Uncertainty Estimation</a><ul>
+<li><a class="reference internal" href="#how-is-subpixel-resolution-possible">How is subpixel resolution possible?</a></li>
+<li><a class="reference internal" href="#demonstration-of-trackpy-s-uncertainty-estimation-on-noisy-images">Demonstration of trackpy&#8217;s uncertainty estimation on noisy images</a></li>
+<li><a class="reference internal" href="#the-effect-of-diameter-on-precision">The effect of <tt class="docutils literal"><span class="pre">diameter</span></tt> on precision</a></li>
+<li><a class="reference internal" href="#how-tracking-errors-can-qualitatively-affect-physical-interpretation">How tracking errors can qualitatively affect physical interpretation</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="subpixel-accuracy-and-uncertainty-estimation">
+<h1>Subpixel Accuracy and Uncertainty Estimation<a class="headerlink" href="#subpixel-accuracy-and-uncertainty-estimation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-is-subpixel-resolution-possible">
+<h2>How is subpixel resolution possible?<a class="headerlink" href="#how-is-subpixel-resolution-possible" title="Permalink to this headline">¶</a></h2>
+<p>Tracking resolution can exceed the traditional diffraction-limited
+resolution of a microscope. If a particle&#8217;s image spans multiple pixels,
+we can find its position with subpixel accuracy by taking the average
+position of these pixels, weighted by brightness. This is referred to as
+the particle&#8217;s <em>centroid</em>.</p>
+<p>This tutorial will use simulated images to demonstrate how well
+trackpy&#8217;s implementation of the Crocker&#8211;Grier algorithm determines
+particle locations under various conditions. It also demonstrates
+trackpy&#8217;s uncertainty-estimation capability and introduces the most
+important sources of error in particle tracking experiments.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+import trackpy as tp
+import pims
+
+mpl.style.use(&#39;http://tiny.cc/leheny-style-sans-serif/raw&#39;)  # optional, just for plot style
+</pre></div>
+</div>
+</div>
+<div class="section" id="demonstration-of-trackpy-s-uncertainty-estimation-on-noisy-images">
+<h2>Demonstration of trackpy&#8217;s uncertainty estimation on noisy images<a class="headerlink" href="#demonstration-of-trackpy-s-uncertainty-estimation-on-noisy-images" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll draw a simulated image with a single Gaussian blob. The class
+below will make it easy to generate copies of the images with simulated
+camera noise.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SimulatedFrame</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_saturation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span><span class="n">dtype</span>
+
+    <span class="k">def</span> <span class="nf">add_spot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">ecc</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="s">&quot;Add a Gaussian spot to the frame.&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+        <span class="n">spot</span> <span class="o">=</span> <span class="n">amplitude</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ecc</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ecc</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">spot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_saturation</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">with_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noise_level</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="s">&quot;Return a copy with noise.&quot;</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="n">noise_level</span><span class="p">,</span> <span class="n">noise_level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">noisy_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">+</span> <span class="n">noise</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_saturation</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">noisy_image</span>
+
+    <span class="k">def</span> <span class="nf">add_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noise_level</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="s">&quot;Modify in place with noise.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_noise</span><span class="p">(</span><span class="n">noise_level</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The uncertainty in particle location can be estimated from the radius of
+gyration, the mask size (i.e., <tt class="docutils literal"><span class="pre">diameter</span></tt> specified to <tt class="docutils literal"><span class="pre">locate()</span></tt>)
+and the signal-to-noise ratio. The relation was worked out in a
+<a class="reference external" href="http://dx.doi.org/10.1529/biophysj.104.042457">detailed study of particle tracking errors by Savin and
+Doyle</a>. For a hat-like
+spot, the uncertainty in location of a hat-like spot is</p>
+<div class="math">
+\[\epsilon = \frac{N}{S}\frac{l_\text{noise}}{2\pi^{1/2}}\frac{w^2}{a^2}\]</div>
+<p>where <span class="math">\(N/S\)</span> is noise-to-signal; <span class="math">\(l_n\)</span>=1 pixel, the length
+scale of noise correlation; and <span class="math">\(w\)</span> and <span class="math">\(a\)</span> are feature size
+and mask size respectively. (The uncertainty in the location of a
+Gaussian blob is similar and more computationally intensive.)</p>
+<p>Trackpy performs the computation and gives the results in the <tt class="docutils literal"><span class="pre">'ep'</span></tt>
+column of the results set returned by <tt class="docutils literal"><span class="pre">locate</span></tt> or <tt class="docutils literal"><span class="pre">batch</span></tt>. This can
+be used as an estimate of uncertainty.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">frame</span> <span class="o">=</span> <span class="n">SimulatedFrame</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_spot</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">noise_level</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">90</span><span class="p">]):</span>
+    <span class="n">noisy_copy</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">with_noise</span><span class="p">(</span><span class="n">noise_level</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">locate</span><span class="p">(</span><span class="n">noisy_copy</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">&#39;python&#39;</span><span class="p">)</span>
+    <span class="n">tp</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">noisy_copy</span><span class="p">,</span> <span class="n">plot_style</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">),</span> <span class="n">imshow_style</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">ep</span> <span class="o">=</span> <span class="n">features</span><span class="p">[[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;ep&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xticks</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">r&#39;Signal/Noise = {signal}/{noise}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+              <span class="n">signal</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="n">noise_level</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s">r&#39;$\delta x={dx:.2}$  $\delta y={dy:.2}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">dx</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">),</span> <span class="n">dy</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)),</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s">r&#39;$\epsilon={ep:.2}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ep</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">ep</span><span class="p">)),</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>
+            <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/uncertainty_5_0.png" src="../_images/uncertainty_5_0.png" />
+</div>
+<div class="section" id="the-effect-of-diameter-on-precision">
+<h2>The effect of <tt class="docutils literal"><span class="pre">diameter</span></tt> on precision<a class="headerlink" href="#the-effect-of-diameter-on-precision" title="Permalink to this headline">¶</a></h2>
+<p>The size of the feature, as specified in the call to the <tt class="docutils literal"><span class="pre">locate</span></tt>
+function, has an important effect of the precision. If a user
+underestimates the particle&#8217;s diameter, precision suffers. Thus, it is
+best to err on the high side, although this a larger diameter comes at
+some cost in performance.</p>
+<p>As demonstrated below, a too-small <tt class="docutils literal"><span class="pre">diameter</span></tt> often biases the
+location toward the pixel edges.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">good_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">bad_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">SimulatedFrame</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+    <span class="n">frame</span><span class="o">.</span><span class="n">add_spot</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span> <span class="o">+</span> <span class="n">s</span><span class="p">),</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">feature</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">locate</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">&#39;python&#39;</span><span class="p">)</span>
+    <span class="n">good_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+    <span class="n">feature</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">locate</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">&#39;python&#39;</span><span class="p">)</span>
+    <span class="n">bad_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">good_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">good_results</span><span class="p">)[</span><span class="s">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-</span> <span class="mi">15</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;true x&#39;</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">bad_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">bad_results</span><span class="p">)[</span><span class="s">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-</span> <span class="mi">15</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;true x&#39;</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bad_df</span><span class="p">[</span><span class="s">&#39;true x&#39;</span><span class="p">],</span> <span class="n">bad_df</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;s&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">mew</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;diameter=9&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">good_df</span><span class="p">[</span><span class="s">&#39;true x&#39;</span><span class="p">],</span> <span class="n">good_df</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mfc</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">mew</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;diameter=13&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s">r&#39;ground truth $x$ mod 1&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">r&#39;measured $x$ mod 1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/uncertainty_7_0.png" src="../_images/uncertainty_7_0.png" />
+</div>
+<div class="section" id="how-tracking-errors-can-qualitatively-affect-physical-interpretation">
+<h2>How tracking errors can qualitatively affect physical interpretation<a class="headerlink" href="#how-tracking-errors-can-qualitatively-affect-physical-interpretation" title="Permalink to this headline">¶</a></h2>
+<p>Random errors in particle tracking can lead to systematic errors in the
+derived statistics, such as mean squared displacement, that are
+qualitatively misleading. The nature of the distortion depends on the
+particulars of the experiment. For simple Brownian diffusion&#8212;a random
+walk&#8212;random errors in locating a particle add a constant offset to the
+mean squared displacement, <span class="math">\(\langle \Delta r^2\rangle\)</span>. This and
+other cases are derived in detail in <a class="reference external" href="http://dx.doi.org/10.1529/biophysj.104.042457">the paper by Savin and
+Doyle</a>.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">noisy_traj</span> <span class="o">=</span> <span class="n">traj</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">traj</span><span class="p">[</span><span class="s">&#39;frame&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">noisy_traj</span><span class="p">[</span><span class="s">&#39;frame&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">msd</span><span class="p">(</span><span class="n">traj</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="s">&#39;msd&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;random walk&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">msd</span><span class="p">(</span><span class="n">noisy_traj</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="s">&#39;msd&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;random walk + random noise&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="s">&#39;log&#39;</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="s">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s">r&#39;$t$ [s]&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">r&#39;$\langle \Delta r^2 \rangle$ [\textmu m$^2$]&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/uncertainty_10_0.png" src="../_images/uncertainty_10_0.png" />
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/uncertainty.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

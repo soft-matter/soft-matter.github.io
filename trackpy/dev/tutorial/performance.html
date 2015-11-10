@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Making trackpy fast(er) &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="../index.html" />
+    <link rel="next" title="Obtaining Diagnostic Information from Linking" href="linking-diagnostics.html" />
+    <link rel="prev" title="Streaming: Processing Unlimited Frames On-Disk" href="on-disk.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Making trackpy fast(er)</a><ul>
+<li><a class="reference internal" href="#general-advice">General advice</a><ul>
+<li><a class="reference internal" href="#subnetworks">Subnetworks</a></li>
+<li><a class="reference internal" href="#feature-finding-the-best-advice">Feature-finding: The best advice</a></li>
+<li><a class="reference internal" href="#feature-finding-the-details">Feature-finding: The details</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-numba-for-acceleration">Using numba for acceleration</a><ul>
+<li><a class="reference internal" href="#theoretical-performance-diagnostics-performance-report">Theoretical performance diagnostics: <tt class="docutils literal"><span class="pre">performance_report()</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-topics">Advanced topics</a><ul>
+<li><a class="reference internal" href="#empirical-performance-diagnostics-timing-and-profiling">Empirical performance diagnostics: Timing and profiling</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#timing">Timing</a></li>
+<li><a class="reference internal" href="#profiling">Profiling</a></li>
+<li><a class="reference internal" href="#pyfftw-and-the-frequency-domain-bandpass"><tt class="docutils literal"><span class="pre">pyfftw</span></tt> and the frequency-domain bandpass</a></li>
+<li><a class="reference internal" href="#neighbor-finding-strategy-kdtree">Neighbor-finding strategy: KDTree</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="making-trackpy-fast-er">
+<h1>Making trackpy fast(er)<a class="headerlink" href="#making-trackpy-fast-er" title="Permalink to this headline">¶</a></h1>
+<p>This notebook explains specific features built into <tt class="docutils literal"><span class="pre">trackpy</span></tt> to boost
+performance, and it also provides some general suggestions on how to
+make your particle tracking run faster.</p>
+<p>First, set up matplotlib...</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
+import matplotlib
+from matplotlib.pyplot import imshow
+</pre></div>
+</div>
+<p>Let&#8217;s check the <tt class="docutils literal"><span class="pre">trackpy</span></tt> version. If it&#8217;s not 0.3.0 or greater, the
+following <em>may</em> not work.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy</span>
+<span class="n">trackpy</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;0.2.3-296-g3e96836&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="general-advice">
+<h2>General advice<a class="headerlink" href="#general-advice" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="subnetworks">
+<h3>Subnetworks<a class="headerlink" href="#subnetworks" title="Permalink to this headline">¶</a></h3>
+<p>As we&#8217;ll see in the examples below, the need to resolve &#8220;subnetworks&#8221; —
+in which multiple neighboring particles in one frame could correspond to
+multiple particles in the next — can drastically slow down tracking.
+There is a seprate tutorial on dealing with (excessive) subnetworks. In
+the text below, we&#8217;ll look at some methods for finding out just how much
+a of a problem subnetworks are in your application, so that you can
+weigh the various remedies against a potential loss of accuracy.</p>
+</div>
+<div class="section" id="feature-finding-the-best-advice">
+<h3>Feature-finding: The best advice<a class="headerlink" href="#feature-finding-the-best-advice" title="Permalink to this headline">¶</a></h3>
+<p>Judicious use of the <tt class="docutils literal"><span class="pre">minmass</span></tt> and/or <tt class="docutils literal"><span class="pre">threshold</span></tt> parameters during
+feature-finding, as described in the &#8220;walkthrough&#8221; tutorial notebook,
+can considerably speed up feature-finding, linking, and analysis of
+tracks. The best way to speed up a computation is usually to avoid doing
+it at all.</p>
+</div>
+<div class="section" id="feature-finding-the-details">
+<h3>Feature-finding: The details<a class="headerlink" href="#feature-finding-the-details" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">locate()</span></tt> and <tt class="docutils literal"><span class="pre">batch()</span></tt> functions for feature-finding can use
+either of two engines for their work, as specified by the optional
+<tt class="docutils literal"><span class="pre">engine</span></tt> parameter:</p>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">numba</span></tt> engine is reasonably fast. It is the default when numba
+is installed (see above).</li>
+<li>The <tt class="docutils literal"><span class="pre">python</span></tt> engine is currently slightly more accurate, but
+considerably slower.</li>
+</ul>
+<p>In addition, both engines do some extra work that you might not always
+need:</p>
+<ul class="simple">
+<li>They iteratively try to refine the position of the feature centroid,
+for the best possible subpixel accuracy. This can be turned off with
+the parameter <tt class="docutils literal"><span class="pre">max_iterations=0</span></tt>.</li>
+<li>They compute extra data about the feature, such as its eccentricity.
+This can be turned off with <tt class="docutils literal"><span class="pre">characterize=False</span></tt>.</li>
+</ul>
+<p><strong>Note:</strong> Before sacrificing accuracy for performance, it&#8217;s best to know
+objectively how much performance you are gaining. Read on to the
+Advanced Topics section for information about how to time
+feature-finding.</p>
+</div>
+</div>
+<div class="section" id="using-numba-for-acceleration">
+<h2>Using numba for acceleration<a class="headerlink" href="#using-numba-for-acceleration" title="Permalink to this headline">¶</a></h2>
+<p>Two key algorithms in <tt class="docutils literal"><span class="pre">trackpy</span></tt> can be sped up by the
+<tt class="docutils literal"><span class="pre">`numba</span></tt> &lt;<a class="reference external" href="http://numba.pydata.org">http://numba.pydata.org</a>&gt;`__ array-based just-in-time
+compiler for Python:</p>
+<ul class="simple">
+<li>Iteratively refining the centroids of features, for better subpixel
+resolution.</li>
+<li>Resolving subnetworks, as part of the linking process.</li>
+</ul>
+<p>The source code actually contains distinct Python and numba versions of
+each — and not one numba version but several, each optimized for a
+different use, and for 2D and 3D images. The default setting is to use
+the appropriate numba version when possible, but to fall back on the
+general-purpose Python version if numba is unavailable. You can also
+control these choices manually, using the <tt class="docutils literal"><span class="pre">engine</span></tt> argument to
+<tt class="docutils literal"><span class="pre">locate()</span></tt>, and the <tt class="docutils literal"><span class="pre">link_strategy</span></tt> argument when linking.</p>
+<p>If you don&#8217;t have <tt class="docutils literal"><span class="pre">numba</span></tt>, we recommend using the Anaconda or Canopy
+scientific Python distributions, which include <tt class="docutils literal"><span class="pre">numba</span></tt> and many other
+useful packages. Note that it can be difficult to install outside of
+these distributions.</p>
+<div class="section" id="theoretical-performance-diagnostics-performance-report">
+<h3>Theoretical performance diagnostics: <tt class="docutils literal"><span class="pre">performance_report()</span></tt><a class="headerlink" href="#theoretical-performance-diagnostics-performance-report" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">trackpy</span></tt> provides an easy way to check whether your system is
+configured for the best performance. Currently, it reports only whether
+<tt class="docutils literal"><span class="pre">numba</span></tt> is working.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy.diag</span>
+<span class="n">trackpy</span><span class="o">.</span><span class="n">diag</span><span class="o">.</span><span class="n">performance_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Yes, but could it be faster?
+FAST: numba is available and enabled (fast subnets and feature-finding).
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="advanced-topics">
+<h2>Advanced topics<a class="headerlink" href="#advanced-topics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="empirical-performance-diagnostics-timing-and-profiling">
+<h3>Empirical performance diagnostics: Timing and profiling<a class="headerlink" href="#empirical-performance-diagnostics-timing-and-profiling" title="Permalink to this headline">¶</a></h3>
+<p>What follows is a crash course in how to evaluate the performance of
+tracking. The general suggestions given above are good starting points,
+but they are just that — general suggestions. For your <em>specific</em>
+application, you need <em>specific</em> data about how long the computation
+takes, and how the computer is spending its time. This information may
+help you make your own adjustments to your tracking method, or it may
+help you when asking the <tt class="docutils literal"><span class="pre">trackpy</span></tt> developers for assistance (chances
+are we&#8217;ll be happy to help!).</p>
+<p>You will use these techniques with your own data, but let&#8217;s use the data
+from the &#8220;walkthrough&#8221; tutorial.</p>
+</div>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy</span> <span class="kn">as</span> <span class="nn">tp</span>
+<span class="kn">import</span> <span class="nn">pims</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">frames</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;../sample_data/bulk_water/*.png&#39;</span><span class="p">,</span> <span class="n">as_grey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The speed at which we can read images from disk is not something we can
+hope to improve much, so let&#8217;s get that out of the way before we do our
+tests. Also, we don&#8217;t need to use all the frames for this example
+(though you&#8217;re welcome to).</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># This gets the image data out of the pims ImageSequence object, and into a good old list in memory.</span>
+<span class="n">frames_preload</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frames</span><span class="p">[:</span><span class="mi">50</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Just so we don&#8217;t forget what these images look like:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">imshow</span><span class="p">(</span><span class="n">frames_preload</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x117f48a90&gt;
+</pre></div>
+</div>
+<img alt="../_images/performance_14_1.png" src="../_images/performance_14_1.png" />
+<p>Before we identify features, we need to give <tt class="docutils literal"><span class="pre">trackpy</span></tt> a chance to
+&#8220;warm up&#8221; — initialize <tt class="docutils literal"><span class="pre">fftw</span></tt> and compile certain functions, if it
+hasn&#8217;t done so already. So we&#8217;ll find features in just 2 frames:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">f2</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">frames_preload</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">minmass</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">frames_preload</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="n">minmass</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">characterize</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 2: 506 features
+</pre></div>
+</div>
+</div>
+<div class="section" id="timing">
+<h3>Timing<a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s find out — precisely — how long it takes to find features in a
+single frame. You&#8217;ll notice that the following cell begins with the line
+<tt class="docutils literal"><span class="pre">%%timeit</span></tt>. This is an example of a <em>cell magic</em>, which gives IPython
+special instructions about how to run the rest of the cell.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%%timeit
+f1 = tp.batch(frames_preload[:1], 11, minmass=100, invert=True)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 0: 500 features
+10 loops, best of 3: 89.7 ms per loop
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">%%timeit</span></tt> runs the same code multiple times and returns a somewhat
+accurate measurement of execution time. We can use it to see how much
+faster we can find features in this image when we turn off centroid
+refinement and feature characterization:</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%%timeit
+f1 = tp.batch(frames_preload[:1], 11, minmass=100, invert=True,
+              max_iterations=0, characterize=False)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 0: 499 features
+10 loops, best of 3: 78.8 ms per loop
+</pre></div>
+</div>
+<p>One thing to note is that the ratio of features to pixels is rather low
+in this image. If you were finding features in a dense packing of
+particles, the timing difference could be much more significant.</p>
+</div>
+<div class="section" id="profiling">
+<h3>Profiling<a class="headerlink" href="#profiling" title="Permalink to this headline">¶</a></h3>
+<p>Next, we&#8217;ll try to get a sense of what&#8217;s taking so long. The <tt class="docutils literal"><span class="pre">%%prun</span></tt>
+cell magic instructs IPython to run the rest of the cell&#8217;s code using a
+<em>profiler</em>.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%%prun
+f = tp.batch(frames_preload, 11, minmass=100, invert=True)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 49: 522 features
+</pre></div>
+</div>
+<p>When execution is complete, a pager will pop up in the lower portion of
+the notebook window. This is the profiler output. We reproduce a portion
+of it here. Your results will depend on your data and the computer you
+are using.</p>
+<div class="highlight-python"><div class="highlight"><pre>     123225 function calls (121986 primitive calls) in 4.480 seconds
+
+Ordered by: internal time
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   50    2.709    0.054    2.709    0.054 {scipy.ndimage._nd_image.min_or_max_filter}
+   50    0.481    0.010    0.481    0.010 {scipy.ndimage._nd_image.binary_erosion}
+  100    0.299    0.003    0.299    0.003 {scipy.ndimage._nd_image.correlate1d}
+  100    0.205    0.002    0.205    0.002 {scipy.ndimage._nd_image.uniform_filter1d}
+  100    0.128    0.001    0.128    0.001 {method &#39;nonzero&#39; of &#39;numpy.ndarray&#39; objects}
+   50    0.079    0.002    0.164    0.003 feature.py:103(refine)
+  100    0.078    0.001    0.078    0.001 {numpy.core.multiarray.where}
+  100    0.053    0.001    0.053    0.001 {method &#39;query_pairs&#39; of &#39;scipy.spatial.ckdtree.cKDTree&#39; objects}
+   50    0.036    0.001    0.607    0.012 preprocessing.py:14(bandpass)
+   50    0.033    0.001    0.195    0.004 feature.py:27(percentile_threshold)
+   50    0.032    0.001    2.989    0.060 feature.py:36(local_maxima)
+   50    0.029    0.001    0.526    0.011 uncertainty.py:12(measure_noise)
+</pre></div>
+</div>
+<p>This is a record of how the computer spent its time while finding
+features. The various numbers are explained in the <cite>documentation for
+the Python ``profiler`</cite>
+module &lt;<a class="reference external" href="http://docs.python.org/2/library/profile.html#instant-user-s-manual">http://docs.python.org/2/library/profile.html#instant-user-s-manual</a>&gt;`__.
+You shouldn&#8217;t try to understand every line, but you can get some idea of
+which functions are called for each frame (multiples of 50), and which
+are called for each particle. Note that <tt class="docutils literal"><span class="pre">{functions</span> <span class="pre">in</span> <span class="pre">braces}</span></tt> are
+written in C, not Python, are not part of <tt class="docutils literal"><span class="pre">trackpy</span></tt>, and tend to be
+less user-serviceable.</p>
+<p>Now let&#8217;s look at the linking step. Once again, we&#8217;ll prime <tt class="docutils literal"><span class="pre">trackpy</span></tt>,
+to avoid distorting our results with one-time setup code:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Use a large search_range, to be sure that numba subnet code is compiled and used.</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">link_df</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 2: 506 trajectories present
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre>%%prun
+t = tp.link_df(f, 5, memory=3)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 49: 522 trajectories present
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>     770140 function calls (766921 primitive calls) in 1.652 seconds
+
+Ordered by: internal time
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   51    0.229    0.004    1.180    0.023 linking.py:926(link)
+  149    0.140    0.001    0.322    0.002 {map}
+28925/28825    0.096    0.000    0.099    0.000 {numpy.core.multiarray.array}
+   49    0.082    0.002    0.240    0.005 linking.py:1182(assign_candidates)
+   49    0.077    0.002    0.080    0.002 {method &#39;query&#39; of &#39;scipy.spatial.ckdtree.cKDTree&#39; objects}
+   49    0.073    0.001    0.118    0.002 linking.py:1069(_assign_links)
+25945    0.064    0.000    0.179    0.000 linking.py:368(__init__)
+27415    0.048    0.000    0.117    0.000 numeric.py:394(asarray)
+25945    0.042    0.000    0.042    0.000 linking.py:300(__init__)
+54280    0.040    0.000    0.051    0.000 {method &#39;sort&#39; of &#39;list&#39; objects}
+   50    0.039    0.001    0.039    0.001 {pandas.lib.clean_index_list}
+    1    0.037    0.037    1.652    1.652 linking.py:470(link_df)
+   98    0.031    0.000    0.097    0.001 linking.py:32(rebuild)
+  300    0.024    0.000    0.043    0.000 common.py:303(_isnull_ndarraylike)
+54115    0.022    0.000    0.022    0.000 linking.py:345(track)
+54280    0.021    0.000    0.021    0.000 linking.py:47(&lt;lambda&gt;)
+  101    0.021    0.000    0.021    0.000 {method &#39;get_indexer&#39; of &#39;pandas.index.IndexEngine&#39; objects}
+112445    0.018    0.000    0.018    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+ 1265    0.018    0.000    0.018    0.000 {method &#39;reduce&#39; of &#39;numpy.ufunc&#39; objects}
+25945    0.018    0.000    0.030    0.000 linking.py:196(add_point)
+89361/86242    0.017    0.000    0.019    0.000 {len}
+  136    0.016    0.000    0.021    0.000 linking.py:1375(numba_link)
+</pre></div>
+</div>
+<p>This goes much faster than feature identification, though to be fair, we
+have far, far more pixels than particles. Note the calls to
+<tt class="docutils literal"><span class="pre">numba_link</span></tt> at the end of the report; this is the subnet resolution
+code referred to above. If you require a large <tt class="docutils literal"><span class="pre">search_range</span></tt>, these
+computations can dramatically slow down linking. As it is, they are
+under control.</p>
+</div>
+<div class="section" id="pyfftw-and-the-frequency-domain-bandpass">
+<h3><tt class="docutils literal"><span class="pre">pyfftw</span></tt> and the frequency-domain bandpass<a class="headerlink" href="#pyfftw-and-the-frequency-domain-bandpass" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">trackpy</span></tt> performs bandpass filtering to prepare an image for
+feature-finding. As of version 0.3, this is done with convolution;
+formerly, it was done using fast Fourier transforms (FFT). The two
+methods yield very close results, but the convolution method is roughly
+twice as fast.</p>
+<p>Because the two methods are <em>not</em> mathematically identical, <tt class="docutils literal"><span class="pre">trackpy</span></tt>
+still includes the FFT method in case you would like to use it (or just
+compare its results). This method is not available as part of
+<tt class="docutils literal"><span class="pre">locate()</span></tt>; you must perform the bandpass separately and then call
+<tt class="docutils literal"><span class="pre">locate()</span></tt> with <tt class="docutils literal"><span class="pre">preprocess=False</span></tt>. You can perform the FFT bandpass
+with one of two functions:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">trackpy.preprocessing.legacy_bandpass()</span></tt> uses the FFT functions
+built into numpy.</li>
+<li><tt class="docutils literal"><span class="pre">trackpy.preprocessing.legacy_bandpass_fftw()</span></tt> uses the FFTW
+library, an exceptionally fast implementation of FFT. <tt class="docutils literal"><span class="pre">pyfftw</span></tt> is
+the module that lets Python programs use it. Like numba it is
+optional, but it can speed up the bandpass operation by a factor of
+~3. (The default method now in <tt class="docutils literal"><span class="pre">trackpy</span></tt> is faster still.)</li>
+</ul>
+<p>You should be able to install FFTW from your Linux package manager, or
+on the Mac using <a class="reference external" href="http://brew.sh">Homebrew</a> (with the command
+<tt class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">fftw</span></tt>). Once you&#8217;ve done that, <tt class="docutils literal"><span class="pre">pyfftw</span></tt> itself should
+install with <tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pyfftw</span></tt></p>
+</div>
+<div class="section" id="neighbor-finding-strategy-kdtree">
+<h3>Neighbor-finding strategy: KDTree<a class="headerlink" href="#neighbor-finding-strategy-kdtree" title="Permalink to this headline">¶</a></h3>
+<p>An important operation in tracking (i.e. linking) is finding all the
+particles that are close to a certain point in space. <tt class="docutils literal"><span class="pre">trackpy</span></tt> has
+two ways of doing this:</p>
+<ul class="simple">
+<li>A KDTree, which only handles more standard cases (e.g. Euclidean
+geometries) and is written in C. (This is the default.)</li>
+<li>A hash table written in pure Python. It is very extensible but tends
+to be slower.</li>
+</ul>
+<p>The method is set by the <tt class="docutils literal"><span class="pre">neighbor_strategy</span></tt> argument to the various
+linking functions, which again defaults to KDTree. The KDTree is a
+standard part of <tt class="docutils literal"><span class="pre">scipy</span></tt>; if you can run <tt class="docutils literal"><span class="pre">trackpy</span></tt> at all, it is
+enabled.</p>
+<hr class="docutils" />
+<p>Well, I hope you&#8217;ve enjoyed this brief tour of <tt class="docutils literal"><span class="pre">trackpy</span></tt> performance.
+Just remember that if you come up with new ways to improve performance,
+the <tt class="docutils literal"><span class="pre">trackpy</span></tt> community will be interested!</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/performance.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

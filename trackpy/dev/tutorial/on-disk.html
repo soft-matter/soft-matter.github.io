@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Streaming: Processing Unlimited Frames On-Disk &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="../index.html" />
+    <link rel="next" title="Making trackpy fast(er)" href="performance.html" />
+    <link rel="prev" title="Adaptive Search: Changing search_range on the Fly" href="adaptive-search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Streaming: Processing Unlimited Frames On-Disk</a><ul>
+<li><a class="reference internal" href="#install-pytables">Install PyTables</a></li>
+<li><a class="reference internal" href="#locate-features-streaming-results-into-an-hdf5-file">Locate Features, Streaming Results into an HDF5 File</a></li>
+<li><a class="reference internal" href="#link-trajectories-streaming-from-and-updating-the-hdf5-file">Link Trajectories, Streaming From and Updating the HDF5 File</a></li>
+<li><a class="reference internal" href="#framewise-data-interfaces">Framewise Data Interfaces</a><ul>
+<li><a class="reference internal" href="#built-in-interfaces">Built-in interfaces</a></li>
+<li><a class="reference internal" href="#writing-your-own-interface">Writing your own interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="streaming-processing-unlimited-frames-on-disk">
+<h1>Streaming: Processing Unlimited Frames On-Disk<a class="headerlink" href="#streaming-processing-unlimited-frames-on-disk" title="Permalink to this headline">¶</a></h1>
+<p>A key feature of trackpy is the ability to process an unlimited number
+of frames.</p>
+<p>For feature-finding, this is straightforward: a frame is loaded,
+features are located, the locations are saved the disk, and the memory
+is cleared for the next frame. For linking, the problem is more
+challenging, but trackpy handles all this complexity for you, using as
+little memory as possible throughout.</p>
+<p>When data sets become large, beginning-friendly file formats like CSV or
+Excel become impractical. We recommend using the HDF5 file format, which
+is trackpy can read and write out of the box. (HDF5 is <a class="reference external" href="http://en.wikipedia.org/wiki/Hierarchical_Data_Format">widely
+used</a>; you can
+be sure it will be around for many, many years to come.)</p>
+<p>If you have some other format in mind, see the end of this tutorial,
+where we explain how to extend trackpy&#8217;s interface to support other
+formats.</p>
+<div class="section" id="install-pytables">
+<h2>Install PyTables<a class="headerlink" href="#install-pytables" title="Permalink to this headline">¶</a></h2>
+<p>You need pytables, which you can easily install using conda. (Type this
+command into a Terminal or Command Prompt.)</p>
+<div class="highlight-python"><div class="highlight"><pre>conda install pytables
+</pre></div>
+</div>
+</div>
+<div class="section" id="locate-features-streaming-results-into-an-hdf5-file">
+<h2>Locate Features, Streaming Results into an HDF5 File<a class="headerlink" href="#locate-features-streaming-results-into-an-hdf5-file" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy</span> <span class="kn">as</span> <span class="nn">tp</span>
+<span class="kn">import</span> <span class="nn">pims</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">images</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">ImageSequence</span><span class="p">(</span><span class="s">&#39;../sample_data/bulk_water/*.png&#39;</span><span class="p">,</span> <span class="n">process_func</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>  <span class="c"># We&#39;ll take just the first 10 frames for demo purposes.</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre># For this demo, we&#39;ll first remove the file if it already exists.
+!rm -f data.h5
+</pre></div>
+</div>
+<p>We can use <tt class="docutils literal"><span class="pre">locate</span></tt> inside a loop:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">tp</span><span class="o">.</span><span class="n">PandasHDFStore</span><span class="p">(</span><span class="s">&#39;data.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>  <span class="c"># This opens an HDF5 file. Data will be stored and retrieved by frame number.</span>
+    <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">locate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c"># Find the features in a given frame.</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>  <span class="c"># Save the features to the file before continuing to the next frame.</span>
+</pre></div>
+</div>
+<p>or, equivalently, we can use <tt class="docutils literal"><span class="pre">batch</span></tt>, which accepts the storage file
+as <tt class="docutils literal"><span class="pre">output</span></tt>.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">tp</span><span class="o">.</span><span class="n">PandasHDFStore</span><span class="p">(</span><span class="s">&#39;data.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">tp</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 9: 510 features
+</pre></div>
+</div>
+<p>We can get the data for a given frame:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">tp</span><span class="o">.</span><span class="n">PandasHDFStore</span><span class="p">(</span><span class="s">&#39;data.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">frame_2_results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">frame_2_results</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>  <span class="c"># Display the first few rows.</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>mass</th>
+      <th>size</th>
+      <th>ecc</th>
+      <th>signal</th>
+      <th>raw_mass</th>
+      <th>ep</th>
+      <th>frame</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>295.886941</td>
+      <td>5.624598</td>
+      <td>372.183679</td>
+      <td>2.580235</td>
+      <td>0.189920</td>
+      <td>17.396842</td>
+      <td>8915</td>
+      <td>0.108849</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>68.203651</td>
+      <td>6.471969</td>
+      <td>416.980545</td>
+      <td>2.888723</td>
+      <td>0.088487</td>
+      <td>13.265092</td>
+      <td>9267</td>
+      <td>0.069054</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>336.888818</td>
+      <td>6.445367</td>
+      <td>340.325712</td>
+      <td>2.565562</td>
+      <td>0.028504</td>
+      <td>16.418269</td>
+      <td>8815</td>
+      <td>0.130158</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>432.423210</td>
+      <td>6.799269</td>
+      <td>564.962429</td>
+      <td>3.048429</td>
+      <td>0.302762</td>
+      <td>17.614302</td>
+      <td>9131</td>
+      <td>0.080412</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>460.570088</td>
+      <td>7.785952</td>
+      <td>359.136047</td>
+      <td>2.924729</td>
+      <td>0.124871</td>
+      <td>12.503980</td>
+      <td>8907</td>
+      <td>0.110293</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>Or dump all the data, if your machine has enough memory to hold it:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">tp</span><span class="o">.</span><span class="n">PandasHDFStore</span><span class="p">(</span><span class="s">&#39;data.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">all_results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">dump</span><span class="p">()</span>
+
+<span class="n">all_results</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>  <span class="c"># Display the first few rows.</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>mass</th>
+      <th>size</th>
+      <th>ecc</th>
+      <th>signal</th>
+      <th>raw_mass</th>
+      <th>ep</th>
+      <th>frame</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>103.430478</td>
+      <td>5.247191</td>
+      <td>308.202079</td>
+      <td>2.738100</td>
+      <td>0.039502</td>
+      <td>11.795655</td>
+      <td>8983</td>
+      <td>0.098772</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>294.831759</td>
+      <td>5.692167</td>
+      <td>355.060049</td>
+      <td>2.574877</td>
+      <td>0.162698</td>
+      <td>17.422941</td>
+      <td>8917</td>
+      <td>0.109846</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>311.069767</td>
+      <td>7.223679</td>
+      <td>255.933257</td>
+      <td>3.321975</td>
+      <td>0.007893</td>
+      <td>5.627285</td>
+      <td>8644</td>
+      <td>0.204852</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>431.496378</td>
+      <td>7.273025</td>
+      <td>627.442294</td>
+      <td>2.872567</td>
+      <td>0.273653</td>
+      <td>19.695498</td>
+      <td>9199</td>
+      <td>0.074267</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>36.061983</td>
+      <td>8.255091</td>
+      <td>483.621872</td>
+      <td>2.973328</td>
+      <td>0.123753</td>
+      <td>13.635345</td>
+      <td>9531</td>
+      <td>0.053765</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>You can dump the first N frames using <tt class="docutils literal"><span class="pre">s.dump(N)</span></tt>.</p>
+</div>
+<div class="section" id="link-trajectories-streaming-from-and-updating-the-hdf5-file">
+<h2>Link Trajectories, Streaming From and Updating the HDF5 File<a class="headerlink" href="#link-trajectories-streaming-from-and-updating-the-hdf5-file" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">tp</span><span class="o">.</span><span class="n">PandasHDFStore</span><span class="p">(</span><span class="s">&#39;data.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">linked</span> <span class="ow">in</span> <span class="n">tp</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">neighbor_strategy</span><span class="o">=</span><span class="s">&#39;KDTree&#39;</span><span class="p">):</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">linked</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 9: 510 trajectories present
+</pre></div>
+</div>
+<p>The original data is overwritten.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">tp</span><span class="o">.</span><span class="n">PandasHDFStore</span><span class="p">(</span><span class="s">&#39;data.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">frame_2_results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">frame_2_results</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>  <span class="c"># Display the first few rows.</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>mass</th>
+      <th>size</th>
+      <th>ecc</th>
+      <th>signal</th>
+      <th>raw_mass</th>
+      <th>ep</th>
+      <th>frame</th>
+      <th>particle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>295.886941</td>
+      <td>5.624598</td>
+      <td>372.183679</td>
+      <td>2.580235</td>
+      <td>0.189920</td>
+      <td>17.396842</td>
+      <td>8915</td>
+      <td>0.108849</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>432.423210</td>
+      <td>6.799269</td>
+      <td>564.962429</td>
+      <td>3.048429</td>
+      <td>0.302762</td>
+      <td>17.614302</td>
+      <td>9131</td>
+      <td>0.080412</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>36.560049</td>
+      <td>8.409618</td>
+      <td>440.901203</td>
+      <td>3.004805</td>
+      <td>0.132634</td>
+      <td>12.938901</td>
+      <td>9508</td>
+      <td>0.055229</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>68.203651</td>
+      <td>6.471969</td>
+      <td>416.980545</td>
+      <td>2.888723</td>
+      <td>0.088487</td>
+      <td>13.265092</td>
+      <td>9267</td>
+      <td>0.069054</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>629.016761</td>
+      <td>7.998041</td>
+      <td>499.506812</td>
+      <td>3.298593</td>
+      <td>0.183847</td>
+      <td>9.350802</td>
+      <td>9374</td>
+      <td>0.062147</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+<div class="section" id="framewise-data-interfaces">
+<h2>Framewise Data Interfaces<a class="headerlink" href="#framewise-data-interfaces" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="built-in-interfaces">
+<h3>Built-in interfaces<a class="headerlink" href="#built-in-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>There are three different interfaces. You can use them interchangeably.
+They offer different performance advantages.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">PandasHDFStore</span></tt> &#8211; fastest for a small (~100) number of frames</li>
+<li><tt class="docutils literal"><span class="pre">PandasHDFStoreBig</span></tt> &#8211; fastest for a medium or large number of
+frames</li>
+<li><tt class="docutils literal"><span class="pre">PandasHDFStoreSingleNode</span></tt> &#8211; optimizes HDF queries that access
+multiple frames (advanced)</li>
+</ul>
+</div>
+<div class="section" id="writing-your-own-interface">
+<h3>Writing your own interface<a class="headerlink" href="#writing-your-own-interface" title="Permalink to this headline">¶</a></h3>
+<p>Trackpy implements a generic interface that could be used to store and
+retrieve particle tracking data in any file format. We hope that it can
+make it easier for researchers who use different file formats to
+exchange data. Any in-house format could be accessed using the same
+simple interface demonstrated above.</p>
+<p>At present, the interface is implemented only for HDF5 files. To extend
+it to any format, write a class subclassing <tt class="docutils literal"><span class="pre">trackpy.FramewiseData</span></tt>.
+This custom class must implement the methods <tt class="docutils literal"><span class="pre">put</span></tt>, <tt class="docutils literal"><span class="pre">get</span></tt>,
+<tt class="docutils literal"><span class="pre">close</span></tt>, and <tt class="docutils literal"><span class="pre">__iter__</span></tt> and the properties <tt class="docutils literal"><span class="pre">max_frame</span></tt> and
+<tt class="docutils literal"><span class="pre">t_column</span></tt>. Refer to the built-in classes in
+<a class="reference external" href="https://github.com/soft-matter/trackpy/blob/master/trackpy/framewise_data.py">framewise_data.py</a>
+for examples to work from.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/on-disk.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

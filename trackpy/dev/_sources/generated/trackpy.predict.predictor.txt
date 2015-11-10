@@ -1,0 +1,6 @@
+trackpy.predict.predictor
+=========================
+
+.. currentmodule:: trackpy.predict
+
+.. autofunction:: predictor

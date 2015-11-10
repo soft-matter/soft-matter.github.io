@@ -1,0 +1,127 @@
+
+Parallelized Feature Location using IPython Parallel
+====================================================
+
+Feature-finding can easily be parallelized: each frame an independent
+task, and the tasks can be divided among the available CPUs. IPython
+parallel makes this very straightforward.
+
+It is simplest to try this on the CPUs of the local machine. To do this
+from an IPython notebook, go to File > Open, and click the "Clusters"
+tab. Fill in the "engines" field with the number of available CPUs
+(e.g., 4) and click start. Now you are running a cluster -- it's that
+easy. More information on IPython parallel is available in `this section
+of the IPython
+documentation <http://ipython.org/ipython-doc/stable/parallel/>`__.
+
+Intsall ipyparallel
+-------------------
+
+IPython parallel used to be included with IPython. As for IPython 4.0
+(summer 2015) it is a separate package.
+
+::
+
+    pip install ipyparalell
+
+See the `ipyparallel
+README <https://github.com/ipython/ipyparallel#install>`__ for more.
+
+.. code:: python
+
+    from ipyparallel import Client
+    client = Client()
+    view = client.load_balanced_view()
+
+We can see that there are four cores available.
+
+.. code:: python
+
+    client[:]
+
+
+
+
+.. parsed-literal::
+
+    <DirectView [0, 1, 2, 3]>
+
+
+
+Use a little magic, ``%%px``, to import trackpy on all cores.
+
+.. code:: python
+
+    %%px
+    import trackpy as tp
+
+Do the normal setup now, import trackpy normally and loading frames to
+analyze.
+
+.. code:: python
+
+    import trackpy as tp
+    
+    def gray(image):
+        return image[:, :, 0]
+    
+    frames = tp.ImageSequence('../sample_data/bulk_water/*.png', process_func=gray)
+
+
+.. parsed-literal::
+
+    /Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/trackpy/api.py:39: UserWarning: trackpy.ImageSequence is being called, but "ImageSequence" is really part of the pims package. It will not be in future versions of trackpy. Consider importing pims and calling pims.ImageSequence instead.
+      ).format(call.__name__), UserWarning)
+
+
+Define a function from ``locate`` with all the parameters specified, so
+the function's only argument is the image to be analyzed. We can map
+this function directly onto our collection of images. (This is a called
+"currying" a function, hence the choice of name.)
+
+.. code:: python
+
+    curried_locate = lambda image: tp.locate(image, 13, invert=True)
+
+.. code:: python
+
+    view.map(curried_locate, frames[:4])  # Optionally, prime each engine: make it set up FFTW.
+
+
+
+
+.. parsed-literal::
+
+    <AsyncMapResult: <lambda>>
+
+
+
+Compare the time it takes to locate features in the first ten images
+with and without parallelization.
+
+.. code:: python
+
+    %%timeit
+    amr = view.map_async(curried_locate, frames[:32])
+    amr.wait_interactive()
+    results = amr.get()
+
+
+.. parsed-literal::
+
+      32/32 tasks finished after    2 s
+    done
+    1 loops, best of 3: 2.44 s per loop
+
+
+.. code:: python
+
+    %%timeit
+    serial_result = list(map(curried_locate, frames[:32]))
+
+
+.. parsed-literal::
+
+    1 loops, best of 3: 4.48 s per loop
+
+

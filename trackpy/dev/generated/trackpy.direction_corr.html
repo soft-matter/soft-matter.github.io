@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.direction_corr &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.proximity" href="trackpy.proximity.html" />
+    <link rel="prev" title="trackpy.velocity_corr" href="trackpy.velocity_corr.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.direction_corr</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-direction-corr">
+<h1>trackpy.direction_corr<a class="headerlink" href="#trackpy-direction-corr" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.direction_corr">
+<tt class="descclassname">trackpy.</tt><tt class="descname">direction_corr</tt><big>(</big><em>t</em>, <em>frame1</em>, <em>frame2</em><big>)</big><a class="headerlink" href="#trackpy.direction_corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the cosine between every pair of particles&#8217; displacements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>t</strong> : DataFrame</p>
+<blockquote>
+<div><p>trajectories, containing columns particle, frame, x, and y</p>
+</div></blockquote>
+<p><strong>frame1</strong> : frame number</p>
+<p><strong>frame2</strong> : frame number</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">DataFrame, indexed by particle, including dx, dy, and direction</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.direction_corr.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

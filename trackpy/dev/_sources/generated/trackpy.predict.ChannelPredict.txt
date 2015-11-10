@@ -1,0 +1,25 @@
+trackpy.predict.ChannelPredict
+==============================
+
+.. currentmodule:: trackpy.predict
+
+.. autoclass:: ChannelPredict
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         ChannelPredict.link_df
+         ChannelPredict.link_df_iter
+         ChannelPredict.observe
+         ChannelPredict.predict
+         ChannelPredict.state
+
+
+
+
+   
+

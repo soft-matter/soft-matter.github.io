@@ -1,0 +1,6 @@
+trackpy.PandasHDFStore.t_column
+===============================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: PandasHDFStore.t_column

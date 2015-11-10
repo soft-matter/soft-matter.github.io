@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>What’s new in the package &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="index.html" />
+    <link rel="next" title="Walkthrough" href="tutorial/walkthrough.html" />
+    <link rel="prev" title="trackpy.masks.theta_mask" href="generated/trackpy.masks.theta_mask.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">What&#8217;s new in the package</a><ul>
+<li><a class="reference internal" href="#in-development-v0-3-0-unreleased">In Development: v0.3.0 (Unreleased)</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#enhancements">Enhancements</a></li>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li><a class="reference internal" href="#api-changes">API changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="what-s-new-in-the-package">
+<span id="whatsnew"></span><h1>What&#8217;s new in the package<a class="headerlink" href="#what-s-new-in-the-package" title="Permalink to this headline">¶</a></h1>
+<p>A catalog of new features, improvements, and bug-fixes in each release. Follow links to the relevant GitHub issue or pull request for specific code changes and any related discussion.</p>
+<div class="section" id="in-development-v0-3-0-unreleased">
+<h2>In Development: v0.3.0 (Unreleased)<a class="headerlink" href="#in-development-v0-3-0-unreleased" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>Release v0.3.0 adds many important enhancements and fixes. Feature location is extended to anisotropic 3D (and generally N-dimensional) features. The analysis and visualization tools now give first-class status to 3D work. A powerful new &#8220;adaptive search&#8221; capability gives fine-tuned control and detailed diagnostics of the trajectory-linking process. Several performance improvements make trackpy even faster.</p>
+</div>
+<div class="section" id="enhancements">
+<h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The feature-finding functionality was formerly limited to circular features, but now trackpy can locate anisotropic N-dimensional features. Their size is specified as a tuple of odd integers instead of a single odd integer. See the new 3D tutorial for details. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/162">GH162</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/239">GH239</a>)</li>
+<li>The plotting and analysis tools, many of which were limited to 2D, have been extended to 3D. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/196">GH196</a>)</li>
+<li>The numba engine for fast feature-finding has been extented to handle 3D images. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/242">GH242</a>)</li>
+<li>Feature finding returns a new column <tt class="docutils literal"><span class="pre">raw_mass</span></tt> that is the sum of intensities inside the unprocessed image. For anisotropic feature detection, size and static errors are returned per dimension: <tt class="docutils literal"><span class="pre">size_x</span></tt> etc. and <tt class="docutils literal"><span class="pre">ep_x</span></tt> etc. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/239">GH239</a>)</li>
+<li>A powerful new adaptive search feature gives much richer control of the tracking (trajectory-linking) process, and it makes formerly intractable scenarios possible to solve in a reasonable time. See the new tutorials, &#8220;Advanced Linking: Subnetworks and search_range&#8221; and &#8220;Adaptive Search: Changing search_range on the Fly,&#8221; for details.</li>
+<li>Uncertainty estimation is more accurate. See the docstring of <tt class="docutils literal"><span class="pre">trackpy.uncertainty.static_error</span></tt> for details. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/239">GH239</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/259">GH259</a>)</li>
+<li>The linking functions can now collect data about how each particle was linked. See the tutorial &#8220;Obtaining Diagnostic Information from Linking.&#8221;</li>
+<li>Nearby local maxima are &#8220;merged&#8221; &#8211; i.e., interpreted as parts of the same feature &#8211; in a more robust way. This improves accuracy in crowded images. For some data, it may have no effect, but for others it will give significantly different (but, we think, better) results than previous versions of trackpy. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/143">GH143</a>)</li>
+<li>The minimum feature separation can be as small as zero. Formerly, it was constrained to be larger than the feature diameter. If <tt class="docutils literal"><span class="pre">serparation=0</span></tt>, &#8220;merging&#8221; of duplicate maxima is effectively turned off. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/139">GH139</a>)</li>
+<li>The percentile-based thresholding was moved into a separate function, so it can now be called directly. That will be useful to users who want to inspect what the thresholding is doing to their images. It will also be useful for profiling. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/139">GH139</a>)</li>
+<li>The performance of feature-finding can now be tested in a custom way using new routines in <tt class="docutils literal"><span class="pre">artificial.py</span></tt>. Users can provide a custom feature shape to test the feature-finding on their own system.</li>
+<li>Various performance improvements make feature-finding and trajectory-linking faster than ever, in spite of the increased functionality. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/203">GH203</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/204">GH204</a>)</li>
+<li>More user-friendly error messages replace cryptic errors. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/166">GH166</a>).</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed a bug in v0.2.3 and v0.2.4 that broke the <tt class="docutils literal"><span class="pre">circle_size</span></tt> parameter in <tt class="docutils literal"><span class="pre">annotate()</span></tt>. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/169">GH169</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/170">GH170</a>)</li>
+<li>Fixed a bug where subnetwork distances were not addded in quadrature in the python linker. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/212">GH212</a>). (The impact of this bug is not as large as one might expect. See issue link for details.)</li>
+<li>Input images with a float datatype are internally converted to integer datatype for faster computation. They were converted to signed integers; now they are converted to unsigned. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/188">GH188</a>). When preprocessing is turned off, integer images are not converted at all (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/264">GH264</a>).</li>
+<li>Slow feature-finding with more recent versions of the numba package (0.16 and 0.17 specifically) is addressed.</li>
+<li>The <tt class="docutils literal"><span class="pre">ax</span></tt> argument of <tt class="docutils literal"><span class="pre">subpx_bias</span></tt> is removed because the figure is cleared anyway by <tt class="docutils literal"><span class="pre">subpx_bias</span></tt>.</li>
+</ul>
+</div>
+<div class="section" id="api-changes">
+<h3>API changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The plot function <tt class="docutils literal"><span class="pre">annotate()</span></tt> now displays the image with the vertical axis inverted, to be consistent with the <tt class="docutils literal"><span class="pre">pims</span></tt> display function and <tt class="docutils literal"><span class="pre">plot_traj()</span></tt>. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/217">GH217</a>)</li>
+<li>Using trackpy to access pims functionality (e.g. <tt class="docutils literal"><span class="pre">trackpy.ImageSequence()</span></tt>) is now deprecated; it still works but will generate a warning message. This capability will be removed from future versions of trackpy, in favor of accessing it in the pims package directly (e.g. <tt class="docutils literal"><span class="pre">pims.ImageSequence()</span></tt>). (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/214">GH214</a>)</li>
+<li>When trackpy estimates the error in a feature&#8217;s position (returned as the <tt class="docutils literal"><span class="pre">ep</span></tt> column), the procedure can fail and result in a nonsense value. This will now result in the value of <tt class="docutils literal"><span class="pre">ep</span></tt> being NaN (not a number); previous versions of trackpy returned a negative value in this situation. To restore the previous behavior, you can replace these values with negative numbers by using the Pandas <tt class="docutils literal"><span class="pre">fillna()</span></tt> method. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/113">GH113</a>)</li>
+<li>The mass calculation is changed. Before v0.3 the mass was calculated from a rescaled image. From this version, this rescaling is compensated at the end so that the mass reflects the actual intensities in the image. <tt class="docutils literal"><span class="pre">minmass_version_change()</span></tt> can calculate the different <tt class="docutils literal"><span class="pre">minmass</span></tt> value to use (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/239">GH239</a>)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/whatsnew.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

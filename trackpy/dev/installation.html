@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing Trackpy &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="index.html" />
+    <link rel="next" title="API reference" href="api.html" />
+    <link rel="prev" title="Introduction to Trackpy" href="introduction.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Installing Trackpy</a><ul>
+<li><a class="reference internal" href="#for-python-novices">For Python Novices</a><ul>
+<li><a class="reference internal" href="#get-scientific-python">1. Get Scientific Python</a></li>
+<li><a class="reference internal" href="#install-trackpy">2. Install trackpy</a></li>
+<li><a class="reference internal" href="#try-it-out">3. Try it out!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#updating-your-installation">Updating Your Installation</a><ul>
+<li><a class="reference internal" href="#latest-stable-release">Latest Stable Release</a></li>
+<li><a class="reference internal" href="#latest-version-under-development">Latest Version Under Development</a></li>
+<li><a class="reference internal" href="#more-information-for-experienced-python-users">More Information for Experienced Python Users</a><ul>
+<li><a class="reference internal" href="#archlinux">Archlinux</a></li>
+<li><a class="reference internal" href="#pip">pip</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="installing-trackpy">
+<span id="installation"></span><h1>Installing Trackpy<a class="headerlink" href="#installing-trackpy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="for-python-novices">
+<h2>For Python Novices<a class="headerlink" href="#for-python-novices" title="Permalink to this headline">¶</a></h2>
+<p>Installation is simple on Windows, OSX, and Linux, even for Python novices.</p>
+<div class="section" id="get-scientific-python">
+<h3>1. Get Scientific Python<a class="headerlink" href="#get-scientific-python" title="Permalink to this headline">¶</a></h3>
+<p>To get started with Python on any platform, download and install
+<a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>. It comes with the
+common scientific Python packages built in.</p>
+</div>
+<div class="section" id="install-trackpy">
+<h3>2. Install trackpy<a class="headerlink" href="#install-trackpy" title="Permalink to this headline">¶</a></h3>
+<p>Open a command prompt. On Windows, you can use the &#8220;Anaconda Command Prompt&#8221;
+installed by Anaconda or Start &gt; Applications &gt; Command Prompt. On a Mac, look
+for Applications &gt; Utilities &gt; Terminal. Type these commands:</p>
+<div class="highlight-bash"><div class="highlight"><pre>conda update conda
+conda install -c soft-matter trackpy
+</pre></div>
+</div>
+<p>The above installs trackpy and all its requirements. Our tutorials also use
+the IPython notebook. To install that as well, type</p>
+<div class="highlight-bash"><div class="highlight"><pre>conda install ipython-notebook
+</pre></div>
+</div>
+</div>
+<div class="section" id="try-it-out">
+<h3>3. Try it out!<a class="headerlink" href="#try-it-out" title="Permalink to this headline">¶</a></h3>
+<p>Finally, to try it out, type</p>
+<div class="highlight-bash"><div class="highlight"><pre>ipython notebook
+</pre></div>
+</div>
+<p>This will automatically open a browser tab, ready to interpret Python code.
+To get started, check out the links to tutorials at the top of this document.</p>
+</div>
+</div>
+</div>
+<div class="section" id="updating-your-installation">
+<h1>Updating Your Installation<a class="headerlink" href="#updating-your-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="latest-stable-release">
+<h2>Latest Stable Release<a class="headerlink" href="#latest-stable-release" title="Permalink to this headline">¶</a></h2>
+<p>The code is under active development. To update to the latest stable release,
+run this in the command prompt:</p>
+<div class="highlight-bash"><div class="highlight"><pre>conda update -c soft-matter trackpy
+</pre></div>
+</div>
+</div>
+<div class="section" id="latest-version-under-development">
+<h2>Latest Version Under Development<a class="headerlink" href="#latest-version-under-development" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>master</cite> branch on github contains the latest tested development code.
+Changes are thoroughly tested before being merged. If you want to use the
+latest features it should be safe to rely on the master branch.
+(The primary contributors do.)</p>
+<p>You can easily install a recent build from the
+soft-matter development channel on conda</p>
+<div class="highlight-bash"><div class="highlight"><pre>conda config --add channels soft-matter
+conda install -c soft-matter/channel/dev trackpy
+</pre></div>
+</div>
+<p>If you plan to edit the code yourself, you should use git and pip as
+explained below.</p>
+</div>
+<div class="section" id="more-information-for-experienced-python-users">
+<h2>More Information for Experienced Python Users<a class="headerlink" href="#more-information-for-experienced-python-users" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="archlinux">
+<h3>Archlinux<a class="headerlink" href="#archlinux" title="Permalink to this headline">¶</a></h3>
+<p>Package for python 2 and python 3 are available for Archlinux on AUR:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://aur.archlinux.org/packages/python2-trackpy/">Python 2</a></li>
+<li><a class="reference external" href="https://aur.archlinux.org/packages/python-trackpy/">Python 3</a></li>
+</ul>
+</div>
+<div class="section" id="pip">
+<h3>pip<a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h3>
+<p>We strongly recommend using conda install trackpy, as described above,
+but pip is also supported.</p>
+<p>Essential Dependencies:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Python 2.7, 3.3, or 3.4.</li>
+<li><a class="reference external" href="http://pythonhosted.org/setuptools/">setuptools</a></li>
+<li><a class="reference external" href="http://pythonhosted.org/six/">six</a> &gt;=1.8</li>
+<li><a class="reference external" href="http://www.scipy.org/">numpy</a> &gt;=1.7</li>
+<li><a class="reference external" href="http://www.scipy.org/">scipy</a> &gt;=0.12.0</li>
+<li><a class="reference external" href="http://matplotlib.org/">matplotlib</a></li>
+<li><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/overview.html">pandas</a> &gt;=0.12.0</li>
+<li><a class="reference external" href="http://pyyaml.org/">pyyaml</a></li>
+</ul>
+</div></blockquote>
+<p>You will also need the image- and video-reader PIMS, which is, like trackpy
+itself, part of the github.com/soft-matter organization.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/soft-matter/pims">PIMS</a></li>
+</ul>
+</div></blockquote>
+<p>You can install PIMS from the soft-matter binstar channel using conda:</p>
+<div class="highlight-bash"><div class="highlight"><pre>conda install -c soft-matter pims
+</pre></div>
+</div>
+<p>or from PyPI using pip:</p>
+<div class="highlight-bash"><div class="highlight"><pre>pip install pims
+</pre></div>
+</div>
+<p>Or, if you plan to edit the code, you can install both packages manually:</p>
+<div class="highlight-bash"><div class="highlight"><pre>git clone https://github.com/soft-matter/pims
+pip install -e pims
+
+git clone https://github.com/soft-matter/trackpy
+pip install -e trackpy
+</pre></div>
+</div>
+<p>Optional Dependencies:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/hgomersall/pyFFTW">pyFFTW</a> to speed up the band</dt>
+<dd><p class="first last">pass, which is one of the slower steps in feature-finding</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://www.pytables.org/moin">PyTables</a> for saving results in an</dt>
+<dd><p class="first last">HDF5 file. This is included with Anaconda.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://numba.pydata.org/">numba</a> for accelerated feature-finding and linking. This is</dt>
+<dd><p class="first last">included with Anaconda and Canopy. Installing it any other way is difficult;
+we recommend sticking with one of these. We support numba
+versions &gt;=0.13.4 (though 0.13.3 appears to work). We currently test on 0.17.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>PIMS has its own optional dependencies for reading various formats. You
+can read what you need for each format
+<a class="reference external" href="https://github.com/soft-matter/pims">here on PIMS&#8217; README</a>.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/installation.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

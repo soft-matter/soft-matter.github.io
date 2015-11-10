@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Parallelized Feature Location using IPython Parallel &mdash; trackpy 0.3.0rc1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0rc1 documentation" href="../index.html" />
+    <link rel="next" title="Custom Feature Detection: Bubble tracking in 2D foams" href="custom-feature-detection.html" />
+    <link rel="prev" title="Obtaining Diagnostic Information from Linking" href="linking-diagnostics.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0rc1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Parallelized Feature Location using IPython Parallel</a><ul>
+<li><a class="reference internal" href="#intsall-ipyparallel">Intsall ipyparallel</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="parallelized-feature-location-using-ipython-parallel">
+<h1>Parallelized Feature Location using IPython Parallel<a class="headerlink" href="#parallelized-feature-location-using-ipython-parallel" title="Permalink to this headline">¶</a></h1>
+<p>Feature-finding can easily be parallelized: each frame an independent
+task, and the tasks can be divided among the available CPUs. IPython
+parallel makes this very straightforward.</p>
+<p>It is simplest to try this on the CPUs of the local machine. To do this
+from an IPython notebook, go to File &gt; Open, and click the &#8220;Clusters&#8221;
+tab. Fill in the &#8220;engines&#8221; field with the number of available CPUs
+(e.g., 4) and click start. Now you are running a cluster &#8211; it&#8217;s that
+easy. More information on IPython parallel is available in <a class="reference external" href="http://ipython.org/ipython-doc/stable/parallel/">this section
+of the IPython
+documentation</a>.</p>
+<div class="section" id="intsall-ipyparallel">
+<h2>Intsall ipyparallel<a class="headerlink" href="#intsall-ipyparallel" title="Permalink to this headline">¶</a></h2>
+<p>IPython parallel used to be included with IPython. As for IPython 4.0
+(summer 2015) it is a separate package.</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install ipyparalell
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://github.com/ipython/ipyparallel#install">ipyparallel
+README</a> for more.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">ipyparallel</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="n">view</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">load_balanced_view</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We can see that there are four cores available.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">client</span><span class="p">[:]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;DirectView [0, 1, 2, 3]&gt;
+</pre></div>
+</div>
+<p>Use a little magic, <tt class="docutils literal"><span class="pre">%%px</span></tt>, to import trackpy on all cores.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%%px
+import trackpy as tp
+</pre></div>
+</div>
+<p>Do the normal setup now, import trackpy normally and loading frames to
+analyze.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy</span> <span class="kn">as</span> <span class="nn">tp</span>
+
+<span class="k">def</span> <span class="nf">gray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">frames</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">ImageSequence</span><span class="p">(</span><span class="s">&#39;../sample_data/bulk_water/*.png&#39;</span><span class="p">,</span> <span class="n">process_func</span><span class="o">=</span><span class="n">gray</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/trackpy/api.py:39: UserWarning: trackpy.ImageSequence is being called, but &quot;ImageSequence&quot; is really part of the pims package. It will not be in future versions of trackpy. Consider importing pims and calling pims.ImageSequence instead.
+  ).format(call.__name__), UserWarning)
+</pre></div>
+</div>
+<p>Define a function from <tt class="docutils literal"><span class="pre">locate</span></tt> with all the parameters specified, so
+the function&#8217;s only argument is the image to be analyzed. We can map
+this function directly onto our collection of images. (This is a called
+&#8220;currying&#8221; a function, hence the choice of name.)</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">curried_locate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">image</span><span class="p">:</span> <span class="n">tp</span><span class="o">.</span><span class="n">locate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">view</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">curried_locate</span><span class="p">,</span> <span class="n">frames</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>  <span class="c"># Optionally, prime each engine: make it set up FFTW.</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;AsyncMapResult: &lt;lambda&gt;&gt;
+</pre></div>
+</div>
+<p>Compare the time it takes to locate features in the first ten images
+with and without parallelization.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%%timeit
+amr = view.map_async(curried_locate, frames[:32])
+amr.wait_interactive()
+results = amr.get()
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>  32/32 tasks finished after    2 s
+done
+1 loops, best of 3: 2.44 s per loop
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre>%%timeit
+serial_result = list(map(curried_locate, frames[:32]))
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>1 loops, best of 3: 4.48 s per loop
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/parallel-locate.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
