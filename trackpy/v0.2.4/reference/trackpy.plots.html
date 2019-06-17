@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>plots Module &mdash; trackpy 0.2.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="trackpy 0.2.4 documentation" href="../index.html" />
+    <link rel="up" title="trackpy Package" href="trackpy.html" />
+    <link rel="prev" title="motion Module" href="trackpy.motion.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trackpy.motion.html" title="motion Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">trackpy 0.2.4 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="trackpy.html" accesskey="U"><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-trackpy.plots">
+<span id="plots-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">plots</span></code> Module<a class="headerlink" href="#module-trackpy.plots" title="Permalink to this headline">¶</a></h1>
+<p>These functions generate handy plots.</p>
+<dl class="function">
+<dt id="trackpy.plots.annotate">
+<code class="descclassname">trackpy.plots.</code><code class="descname">annotate</code><span class="sig-paren">(</span><em>centroids</em>, <em>image</em>, <em>circle_size=None</em>, <em>color=None</em>, <em>invert=False</em>, <em>ax=None</em>, <em>split_category=None</em>, <em>split_thresh=None</em>, <em>imshow_style={}</em>, <em>plot_style={}</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.annotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark identified features with white circles.</p>
+<p>centroids : DataFrame including columns x and y
+image : image array (or string path to image file)
+circle_size : Deprecated.</p>
+<blockquote>
+<div>This will be removed in a future version of trackpy.
+Use <cite>plot_style={&#8216;markersize&#8217;: ...}</cite> instead.</div></blockquote>
+<dl class="docutils">
+<dt>color</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">single matplotlib color or a list of multiple colors</span><dd>default None</dd>
+<dt>invert</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">If you give a filepath as the image, specify whether to invert</span><dd>black and white. Default True.</dd>
+</dl>
+<p>ax : matplotlib axes object, defaults to current axes
+split_category : string, parameter to use to split the data into sections</p>
+<blockquote>
+<div>default None</div></blockquote>
+<dl class="docutils">
+<dt>split_thresh</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">single value or list of ints or floats to split </span><dd>particles into sections for plotting in multiple colors.
+List items should be ordered by increasing value.
+default None</dd>
+<dt>imshow_style</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">dictionary of keyword arguments passed through to</span><dd>the <cite>Axes.imshow(...)</cite> command the displays the image</dd>
+<dt>plot_style</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">dictionary of keyword arguments passed through to</span><dd>the <cite>Axes.plot(...)</cite> command that marks the features</dd>
+</dl>
+<p>axes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.make_axes">
+<code class="descclassname">trackpy.plots.</code><code class="descname">make_axes</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.make_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator for plotting functions.
+NORMALLY: Direct the plotting function to the current axes, gca().</p>
+<blockquote>
+<div>When it&#8217;s done, make the legend and show that plot.
+(Instant gratificaiton!)</div></blockquote>
+<dl class="docutils">
+<dt>BUT:      If the uses passes axes to plotting function, write on those axes</dt>
+<dd>and return them. The user has the option to draw a more complex
+plot in multiple steps.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.make_fig">
+<code class="descclassname">trackpy.plots.</code><code class="descname">make_fig</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.make_fig" title="Permalink to this definition">¶</a></dt>
+<dd><p>See make_axes.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.mass_ecc">
+<code class="descclassname">trackpy.plots.</code><code class="descname">mass_ecc</code><span class="sig-paren">(</span><em>f</em>, <em>ax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.mass_ecc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot each particle&#8217;s mass versus eccentricity.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.mass_size">
+<code class="descclassname">trackpy.plots.</code><code class="descname">mass_size</code><span class="sig-paren">(</span><em>f</em>, <em>ax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.mass_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot each particle&#8217;s mass versus size.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.plot_displacements">
+<code class="descclassname">trackpy.plots.</code><code class="descname">plot_displacements</code><span class="sig-paren">(</span><em>t</em>, <em>frame1</em>, <em>frame2</em>, <em>scale=1</em>, <em>ax=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.plot_displacements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot arrows showing particles displacements between two frames.</p>
+<dl class="docutils">
+<dt>t</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span><dd>trajectories, including columns &#8216;frame&#8217; and &#8216;particle&#8217;</dd>
+<dt>frame1</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>frame number</dd>
+<dt>frame2</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>frame number</dd>
+<dt>scale</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">float</span><dd>scale factor, if 1 (default) then arrow end is placed at particle
+destination; if any other number arrows are rescaled</dd>
+</dl>
+<p>ax : matplotlib axes (optional)</p>
+<p>Any other keyword arguments will pass through to matplotlib&#8217;s <cite>annotate</cite>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.plot_principal_axes">
+<code class="descclassname">trackpy.plots.</code><code class="descname">plot_principal_axes</code><span class="sig-paren">(</span><em>img</em>, <em>x_bar</em>, <em>y_bar</em>, <em>cov</em>, <em>ax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.plot_principal_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot bars with a length of 2 stddev along the principal axes.</p>
+<p>This function is based on a solution by Joe Kington, posted on Stack
+Overflow at <a class="reference external" href="http://stackoverflow.com/questions/5869891/">http://stackoverflow.com/questions/5869891/</a>
+how-to-calculate-the-axis-of-orientation/5873296#5873296</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.plot_traj">
+<code class="descclassname">trackpy.plots.</code><code class="descname">plot_traj</code><span class="sig-paren">(</span><em>traj</em>, <em>colorby='particle'</em>, <em>mpp=None</em>, <em>label=False</em>, <em>superimpose=None</em>, <em>cmap=None</em>, <em>ax=None</em>, <em>t_column=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.plot_traj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot traces of trajectories for each particle.
+Optionally superimpose it on a frame from the video.</p>
+<p>traj : DataFrame including columns x and y
+colorby : {&#8216;particle&#8217;, &#8216;frame&#8217;}
+mpp : microns per pixel</p>
+<blockquote>
+<div>If omitted, the labels will be labeled in units of pixels.</div></blockquote>
+<p>label : Set to True to write particle ID numbers next to trajectories.
+superimpose : background image, default None
+cmap : This is only used in colorby=&#8217;frame&#8217; mode.</p>
+<blockquote>
+<div>Default = mpl.cm.winter</div></blockquote>
+<p>ax : matplotlib axes object, defaults to current axes
+t_column : DataFrame column name</p>
+<blockquote>
+<div>Default is &#8216;frame&#8217;</div></blockquote>
+<p>None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.ptraj">
+<code class="descclassname">trackpy.plots.</code><code class="descname">ptraj</code><span class="sig-paren">(</span><em>traj</em>, <em>colorby='particle'</em>, <em>mpp=None</em>, <em>label=False</em>, <em>superimpose=None</em>, <em>cmap=None</em>, <em>ax=None</em>, <em>t_column=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.ptraj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot traces of trajectories for each particle.
+Optionally superimpose it on a frame from the video.</p>
+<p>traj : DataFrame including columns x and y
+colorby : {&#8216;particle&#8217;, &#8216;frame&#8217;}
+mpp : microns per pixel</p>
+<blockquote>
+<div>If omitted, the labels will be labeled in units of pixels.</div></blockquote>
+<p>label : Set to True to write particle ID numbers next to trajectories.
+superimpose : background image, default None
+cmap : This is only used in colorby=&#8217;frame&#8217; mode.</p>
+<blockquote>
+<div>Default = mpl.cm.winter</div></blockquote>
+<p>ax : matplotlib axes object, defaults to current axes
+t_column : DataFrame column name</p>
+<blockquote>
+<div>Default is &#8216;frame&#8217;</div></blockquote>
+<p>None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.plots.subpx_bias">
+<code class="descclassname">trackpy.plots.</code><code class="descname">subpx_bias</code><span class="sig-paren">(</span><em>f</em>, <em>ax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plots.subpx_bias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Histogram the fractional part of the x and y position.</p>
+<p>If subpixel accuracy is good, this should be flat. If it depressed in the
+middle, try using a larger value for feature diameter.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trackpy.motion.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">motion</span></code> Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reference/trackpy.plots.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trackpy.motion.html" title="motion Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">trackpy 0.2.4 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="trackpy.html" ><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2010-2014, Trackpy Contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+    </div>
+  </body>
+</html>

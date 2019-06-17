@@ -1,0 +1,25 @@
+trackpy.predict.DriftPredict
+============================
+
+.. currentmodule:: trackpy.predict
+
+.. autoclass:: DriftPredict
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         DriftPredict.link_df
+         DriftPredict.link_df_iter
+         DriftPredict.observe
+         DriftPredict.predict
+         DriftPredict.state
+
+
+
+
+   
+

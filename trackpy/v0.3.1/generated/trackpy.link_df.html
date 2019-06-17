@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.link_df &mdash; trackpy 0.3.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.1 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.link_df_iter" href="trackpy.link_df_iter.html" />
+    <link rel="prev" title="trackpy.batch" href="trackpy.batch.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/linking-diagnostics.html">Linking Diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Bubble Tracking in Foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.link_df</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-link-df">
+<h1>trackpy.link_df<a class="headerlink" href="#trackpy-link-df" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.link_df">
+<code class="descclassname">trackpy.</code><code class="descname">link_df</code><span class="sig-paren">(</span><em>features</em>, <em>search_range</em>, <em>memory=0</em>, <em>neighbor_strategy='KDTree'</em>, <em>link_strategy='auto'</em>, <em>predictor=None</em>, <em>adaptive_stop=None</em>, <em>adaptive_step=0.95</em>, <em>copy_features=False</em>, <em>diagnostics=False</em>, <em>pos_columns=None</em>, <em>t_column=None</em>, <em>hash_size=None</em>, <em>box_size=None</em>, <em>verify_integrity=True</em>, <em>retain_index=False</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.link_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link features into trajectories, assigning a label to each trajectory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>features</strong> : DataFrame</p>
+<blockquote>
+<div><p>Must include any number of column(s) for position and a column of
+frame numbers. By default, &#8216;x&#8217; and &#8216;y&#8217; are expected for position,
+and &#8216;frame&#8217; is expected for frame number. See below for options to use
+custom column names. After linking, this DataFrame will contain a
+&#8216;particle&#8217; column.</p>
+</div></blockquote>
+<p><strong>search_range</strong> : float</p>
+<blockquote>
+<div><p>the maximum distance features can move between frames</p>
+</div></blockquote>
+<p><strong>memory</strong> : integer</p>
+<blockquote>
+<div><p>the maximum number of frames during which a feature can vanish,
+then reppear nearby, and be considered the same particle. 0 by default.</p>
+</div></blockquote>
+<p><strong>neighbor_strategy</strong> : {&#8216;KDTree&#8217;, &#8216;BTree&#8217;}</p>
+<blockquote>
+<div><p>algorithm used to identify nearby features</p>
+</div></blockquote>
+<p><strong>link_strategy</strong> : {&#8216;recursive&#8217;, &#8216;nonrecursive&#8217;, &#8216;numba&#8217;, &#8216;drop&#8217;, &#8216;auto&#8217;}</p>
+<blockquote>
+<div><p>algorithm used to resolve subnetworks of nearby particles
+&#8216;auto&#8217; uses numba if available
+&#8216;drop&#8217; causes particles in subnetworks to go unlinked</p>
+</div></blockquote>
+<p><strong>predictor</strong> : function, optional</p>
+<blockquote>
+<div><p>Improve performance by guessing where a particle will be in
+the next frame.</p>
+<p>For examples of how this works, see the &#8220;predict&#8221; module.</p>
+</div></blockquote>
+<p><strong>adaptive_stop</strong> : float, optional</p>
+<blockquote>
+<div><p>If not None, when encountering an oversize subnet, retry by progressively
+reducing search_range until the subnet is solvable. If search_range
+becomes &lt;= adaptive_stop, give up and raise a SubnetOversizeException.</p>
+</div></blockquote>
+<p><strong>adaptive_step</strong> : float, optional</p>
+<blockquote>
+<div><p>Reduce search_range by multiplying it by this factor.</p>
+</div></blockquote>
+<p><strong>copy_features</strong> : boolean</p>
+<blockquote>
+<div><p>Leave the original features DataFrame intact (slower, uses more memory)</p>
+</div></blockquote>
+<p><strong>diagnostics</strong> : boolean</p>
+<blockquote>
+<div><p>Collect details about how each particle was linked, and return as
+columns in the output DataFrame. Implies copy=True.</p>
+</div></blockquote>
+<p><strong>pos_columns</strong> : DataFrame column names (unlimited dimensions)</p>
+<blockquote>
+<div><p>Default is [&#8216;x&#8217;, &#8216;y&#8217;]</p>
+</div></blockquote>
+<p><strong>t_column</strong> : DataFrame column name</p>
+<blockquote>
+<div><p>Default is &#8216;frame&#8217;</p>
+</div></blockquote>
+<p><strong>hash_size</strong> : sequence</p>
+<blockquote>
+<div><p>For &#8216;BTree&#8217; mode only. Define the shape of the search region.
+If None (default), infer shape from range of data.</p>
+</div></blockquote>
+<p><strong>box_size</strong> : sequence</p>
+<blockquote>
+<div><p>For &#8216;BTree&#8217; mode only. Define the parition size to optimize
+performance. If None (default), the search_range is used, which is
+a reasonable guess for best performance.</p>
+</div></blockquote>
+<p><strong>verify_integrity</strong> : boolean</p>
+<blockquote>
+<div><p>False by default for fastest performance.
+Use True if you suspect a bug in linking.</p>
+</div></blockquote>
+<p><strong>retain_index</strong> : boolean</p>
+<blockquote>
+<div><p>By default, the index is reset to be sequential. To keep the original
+index, set to True. Default is fine unless you devise a special use.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajectories</strong> : DataFrame</p>
+<blockquote class="last">
+<div><p>This is the input features DataFrame, now with a new column labeling
+each particle with an ID number. This is not a copy; the original
+features DataFrame is modified.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.link_df.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

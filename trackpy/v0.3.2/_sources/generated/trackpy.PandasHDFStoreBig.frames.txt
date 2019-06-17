@@ -1,0 +1,6 @@
+trackpy.PandasHDFStoreBig.frames
+================================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: PandasHDFStoreBig.frames

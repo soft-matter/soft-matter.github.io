@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>feature Module &mdash; trackpy 0.2.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="trackpy 0.2.4 documentation" href="../index.html" />
+    <link rel="up" title="trackpy Package" href="trackpy.html" />
+    <link rel="next" title="linking Module" href="trackpy.linking.html" />
+    <link rel="prev" title="trackpy Package" href="trackpy.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trackpy.linking.html" title="linking Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="trackpy.html" title="trackpy Package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">trackpy 0.2.4 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="trackpy.html" accesskey="U"><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="feature-module">
+<h1><code class="xref py py-mod docutils literal"><span class="pre">feature</span></code> Module<a class="headerlink" href="#feature-module" title="Permalink to this headline">¶</a></h1>
+<p>A full-featured implementation of the Crocker-Grier algorithm for locating
+round features in images.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">trackpy</span> <span class="kn">as</span> <span class="nn">tp</span>
+<span class="n">diameter</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># estimated size of features</span>
+<span class="n">tp</span><span class="o">.</span><span class="n">locate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">diameter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>locate</cite> returns a DataFrame (a spreadsheet-like object) listing the
+position, mass (total brightness), size (radius-of-gyration of brightness),
+and eccentricity. It also lists the signal, a measure related the contrast,
+and ep for epislon, the estimated uncertainty in the position of the feature.</p>
+<p><cite>locate</cite> prepares the image by performing a band pass using sensible defaults
+derived from the diameter you specified. You choose your settings or
+override this preprocessing all together; see the API documentation below.</p>
+<p>Then, following the Crocker-Grier procedure, it locates all local maxima,
+filters very dim maxima away, and refines the remainder to subpixel
+accuracy by iteratively honing in on their center of brightness.</p>
+<dl class="function">
+<dt id="trackpy.locate">
+<code class="descclassname">trackpy.</code><code class="descname">locate</code><span class="sig-paren">(</span><em>raw_image</em>, <em>diameter</em>, <em>minmass=100.0</em>, <em>maxsize=None</em>, <em>separation=None</em>, <em>noise_size=1</em>, <em>smoothing_size=None</em>, <em>threshold=None</em>, <em>invert=False</em>, <em>percentile=64</em>, <em>topn=None</em>, <em>preprocess=True</em>, <em>max_iterations=10</em>, <em>filter_before=True</em>, <em>filter_after=True</em>, <em>characterize=True</em>, <em>engine='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.locate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate Gaussian-like blobs of a given approximate size.</p>
+<p>Preprocess the image by performing a band pass and a threshold.
+Locate all peaks of brightness, characterize the neighborhoods of the peaks
+and take only those with given total brightnesss (&#8220;mass&#8221;). Finally,
+refine the positions of each peak.</p>
+<p>image : image array (any dimensions)
+diameter : feature size in px
+minmass : minimum integrated brightness</p>
+<blockquote>
+<div>Default is 100, but a good value is often much higher. This is a
+crucial parameter for elminating spurrious features.</div></blockquote>
+<p>maxsize : maximum radius-of-gyration of brightness, default None
+separation : feature separation, in pixels</p>
+<blockquote>
+<div>Default is the feature diameter + 1.</div></blockquote>
+<dl class="docutils">
+<dt>noise_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">width of Gaussian blurring kernel, in pixels</span><dd>Default is 1.</dd>
+<dt>smoothing_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">size of boxcar smoothing, in pixels</span><dd>Default is the same is feature separation.</dd>
+<dt>threshold</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Clip bandpass result below this value.</span><dd>Default None, passed through to bandpass.</dd>
+<dt>invert</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Set to True if features are darker than background. False by</span><dd>default.</dd>
+<dt>percentile</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Features must have a peak brighter than pixels in this</span><dd>percentile. This helps eliminate spurrious peaks.</dd>
+<dt>topn</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Return only the N brightest features above minmass.</span><dd>If None (default), return all features above minmass.</dd>
+</dl>
+<dl class="docutils">
+<dt>DataFrame([x, y, mass, size, ecc, signal])</dt>
+<dd>where mass means total integrated brightness of the blob,
+size means the radius of gyration of its Gaussian-like profile,
+and ecc is its eccentricity (1 is circular).</dd>
+</dl>
+<p>preprocess : Set to False to turn out bandpass preprocessing.
+max_iterations : integer</p>
+<blockquote>
+<div>max number of loops to refine the center of mass, default 10</div></blockquote>
+<dl class="docutils">
+<dt>filter_before</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>Use minmass (and maxsize, if set) to eliminate spurrious features
+based on their estimated mass and size before refining position.
+True by default for performance.</dd>
+<dt>filter_after</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>Use final characterizations of mass and size to elminate spurrious
+features. True by default.</dd>
+<dt>characterize</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>Compute &#8220;extras&#8221;: eccentricity, signal, ep. True by default.</dd>
+</dl>
+<p>engine : {&#8216;auto&#8217;, &#8216;python&#8217;, &#8216;numba&#8217;}</p>
+<p>batch : performs location on many images in batch</p>
+<p>This is an implementation of the Crocker-Grier centroid-finding algorithm.
+<a href="#id5"><span class="problematic" id="id6"><span id="id1"></span>[1]_</span></a></p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Crocker, J.C., Grier, D.G. <a class="reference external" href="http://dx.doi.org/10.1006/jcis.1996.0217">http://dx.doi.org/10.1006/jcis.1996.0217</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="trackpy.batch">
+<code class="descclassname">trackpy.</code><code class="descname">batch</code><span class="sig-paren">(</span><em>frames</em>, <em>diameter</em>, <em>minmass=100</em>, <em>maxsize=None</em>, <em>separation=None</em>, <em>noise_size=1</em>, <em>smoothing_size=None</em>, <em>threshold=None</em>, <em>invert=False</em>, <em>percentile=64</em>, <em>topn=None</em>, <em>preprocess=True</em>, <em>max_iterations=10</em>, <em>filter_before=True</em>, <em>filter_after=True</em>, <em>characterize=True</em>, <em>engine='auto'</em>, <em>output=None</em>, <em>meta=True</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate Gaussian-like blobs of a given approximate size.</p>
+<p>Preprocess the image by performing a band pass and a threshold.
+Locate all peaks of brightness, characterize the neighborhoods of the peaks
+and take only those with given total brightnesss (&#8220;mass&#8221;). Finally,
+refine the positions of each peak.</p>
+<p>frames : list (or iterable) of images
+diameter : feature size in px
+minmass : minimum integrated brightness</p>
+<blockquote>
+<div>Default is 100, but a good value is often much higher. This is a
+crucial parameter for elminating spurrious features.</div></blockquote>
+<p>maxsize : maximum radius-of-gyration of brightness, default None
+separation : feature separation, in pixels</p>
+<blockquote>
+<div>Default is the feature diameter + 1.</div></blockquote>
+<dl class="docutils">
+<dt>noise_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">width of Gaussian blurring kernel, in pixels</span><dd>Default is 1.</dd>
+<dt>smoothing_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">size of boxcar smoothing, in pixels</span><dd>Default is the same is feature separation.</dd>
+<dt>threshold</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Clip bandpass result below this value.</span><dd>Default None, passed through to bandpass.</dd>
+<dt>invert</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Set to True if features are darker than background. False by</span><dd>default.</dd>
+<dt>percentile</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Features must have a peak brighter than pixels in this</span><dd>percentile. This helps eliminate spurrious peaks.</dd>
+<dt>topn</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">Return only the N brightest features above minmass.</span><dd>If None (default), return all features above minmass.</dd>
+</dl>
+<dl class="docutils">
+<dt>DataFrame([x, y, mass, size, ecc, signal])</dt>
+<dd>where mass means total integrated brightness of the blob,
+size means the radius of gyration of its Gaussian-like profile,
+and ecc is its eccentricity (1 is circular).</dd>
+</dl>
+<p>preprocess : Set to False to turn off bandpass preprocessing.
+max_iterations : integer</p>
+<blockquote>
+<div>max number of loops to refine the center of mass, default 10</div></blockquote>
+<dl class="docutils">
+<dt>filter_before</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>Use minmass (and maxsize, if set) to eliminate spurrious features
+based on their estimated mass and size before refining position.
+True by default for performance.</dd>
+<dt>filter_after</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>Use final characterizations of mass and size to elminate spurrious
+features. True by default.</dd>
+<dt>characterize</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>Compute &#8220;extras&#8221;: eccentricity, signal, ep. True by default.</dd>
+</dl>
+<p>engine : {&#8216;auto&#8217;, &#8216;python&#8217;, &#8216;numba&#8217;}
+output : {None, trackpy.PandasHDFStore, SomeCustomClass}</p>
+<blockquote>
+<div>If None, return all results as one big DataFrame. Otherwise, pass
+results from each frame, one at a time, to the write() method
+of whatever class is specified here.</div></blockquote>
+<dl class="docutils">
+<dt>meta</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">By default, a YAML (plain text) log file is saved in the current</span><dd>directory. You can specify a different filepath set False.</dd>
+</dl>
+<p>locate : performs location on a single image</p>
+<p>This is an implementation of the Crocker-Grier centroid-finding algorithm.
+<a href="#id7"><span class="problematic" id="id8"><span id="id3"></span>[1]_</span></a></p>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Crocker, J.C., Grier, D.G. <a class="reference external" href="http://dx.doi.org/10.1006/jcis.1996.0217">http://dx.doi.org/10.1006/jcis.1996.0217</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>These locate doesn&#8217;t do exactly what you want, you can dig into the lower-
+level functions and develop something of your own.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trackpy.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="trackpy.linking.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">linking</span></code> Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reference/trackpy.feature.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trackpy.linking.html" title="linking Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="trackpy.html" title="trackpy Package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">trackpy 0.2.4 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="trackpy.html" ><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2010-2014, Trackpy Contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>linking Module &mdash; trackpy 0.2.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="trackpy 0.2.4 documentation" href="../index.html" />
+    <link rel="up" title="trackpy Package" href="trackpy.html" />
+    <link rel="next" title="filtering Module" href="trackpy.filtering.html" />
+    <link rel="prev" title="feature Module" href="trackpy.feature.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trackpy.filtering.html" title="filtering Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="trackpy.feature.html" title="feature Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">trackpy 0.2.4 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="trackpy.html" accesskey="U"><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="linking-module">
+<h1><code class="xref py py-mod docutils literal"><span class="pre">linking</span></code> Module<a class="headerlink" href="#linking-module" title="Permalink to this headline">¶</a></h1>
+<p>Most users will rely only on <code class="docutils literal"><span class="pre">link_df</span></code> (for &#8220;link DataFrame&#8221;) which expects
+results the format given from <code class="docutils literal"><span class="pre">locate</span></code> and <code class="docutils literal"><span class="pre">batch</span></code>.</p>
+<dl class="function">
+<dt id="trackpy.link_df">
+<code class="descclassname">trackpy.</code><code class="descname">link_df</code><span class="sig-paren">(</span><em>features</em>, <em>search_range</em>, <em>memory=0</em>, <em>neighbor_strategy='KDTree'</em>, <em>link_strategy='auto'</em>, <em>predictor=None</em>, <em>hash_size=None</em>, <em>box_size=None</em>, <em>pos_columns=None</em>, <em>t_column=None</em>, <em>verify_integrity=True</em>, <em>retain_index=False</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.link_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link features into trajectories, assigning a label to each trajectory.</p>
+<dl class="docutils">
+<dt>features</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span><dd>Must include any number of column(s) for position and a column of
+frame numbers. By default, &#8216;x&#8217; and &#8216;y&#8217; are expected for position,
+and &#8216;frame&#8217; is expected for frame number. See below for options to use
+custom column names.</dd>
+<dt>search_range</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>the maximum distance features can move between frames</dd>
+<dt>memory</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>the maximum number of frames during which a feature can vanish,
+then reppear nearby, and be considered the same particle. 0 by default.</dd>
+<dt>neighbor_strategy</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">{&#8216;KDTree&#8217;, &#8216;BTree&#8217;}</span><dd>algorithm used to identify nearby features</dd>
+<dt>link_strategy</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">{&#8216;recursive&#8217;, &#8216;nonrecursive&#8217;, &#8216;numba&#8217;, &#8216;auto&#8217;}</span><dd>algorithm used to resolve subnetworks of nearby particles
+&#8216;auto&#8217; uses numba if available</dd>
+<dt>predictor</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">function (optional)</span><dd>Improve performance by guessing where a particle will be in the next frame.
+For examples of how this works, see the &#8220;predict&#8221; module.</dd>
+</dl>
+<dl class="docutils">
+<dt>trajectories</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span><dd>This is the input features DataFrame, now with a new column labeling
+each particle with an ID number. This is not a copy.</dd>
+</dl>
+<dl class="docutils">
+<dt>pos_columns</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame column names (unlimited dimensions)</span><dd>Default is [&#8216;x&#8217;, &#8216;y&#8217;]</dd>
+<dt>t_column</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame column name</span><dd>Default is &#8216;frame&#8217;</dd>
+<dt>hash_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span><dd>For &#8216;BTree&#8217; mode only. Define the shape of the search region.
+If None (default), infer shape from range of data.</dd>
+<dt>box_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span><dd>For &#8216;BTree&#8217; mode only. Define the parition size to optimize
+performance. If None (default), the search_range is used, which is
+a reasonable guess for best performance.</dd>
+<dt>verify_integrity</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>False by default, for fastest performance.
+Use True if you suspect a bug in linking.</dd>
+<dt>retain_index</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span><dd>By default, the index is reset to be sequential. To keep the original
+index, set to True. Default is fine unless you devise a special use.</dd>
+</dl>
+</dd></dl>
+
+<p>We continue to support <code class="docutils literal"><span class="pre">link</span></code> which expects <code class="docutils literal"><span class="pre">trackpy.Point</span></code> objects as
+a list of lists.</p>
+<dl class="function">
+<dt id="trackpy.link">
+<code class="descclassname">trackpy.</code><code class="descname">link</code><span class="sig-paren">(</span><em>levels</em>, <em>search_range</em>, <em>hash_generator</em>, <em>memory=0</em>, <em>track_cls=None</em>, <em>neighbor_strategy='BTree'</em>, <em>link_strategy='recursive'</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link features into trajectories, assigning a label to each trajectory.</p>
+<p>This function is deprecated and lacks some recently-added options,
+thought it is still accurate. Use link_df or link_iter.</p>
+<dl class="docutils">
+<dt>levels</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">iterable of iterables containing Points objects</span><dd>e.g., a list containing lists with the Points in each frame</dd>
+<dt>search_range</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>the maximum distance features can move between frames</dd>
+<dt>hash_generator</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">a function that returns a HashTable</span><dd>only used if neighbor_strategy is set to &#8216;BTree&#8217; (default)</dd>
+<dt>memory</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>the maximum number of frames during which a feature can vanish,
+then reppear nearby, and be considered the same particle. 0 by default.</dd>
+<dt>neighbor_strategy</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">{&#8216;BTree&#8217;, &#8216;KDTree&#8217;}</span><dd>algorithm used to identify nearby features</dd>
+<dt>link_strategy</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">{&#8216;recursive&#8217;, &#8216;nonrecursive&#8217;, &#8216;numba&#8217;, &#8216;auto&#8217;}</span><dd>algorithm used to resolve subnetworks of nearby particles
+&#8216;auto&#8217; uses numba if available</dd>
+</dl>
+<p>tracks : list of Track (or track_cls) objects</p>
+<p>link_df, link_iter</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trackpy.Point">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">Point</code><a class="headerlink" href="#trackpy.Point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for point (features) used in tracking.  This class
+contains all of the general stuff for interacting with
+<code class="xref py py-class docutils literal"><span class="pre">Track</span></code> objects.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To be used for tracking this class must be sub-classed to provide a <code class="xref py py-func docutils literal"><span class="pre">distance()</span></code> function.  Child classes <strong>MUST</strong> call <code class="xref py py-func docutils literal"><span class="pre">Point.__init__()</span></code>.  (See <code class="xref py py-class docutils literal"><span class="pre">PointND</span></code> for example. )</p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="trackpy.PointND">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">PointND</code><span class="sig-paren">(</span><em>t</em>, <em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.PointND" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> &#8211; a time-like variable.</li>
+<li><strong>pos</strong> (<em>iterable of length d</em>) &#8211; position of feature</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Version of <code class="xref py py-class docutils literal"><span class="pre">Point</span></code> for tracking in flat space with
+non-periodic boundary conditions.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trackpy.Track">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">Track</code><span class="sig-paren">(</span><em>point=None</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.Track" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>point</strong> (<code class="xref py py-class docutils literal"><span class="pre">Point</span></code>) &#8211; The first feature in the track if not  <cite>None</cite>.</td>
+</tr>
+</tbody>
+</table>
+<p>Base class for objects to represent linked tracks.  Includes logic
+for adding, removing features to the track.  This can be sub-classed
+to provide additional track level computation as needed.</p>
+</dd></dl>
+
+<p>At the lowest level is <code class="docutils literal"><span class="pre">link_iter</span></code>, which can returns results iteratively
+and process unlimited stream of data using a fixed amount of memory.</p>
+<dl class="function">
+<dt id="trackpy.link_iter">
+<code class="descclassname">trackpy.</code><code class="descname">link_iter</code><span class="sig-paren">(</span><em>levels</em>, <em>search_range</em>, <em>memory=0</em>, <em>neighbor_strategy='KDTree'</em>, <em>link_strategy='auto'</em>, <em>hash_size=None</em>, <em>box_size=None</em>, <em>predictor=None</em>, <em>track_cls=None</em>, <em>hash_generator=None</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.link_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link features into trajectories, assigning a label to each trajectory.</p>
+<dl class="docutils">
+<dt>levels</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">iterable of iterables containing Points objects</span><dd>e.g., a list containing lists with the Points in each frame</dd>
+<dt>search_range</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>the maximum distance features can move between frames</dd>
+<dt>memory</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">integer</span><dd>the maximum number of frames during which a feature can vanish,
+then reppear nearby, and be considered the same particle. 0 by default.</dd>
+<dt>neighbor_strategy</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">{&#8216;KDTree&#8217;, &#8216;BTree&#8217;}</span><dd>algorithm used to identify nearby features</dd>
+<dt>link_strategy</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">{&#8216;recursive&#8217;, &#8216;nonrecursive&#8217;, &#8216;numba&#8217;, &#8216;auto&#8217;}</span><dd>algorithm used to resolve subnetworks of nearby particles
+&#8216;auto&#8217; uses numba if available</dd>
+<dt>predictor</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">function (optional)</span><dd>Improve performance by guessing where a particle will be in the next frame.
+For examples of how this works, see the &#8220;predict&#8221; module.</dd>
+</dl>
+<dl class="docutils">
+<dt>labels</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">list of integers</span><dd>labeling the features in the given level</dd>
+</dl>
+<dl class="docutils">
+<dt>hash_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span><dd>For &#8216;BTree&#8217; mode only. Define the shape of the search region.
+(Higher-level wrappers of link infer this from the data.)</dd>
+<dt>box_size</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span><dd>For &#8216;BTree&#8217; mode only. Define the parition size to optimize
+performance. If None (default), the search_range is used, which is
+a reasonable guess for best performance.</dd>
+<dt>track_cls</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">class (optional)</span><dd>for special uses, you can specify a custom class that holds
+each Track</dd>
+<dt>hash_generator</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">function (optional)</span><dd>a function that returns a HashTable, included for legacy support.
+Specifying hash_size and box_size (above) fully defined a HashTable.</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="trackpy.IndexedPointND">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">IndexedPointND</code><span class="sig-paren">(</span><em>t</em>, <em>pos</em>, <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.IndexedPointND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="trackpy.DummyTrack">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">DummyTrack</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.DummyTrack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does not store points, thereby conserving memory.</p>
+</dd></dl>
+
+<p>The BTree link strategy uses a hash table that can be fully specified by
+keyword arguments, but you can also build one yourself.</p>
+<dl class="class">
+<dt id="trackpy.HashTable">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">HashTable</code><span class="sig-paren">(</span><em>dims</em>, <em>box_size</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.HashTable" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dims</strong> &#8211; the range of the data to be put in the hash table.  0&lt;data[k]&lt;dims[k]</li>
+<li><strong>box_size</strong> &#8211; how big each box should be in data units.  The same scale is used for all dimensions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Basic hash table to fast look up of particles in the region of a given particle</p>
+</dd></dl>
+
+<p>The KDTree link strategy uses a class that, at this point, is not exposed
+to the user and shouldn&#8217;t need to be, but here it is for completeness:</p>
+<dl class="class">
+<dt id="trackpy.TreeFinder">
+<em class="property">class </em><code class="descclassname">trackpy.</code><code class="descname">TreeFinder</code><span class="sig-paren">(</span><em>points</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.TreeFinder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trackpy.feature.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">feature</span></code> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="trackpy.filtering.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">filtering</span></code> Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reference/trackpy.linking.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trackpy.filtering.html" title="filtering Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="trackpy.feature.html" title="feature Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">trackpy 0.2.4 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="trackpy.html" ><code class="docutils literal"><span class="pre">trackpy</span></code> Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2010-2014, Trackpy Contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+    </div>
+  </body>
+</html>

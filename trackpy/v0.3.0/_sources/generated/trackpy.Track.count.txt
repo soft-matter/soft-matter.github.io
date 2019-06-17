@@ -1,0 +1,6 @@
+trackpy.Track.count
+===================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: Track.count

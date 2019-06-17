@@ -1,0 +1,6 @@
+trackpy.predict.NullPredict.observe
+===================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: NullPredict.observe

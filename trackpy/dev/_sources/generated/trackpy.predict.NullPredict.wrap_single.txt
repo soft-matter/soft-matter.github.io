@@ -1,0 +1,6 @@
+trackpy.predict.NullPredict.wrap_single
+=======================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: NullPredict.wrap_single

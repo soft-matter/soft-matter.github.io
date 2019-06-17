@@ -1,0 +1,6 @@
+trackpy.preprocessing.invert_image
+==================================
+
+.. currentmodule:: trackpy.preprocessing
+
+.. autofunction:: invert_image

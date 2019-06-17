@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Trackpy tutorial &mdash; trackpy 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="#">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Trackpy tutorial</a><ul>
+<li><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li><a class="reference internal" href="#processing-large-data-sets">Processing Large Data Sets</a></li>
+<li><a class="reference internal" href="#extending-customizing-trackpy">Extending &amp; Customizing Trackpy</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-tutorial">
+<span id="tutorial"></span><h1>Trackpy tutorial<a class="headerlink" href="#trackpy-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/walkthrough.html">Walkthrough</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#scientific-ipython-setup">Scientific IPython Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#step-1-read-the-data">Step 1: Read the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#step-2-locate-features">Step 2: Locate Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#step-3-link-features-into-particle-trajectories">Step 3: Link features into particle trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#step-4-analyze-trajectories">Step 4: Analyze trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#preview-of-advanced-features">Preview of Advanced Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#streaming">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#optional-high-performance-component-numba">Optional High Performance Component: Numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/walkthrough.html#parellelization">Parellelization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/prediction.html">Prediction: Beyond Simple Random Walks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/prediction.html#prescribed-predictors">Prescribed predictors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/prediction.html#dynamic-predictors">Dynamic predictors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tracking-3d.html">Feature finding in 3D confocal images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#setup-ipython-pims-trackpy">Setup IPython, pims, trackpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#import-3d-images">Import 3D images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#feature-finding">Feature finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#batch-processing">Batch processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#linking">Linking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#mean-squared-displacement">Mean squared displacement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/tracking-3d.html#about-this-work">About this work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/uncertainty.html#how-is-subpixel-resolution-possible">How is subpixel resolution possible?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/uncertainty.html#demonstration-of-trackpy-s-uncertainty-estimation-on-noisy-images">Demonstration of trackpy&#8217;s uncertainty estimation on noisy images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/uncertainty.html#the-effect-of-diameter-on-precision">The effect of <tt class="docutils literal"><span class="pre">diameter</span></tt> on precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/uncertainty.html#how-tracking-errors-can-qualitatively-affect-physical-interpretation">How tracking errors can qualitatively affect physical interpretation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/subnets.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/subnets.html#techniques-for-limiting-subnetwork-size">Techniques for limiting subnetwork size</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/adaptive-search.html#how-it-works">How it works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/adaptive-search.html#how-to-use-it">How to use it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/adaptive-search.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/linking-diagnostics.html#how-to-use-it">How to use it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/linking-diagnostics.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="processing-large-data-sets">
+<h2>Processing Large Data Sets<a class="headerlink" href="#processing-large-data-sets" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/on-disk.html#install-pytables">Install PyTables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/on-disk.html#locate-features-streaming-results-into-an-hdf5-file">Locate Features, Streaming Results into an HDF5 File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/on-disk.html#link-trajectories-streaming-from-and-updating-the-hdf5-file">Link Trajectories, Streaming From and Updating the HDF5 File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/on-disk.html#framewise-data-interfaces">Framewise Data Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/performance.html">Making trackpy fast(er)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/performance.html#general-advice">General advice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/performance.html#using-numba-for-acceleration">Using numba for acceleration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/performance.html#advanced-topics">Advanced topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/parallel-locate.html">Parallelized Feature Location using IPython Parallel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/parallel-locate.html#intsall-ipyparallel">Intsall ipyparallel</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="extending-customizing-trackpy">
+<h2>Extending &amp; Customizing Trackpy<a class="headerlink" href="#extending-customizing-trackpy" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#scientific-libraries">Scientific libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#image-preprocessing">Image preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#custom-feature-detection">Custom feature detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#bubble-tracking">Bubble tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#velocity-field">Velocity field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#about-this-work">About this work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/custom-feature-detection.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/tutorial.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

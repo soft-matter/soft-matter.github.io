@@ -1,0 +1,6 @@
+trackpy.preprocessing.scale_to_gamut
+====================================
+
+.. currentmodule:: trackpy.preprocessing
+
+.. autofunction:: scale_to_gamut

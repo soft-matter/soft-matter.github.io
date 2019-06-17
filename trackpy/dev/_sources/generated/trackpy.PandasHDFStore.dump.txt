@@ -1,0 +1,6 @@
+trackpy.PandasHDFStore.dump
+===========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: PandasHDFStore.dump

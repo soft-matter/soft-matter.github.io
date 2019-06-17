@@ -1,0 +1,33 @@
+trackpy.PointND
+===============
+
+.. currentmodule:: trackpy
+
+.. autoclass:: PointND
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         PointND.add_to_track
+         PointND.distance
+         PointND.in_track
+         PointND.remove_from_track
+
+
+
+
+   
+
+
+   .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         PointND.count
+         PointND.track
+
+

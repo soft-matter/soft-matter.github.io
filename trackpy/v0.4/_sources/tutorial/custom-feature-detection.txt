@@ -1,0 +1,4 @@
+-e custom-feature-detection
+------------------------------------------------
+.. raw:: html
+    :file: custom-feature-detection.html

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.refine_leastsq &#8212; trackpy 0.4.1+62.gf1595d9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.1+62.gf1595d9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="trackpy 0.4.1+62.gf1595d9 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.link_iter" href="trackpy.link_iter.html" />
+    <link rel="prev" title="trackpy.refine_com" href="trackpy.refine_com.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.1+62.gf1595d9</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Tracking Large Features Such As Bubbles</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.refine_leastsq</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-refine-leastsq">
+<h1>trackpy.refine_leastsq<a class="headerlink" href="#trackpy-refine-leastsq" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.refine_leastsq">
+<code class="descclassname">trackpy.</code><code class="descname">refine_leastsq</code><span class="sig-paren">(</span><em>f</em>, <em>reader</em>, <em>diameter</em>, <em>separation=None</em>, <em>fit_function='gauss'</em>, <em>param_mode=None</em>, <em>param_val=None</em>, <em>constraints=None</em>, <em>bounds=None</em>, <em>compute_error=False</em>, <em>pos_columns=None</em>, <em>t_column='frame'</em>, <em>max_iter=10</em>, <em>max_shift=1</em>, <em>max_rms_dev=1.0</em>, <em>residual_factor=100000.0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.refine_leastsq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refines overlapping feature coordinates by least-squares fitting to
+radial model functions.</p>
+<p>This does not raise an error if minimization fails. Instead, coordinates
+are unchanged and the added column <code class="docutils literal"><span class="pre">cost</span></code> will contain <code class="docutils literal"><span class="pre">NaN</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f</strong> : DataFrame</p>
+<blockquote>
+<div><p>pandas DataFrame containing coordinates of features.
+Required columns are the position columns (see <code class="docutils literal"><span class="pre">pos_columns</span></code>)</p>
+<p>Any fit parameter (which are at least &#8216;background&#8217;, &#8216;signal&#8217; and &#8216;size&#8217;)
+that is not present should be either given as a standard value in the
+<code class="docutils literal"><span class="pre">param_val</span></code> argument, or be present as a <code class="docutils literal"><span class="pre">default</span></code> value in the used
+fit function.</p>
+<p>If a FramesSequence is supplied as a reader, the time column (see
+<code class="docutils literal"><span class="pre">t_column</span></code> is also required.</p>
+</div></blockquote>
+<p><strong>reader</strong> : pims.FramesSequence, pims.Frame, or ndarray</p>
+<blockquote>
+<div><p>A pims.FrameSequence is an object that returns an image when indexed. It
+also provides the <code class="docutils literal"><span class="pre">frame_shape</span></code> attribute. If not a FrameSequence is
+given a single image is assumed and all features that are present in
+<code class="docutils literal"><span class="pre">f</span></code> are assumed to be in that image.</p>
+</div></blockquote>
+<p><strong>diameter</strong> : number or tuple</p>
+<blockquote>
+<div><p>Determines the feature mask diameter that is used for the refinement.
+Use a tuple to account for anisotropic pixel sizes (e.g. <code class="docutils literal"><span class="pre">(7,</span> <span class="pre">11)</span></code>).</p>
+</div></blockquote>
+<p><strong>separation</strong> : number or tuple, optional</p>
+<blockquote>
+<div><p>Determines the distance below which features are considered in the same
+cluster. By default, equals <code class="docutils literal"><span class="pre">diameter</span></code>. As the model feature function
+is only defined up to <code class="docutils literal"><span class="pre">diameter</span></code>, it does not effect the refine
+results if this value is increased above <code class="docutils literal"><span class="pre">diameter</span></code>.</p>
+</div></blockquote>
+<p><strong>fit_function</strong> : string or or dict, optional</p>
+<blockquote>
+<div><p>The type of fit function. Either one of the default functions
+<code class="docutils literal"><span class="pre">{'gauss',</span> <span class="pre">'hat',</span> <span class="pre">'ring',</span> <span class="pre">'inv_series_&lt;number&gt;'}</span></code>, or a custom
+function defined using a dictionary. Defaults to <code class="docutils literal"><span class="pre">'gauss'</span></code>.</p>
+<p>The fit function is loosely defined as follows:</p>
+<div class="math">
+\[ \begin{align}\begin{aligned}F(r, A, \sigma, \vec{p}) = B + A f(r, \vec{p})\\r^2 = \frac{x - c_x}{\sigma_x}^2 + \frac{y - c_y}{\sigma_y}^2\end{aligned}\end{align} \]</div>
+<p>In which <span class="math">\(r\)</span> denotes the reduced distance to the feature center,
+<span class="math">\(B\)</span> the background intensity of the image, <span class="math">\(A\)</span> (&#8216;signal&#8217;)
+the maximum value of the feature, <span class="math">\(\vec{p}\)</span> a list of extra model
+parameters, <span class="math">\(\sigma\)</span> (&#8216;size&#8217;) the radial distance from the feature
+center at which the value of <span class="math">\(f(r)\)</span> has decayed to
+<span class="math">\(1/e \approx 0.37\)</span>, and <span class="math">\(\vec{c}\)</span> the coordinate of the
+feature center.</p>
+<p>So <code class="docutils literal"><span class="pre">size</span></code> is smaller than the apparent radius of the feature.
+Typically, it is three to four times lower than the <code class="docutils literal"><span class="pre">diameter</span></code>.</p>
+<ul class="simple">
+<li>The <code class="docutils literal"><span class="pre">'gauss'</span></code> function is a Gaussian, without any extra parameter</li>
+<li>The <code class="docutils literal"><span class="pre">'hat'</span></code> function is solid disc of relative size <code class="docutils literal"><span class="pre">disc_size</span></code>,
+and gaussian smoothed borders.</li>
+<li>The <code class="docutils literal"><span class="pre">'ring'</span></code> model function is a displaced gaussian with parameter
+<code class="docutils literal"><span class="pre">thickness</span></code>.</li>
+<li>The <code class="docutils literal"><span class="pre">inv_series_&lt;number&gt;</span></code> model function is the inverse of an
+even polynomial containing <code class="docutils literal"><span class="pre">&lt;number&gt;</span></code> parameters
+(signal_mult / (1 + a r**2 + b r**4 + c r*2 + ...) <code class="docutils literal"><span class="pre">signal_mult</span></code> is
+best chosen such that the maximum of the polynomial equals 1.</li>
+</ul>
+<p>Define your own model function with a dictionary, containing:</p>
+<ul>
+<li><p class="first">params : list of str
+List of custom parameter names. The list has the same length as
+the <code class="docutils literal"><span class="pre">p</span></code> ndarray in <code class="docutils literal"><span class="pre">fun</span></code> and <code class="docutils literal"><span class="pre">dfun</span></code>. It does not include
+<code class="docutils literal"><span class="pre">background</span></code>, <code class="docutils literal"><span class="pre">signal</span></code>, or <code class="docutils literal"><span class="pre">size</span></code>.</p>
+</li>
+<li><p class="first">fun : callable
+The image model function. It takes arguments <code class="docutils literal"><span class="pre">(r2,</span> <span class="pre">p,</span> <span class="pre">ndim)</span></code>.</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">r2</span></code> is a 1d ndarray containing the squared reduced</dt>
+<dd>radial distances (see the above definition).</dd>
+</dl>
+</li>
+<li><code class="docutils literal"><span class="pre">p</span></code> is an array of extra feature parameters</li>
+<li><code class="docutils literal"><span class="pre">ndim</span></code> is the number of dimensions in the image</li>
+</ul>
+<p>The function returns an ndarray of the same shape as <code class="docutils literal"><span class="pre">r2</span></code>,
+containing the feature intensity values up to a maximum of 1.</p>
+</li>
+<li><p class="first">dfun : callable, optional
+The analytical derivative of the image model function <code class="docutils literal"><span class="pre">fun</span></code>.
+The function takes the same arguments as <code class="docutils literal"><span class="pre">fun</span></code>.</p>
+<p>It returns a length-two tuple, with the following elements:</p>
+<ol class="arabic simple">
+<li>(because of performance considerations)
+the image model function, exactly as returned by <code class="docutils literal"><span class="pre">fun</span></code></li>
+<li>the partial derivatives of <code class="docutils literal"><span class="pre">fun</span></code> in each point <code class="docutils literal"><span class="pre">r2</span></code> as a
+list of 1d ndarrays. The first element is the derivative with
+respect to <code class="docutils literal"><span class="pre">r2</span></code>, the following elements w.r.t. the custom
+shape parameters as defined in <code class="docutils literal"><span class="pre">params</span></code>. Hence, the number
+of elements in this list is <code class="docutils literal"><span class="pre">len(params)</span> <span class="pre">+</span> <span class="pre">1</span></code>.</li>
+</ol>
+</li>
+<li><p class="first">default : dict, optional
+Default parameter values. For instance <code class="docutils literal"><span class="pre">dict(thickness=0.2)</span></code></p>
+</li>
+<li><p class="first">continuous : boolean, optional
+Default True. Set this to False if <span class="math">\(f(|r|)\)</span> is not
+continuous at <span class="math">\(r = 0\)</span>. In that case, all pixels closer
+than 1 pixel to the center will be ignored.</p>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>param_mode</strong> : dict, optional</p>
+<blockquote>
+<div><p>For each parameter, define whether it should be optimized or be
+kept constant. This also allows for constraining parameters to be equal
+within each cluster or equal for all frames.</p>
+<p>Each parameter can have one of the following values:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'var'</span></code> : the parameter is allowed to vary for each feature independently</li>
+<li><code class="docutils literal"><span class="pre">'const'</span></code> : the parameter is not allowed to vary</li>
+<li><code class="docutils literal"><span class="pre">'cluster'</span></code> : the parameter is allowed to vary, but is equal
+within each cluster</li>
+<li><code class="docutils literal"><span class="pre">'global'</span></code> : the parameter is allowed to vary, but is equal for
+each feature</li>
+<li><code class="docutils literal"><span class="pre">'frame'</span></code> : Not yet implemented</li>
+<li><code class="docutils literal"><span class="pre">'particle'</span></code> : Not yet implemented</li>
+</ul>
+<p>Default values for position coordinates and signal is <code class="docutils literal"><span class="pre">'var'</span></code>, for
+background <code class="docutils literal"><span class="pre">'cluster'</span></code> and for all others <code class="docutils literal"><span class="pre">'const'</span></code>. Background
+cannot vary within one cluster, as regions overlap.</p>
+</div></blockquote>
+<p><strong>param_val</strong> : dict, optional</p>
+<blockquote>
+<div><p>Default parameter values.</p>
+</div></blockquote>
+<p><strong>constraints</strong> : tuple of dicts, optional</p>
+<blockquote>
+<div><p>Provide constraints for the parameters that are optimized. Each
+constraint consists of a dictionary containing the following elements:</p>
+<ul class="simple">
+<li>type : str
+Constraint type: &#8216;eq&#8217; for equality, which means that the constraint
+function result is to be zero. &#8216;ineq&#8217; for inequality, which means
+that the constraint function result is to be greater than zero.</li>
+<li>fun : callable
+The function defining the constraint. The function is provided
+a 3d ndarray with on the axes (&lt;cluster&gt;, &lt;feature&gt;, &lt;parameter&gt;)
+parameters are (background, signal, &lt;pos&gt;, &lt;size&gt;, &lt;other&gt;).</li>
+<li>args : sequence, optional
+Extra arguments to be passed to the function.</li>
+<li>cluster_size : integer
+Size of the cluster to which the constraint applies</li>
+</ul>
+<p>The parameter array that is presented to the constraint function is
+slightly different from the 2D array of per-feature parameters used in
+<code class="docutils literal"><span class="pre">vect_from_params</span></code>, in the sense that that the first axis (axis 0) is
+extra.</p>
+<p>The 3D array of feature parameters that is presented to the constraint
+function is defined as follows:</p>
+<ul class="simple">
+<li>Axis 0, the grouping axis, which  mostly has a length of 1, but in the
+case that the features that are optimized at once belong to different
+clusters (e.g. 1 image with 10 dimers) the length of this axis is the
+number of clusters that are optimized together (in this example, 10).</li>
+<li>Axis 1, the feature axis, contains the individual features. In the example
+of 10 dimers, this axis would have a size of 2.</li>
+<li>Axis 2, the parameter axis, contains the parameters. The order is
+<code class="docutils literal"><span class="pre">['background',</span> <span class="pre">'signal',</span> <span class="pre">&lt;pos&gt;,</span> <span class="pre">&lt;size&gt;,</span> <span class="pre">&lt;extra&gt;]</span></code></li>
+</ul>
+</div></blockquote>
+<p><strong>bounds: dict</strong></p>
+<blockquote>
+<div><p>Bounds on parameters, in the following forms:</p>
+<ul class="simple">
+<li>Absolute bounds <code class="docutils literal"><span class="pre">{'x':</span> <span class="pre">[low,</span> <span class="pre">high]}</span></code></li>
+<li>Difference bounds, one-sided <code class="docutils literal"><span class="pre">{'x_abs':</span> <span class="pre">max_diff}</span></code></li>
+<li>Difference bounds, two-sided <code class="docutils literal"><span class="pre">{'x_abs':</span> <span class="pre">[max_diff_below,</span> <span class="pre">max_diff_above]}</span></code></li>
+<li>Relative bounds, one-sided <code class="docutils literal"><span class="pre">{'x_rel':</span> <span class="pre">max_fraction_below}</span></code></li>
+<li>Relative bounds, two-sided <code class="docutils literal"><span class="pre">{'x_rel':</span> <span class="pre">[max_fraction_below,</span> <span class="pre">max_fraction_above]}</span></code></li>
+</ul>
+<p>When the keyword <cite>pos</cite> is used, this will be distributed to all
+pos_columns (but direct values of each positions will have precedence)
+When the keyword <cite>size</cite> is used, this will be distributed to all sizes,
+in the case of anisotropic sizes (also, direct values have precedence)</p>
+<p>For example, <code class="docutils literal"><span class="pre">{'x':</span> <span class="pre">(2,</span> <span class="pre">6),</span> <span class="pre">'x_abs':</span> <span class="pre">(4,</span> <span class="pre">6),</span> <span class="pre">'x_rel':</span> <span class="pre">(1.5,</span> <span class="pre">2.5)</span></code>
+would limit the parameter <code class="docutils literal"><span class="pre">'x'</span></code> between 2 and 6, between <code class="docutils literal"><span class="pre">x-4</span></code> and
+<code class="docutils literal"><span class="pre">x+6</span></code>,  and between <code class="docutils literal"><span class="pre">x/1.5</span></code> and <code class="docutils literal"><span class="pre">x*2.5</span></code>. The narrowest bound is
+taken.</p>
+</div></blockquote>
+<p><strong>compute_error</strong> : boolean, optional</p>
+<blockquote>
+<div><p>Requires numdifftools to be installed. Default False.
+This is an experimental and untested feature that estimates the error
+in the optimized parameters on a per-feature basis from the curvature
+(diagonal elements of the Hessian) of the objective function in the
+optimized point.</p>
+</div></blockquote>
+<p><strong>pos_columns: list of strings, optional</strong></p>
+<blockquote>
+<div><p>Column names that contain the position coordinates.
+Defaults to <code class="docutils literal"><span class="pre">['y',</span> <span class="pre">'x']</span></code> or <code class="docutils literal"><span class="pre">['z',</span> <span class="pre">'y',</span> <span class="pre">'x']</span></code>, if <code class="docutils literal"><span class="pre">'z'</span></code> exists.</p>
+</div></blockquote>
+<p><strong>t_column: string, optional</strong></p>
+<blockquote>
+<div><p>Column name that denotes the frame index. Default <code class="docutils literal"><span class="pre">'frame'</span></code>.</p>
+</div></blockquote>
+<p><strong>max_iter: int, optional</strong></p>
+<blockquote>
+<div><p>Max number of whole-pixel shifts in refine. Default 10.</p>
+</div></blockquote>
+<p><strong>max_shift: float, optional</strong></p>
+<blockquote>
+<div><p>Maximum satisfactory out-of-center distance. When the fitted gaussian
+is more out of center, do extra iteration. Default 1.</p>
+</div></blockquote>
+<p><strong>max_rms_dev</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum root mean squared difference between the final fit and the
+(preprocessed) image, in units of the image maximum value. Default 1.</p>
+</div></blockquote>
+<p><strong>residual_factor</strong> : float, optional</p>
+<blockquote>
+<div><p>Factor with which the residual is multiplied, something internal inside
+SLSQP makes it work best with this set around 100000. (which is Default)</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : optional</p>
+<blockquote>
+<div><p>other arguments are passed directly to scipy.minimize. Defaults are
+<code class="docutils literal"><span class="pre">dict(method='SLSQP',</span> <span class="pre">tol=1E-6,</span> <span class="pre">options=dict(maxiter=100,</span> <span class="pre">disp=False))</span></code></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DataFrame of refined coordinates. Added columns:</p>
+<ul class="last">
+<li><p class="first">&#8216;cluster&#8217;: the cluster id of the feature.</p>
+</li>
+<li><p class="first">&#8216;cluster_size&#8217;: the size of the cluster to which the feature belongs</p>
+</li>
+<li><p class="first">&#8216;cost&#8217;: root mean squared difference between the final fit and</p>
+<blockquote>
+<div><p>the (preprocessed) image, in units of the cluster maximum value. If the
+optimization fails, no error is raised feature fields are unchanged,
+and this field becomes NaN.</p>
+</div></blockquote>
+</li>
+<li><p class="first">(experimental) standard errors of variable parameters (&#8216;x_std&#8217;, etc.) (only if compute_error is true)</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal"><span class="pre">FitFunctions</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">vect_from_params</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">vect_to_params</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">wrap_constraint</span></code></p>
+</div>
+<p class="rubric">Notes</p>
+<p>This feature is a recent addition to trackpy that is still in its
+experimental phase. Please report any issues you encounter on Github.</p>
+<p>If you use this specific algorithm for your scientific publications, please
+mention the accompanying publication <a class="reference internal" href="#r13" id="id1">[R13]</a></p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R13]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> van der Wel C., Kraft D.J. Automated tracking of colloidal clusters</td></tr>
+</tbody>
+</table>
+<p>with sub-pixel accuracy and precision. J. Phys. Condens. Mat. 29:44001 (2017)
+DOI: <a class="reference external" href="http://dx.doi.org/10.1088/1361-648X/29/4/044001">http://dx.doi.org/10.1088/1361-648X/29/4/044001</a></p>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.refine_leastsq.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2019, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

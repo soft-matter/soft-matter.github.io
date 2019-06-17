@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.locate &#8212; trackpy 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="trackpy 0.4 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.batch" href="trackpy.batch.html" />
+    <link rel="prev" title="API reference" href="../api.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/linking-diagnostics.html">Linking Diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Bubble Tracking in Foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.locate</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-locate">
+<h1>trackpy.locate<a class="headerlink" href="#trackpy-locate" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.locate">
+<code class="descclassname">trackpy.</code><code class="descname">locate</code><span class="sig-paren">(</span><em>raw_image</em>, <em>diameter</em>, <em>minmass=None</em>, <em>maxsize=None</em>, <em>separation=None</em>, <em>noise_size=1</em>, <em>smoothing_size=None</em>, <em>threshold=None</em>, <em>invert=False</em>, <em>percentile=64</em>, <em>topn=None</em>, <em>preprocess=True</em>, <em>max_iterations=10</em>, <em>filter_before=None</em>, <em>filter_after=None</em>, <em>characterize=True</em>, <em>engine='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.locate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate Gaussian-like blobs of some approximate size in an image.</p>
+<p>Preprocess the image by performing a band pass and a threshold.
+Locate all peaks of brightness, characterize the neighborhoods of the peaks
+and take only those with given total brightness (&#8220;mass&#8221;). Finally,
+refine the positions of each peak.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image</strong> : array</p>
+<blockquote>
+<div><p>any N-dimensional image</p>
+</div></blockquote>
+<p><strong>diameter</strong> : odd integer or tuple of odd integers</p>
+<blockquote>
+<div><p>This may be a single number or a tuple giving the feature&#8217;s
+extent in each dimension, useful when the dimensions do not have
+equal resolution (e.g. confocal microscopy). The tuple order is the
+same as the image shape, conventionally (z, y, x) or (y, x). The
+number(s) must be odd integers. When in doubt, round up.</p>
+</div></blockquote>
+<p><strong>minmass</strong> : float, optional</p>
+<blockquote>
+<div><p>The minimum integrated brightness. This is a crucial parameter for
+eliminating spurious features.
+Recommended minimum values are 100 for integer images and 1 for float
+images. Defaults to 0 (no filtering).
+.. warning:: The mass value is changed since v0.3.0
+.. warning:: The default behaviour of minmass has changed since v0.4.0</p>
+</div></blockquote>
+<p><strong>maxsize</strong> : float</p>
+<blockquote>
+<div><p>maximum radius-of-gyration of brightness, default None</p>
+</div></blockquote>
+<p><strong>separation</strong> : float or tuple</p>
+<blockquote>
+<div><p>Minimum separtion between features.
+Default is diameter + 1. May be a tuple, see diameter for details.</p>
+</div></blockquote>
+<p><strong>noise_size</strong> : float or tuple</p>
+<blockquote>
+<div><p>Width of Gaussian blurring kernel, in pixels
+Default is 1. May be a tuple, see diameter for details.</p>
+</div></blockquote>
+<p><strong>smoothing_size</strong> : float or tuple</p>
+<blockquote>
+<div><p>The size of the sides of the square kernel used in boxcar (rolling
+average) smoothing, in pixels
+Default is diameter. May be a tuple, making the kernel rectangular.</p>
+</div></blockquote>
+<p><strong>threshold</strong> : float</p>
+<blockquote>
+<div><p>Clip bandpass result below this value. Thresholding is done on the
+already background-subtracted image.
+By default, 1 for integer images and 1/255 for float images.</p>
+</div></blockquote>
+<p><strong>invert</strong> : boolean</p>
+<blockquote>
+<div><p>This will be deprecated. Use an appropriate PIMS pipeline to invert a
+Frame or FramesSequence.
+Set to True if features are darker than background. False by default.</p>
+</div></blockquote>
+<p><strong>percentile</strong> : float</p>
+<blockquote>
+<div><p>Features must have a peak brighter than pixels in this
+percentile. This helps eliminate spurious peaks.</p>
+</div></blockquote>
+<p><strong>topn</strong> : integer</p>
+<blockquote>
+<div><p>Return only the N brightest features above minmass.
+If None (default), return all features above minmass.</p>
+</div></blockquote>
+<p><strong>preprocess</strong> : boolean</p>
+<blockquote>
+<div><p>Set to False to turn off bandpass preprocessing.</p>
+</div></blockquote>
+<p><strong>max_iterations</strong> : integer</p>
+<blockquote>
+<div><p>max number of loops to refine the center of mass, default 10</p>
+</div></blockquote>
+<p><strong>filter_before</strong> : boolean</p>
+<blockquote>
+<div><p>filter_before is no longer supported as it does not improve performance.</p>
+</div></blockquote>
+<p><strong>filter_after</strong> : boolean</p>
+<blockquote>
+<div><p>This parameter has been deprecated: use minmass and maxsize.</p>
+</div></blockquote>
+<p><strong>characterize</strong> : boolean</p>
+<blockquote>
+<div><p>Compute &#8220;extras&#8221;: eccentricity, signal, ep. True by default.</p>
+</div></blockquote>
+<p><strong>engine</strong> : {&#8216;auto&#8217;, &#8216;python&#8217;, &#8216;numba&#8217;}</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DataFrame([x, y, mass, size, ecc, signal])</p>
+<blockquote class="last">
+<div><p>where mass means total integrated brightness of the blob,
+size means the radius of gyration of its Gaussian-like profile,
+and ecc is its eccentricity (0 is circular).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="trackpy.batch.html#trackpy.batch" title="trackpy.batch"><code class="xref py py-obj docutils literal"><span class="pre">batch</span></code></a></dt>
+<dd>performs location on many images in batch</dd>
+<dt><code class="xref py py-obj docutils literal"><span class="pre">minmass_version_change</span></code></dt>
+<dd>to convert minmass from v0.2.4 to v0.3.0</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Locate works with a coordinate system that has its origin at the center of
+pixel (0, 0). In almost all cases this will be the topleft pixel: the
+y-axis is pointing downwards.</p>
+<p>This is an implementation of the Crocker-Grier centroid-finding algorithm.
+<a class="reference internal" href="#r7" id="id1">[R7]</a></p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R7]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> Crocker, J.C., Grier, D.G. <a class="reference external" href="http://dx.doi.org/10.1006/jcis.1996.0217">http://dx.doi.org/10.1006/jcis.1996.0217</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.locate.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2018, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

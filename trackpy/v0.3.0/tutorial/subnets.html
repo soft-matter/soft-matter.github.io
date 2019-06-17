@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Advanced Linking: Subnetworks and search_range &mdash; trackpy 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0 documentation" href="../index.html" />
+    <link rel="next" title="Adaptive Search: Changing search_range on the Fly" href="adaptive-search.html" />
+    <link rel="prev" title="Subpixel Accuracy and Uncertainty Estimation" href="uncertainty.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#techniques-for-limiting-subnetwork-size">Techniques for limiting subnetwork size</a><ul>
+<li><a class="reference internal" href="#search-range"><tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li><a class="reference internal" href="#subnetwork-size-limit">Subnetwork size limit</a></li>
+<li><a class="reference internal" href="#accelerated-subnetwork-solver">Accelerated subnetwork solver</a></li>
+<li><a class="reference internal" href="#prediction">Prediction</a></li>
+<li><a class="reference internal" href="#adaptive-search">Adaptive search</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="advanced-linking-subnetworks-and-search-range">
+<h1>Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt><a class="headerlink" href="#advanced-linking-subnetworks-and-search-range" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The goal of the linking step is to find the most likely set of
+assignments that match each feature in the previous frame with its
+counterpart in the current frame. This is not always trivial: the
+correct match for a feature is not always the one closest in distance,
+and some particles disappear or are introduced with each new frame,
+leaving features dangling. In theory, doing this for <span class="math">\(N\)</span> particles
+involves evaluating all <span class="math">\(N!\)</span> possible sets of assignments, and
+choosing the best set.</p>
+<p>Such a computation is time-consuming — infeasibly so for more than a few
+dozen particles. Instead, for each particle in the previous frame,
+<tt class="docutils literal"><span class="pre">trackpy</span></tt> restricts its search of the current frame to a circular
+region of radius <tt class="docutils literal"><span class="pre">search_range</span></tt>, centered on the particle&#8217;s most
+likely new position. One supplies an appropriate <tt class="docutils literal"><span class="pre">search_range</span></tt> as an
+arugment to the <tt class="docutils literal"><span class="pre">link</span></tt> family of functions, so that for each particle,
+there will be at most a few candidate features to consider.</p>
+<p>The <tt class="docutils literal"><span class="pre">search_range</span></tt> technique usually speeds up linking, but it does
+not solve the basic problem. Consider the following (admittedly
+pathological) example, in which a grid of points in the first frame
+(large blue dots) mysteriously shifts and loses particles in the second
+frame (small green dots).</p>
+<div class="code python highlight-python"><div class="highlight"><pre>import trackpy
+import numpy as np
+import pandas as pd
+%matplotlib notebook
+from matplotlib.pyplot import *   # not recommended usage, but we use it for brevity here
+
+x0 = np.mgrid[-4:5,-4:5].astype(float)
+x0[x0 == 0] = np.nan
+x0 += np.random.normal(scale=0.05, size=x0.shape)
+pts0 = pd.DataFrame(dict(x=x0[0].flatten(), y=x0[1].flatten(), frame=0)).dropna()
+
+x1 = np.mgrid[-4:4,-4:4] + 0.5
+x1[x1 == 0.5] = np.nan
+x1 += np.random.normal(scale=0.05, size=x1.shape)
+pts1 = pd.DataFrame(dict(x=x1[0].flatten(), y=x1[1].flatten(), frame=1)).dropna()
+</pre></div>
+</div>
+<pre class="literal-block">
+/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/IPython/kernel/__init__.py:13: ShimWarning: The <cite>IPython.kernel</cite> package has been deprecated. You should import from ipykernel or jupyter_client instead.
+  &quot;You should import from ipykernel or jupyter_client instead.&quot;, ShimWarning)
+</pre>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">pts0</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pts0</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">pts1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pts1</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;g.&#39;</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;IPython.core.display.Javascript object&gt;
+</pre></div>
+</div>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAgAElEQVR4Xu3dDaxd53oX+H9pri1uxc10GukiqMX3LS0QlQ8NNkIYVQZDRewJQlfcUqIqQr1V3cxxzYfgAuVLveoMmlROJkiZQVEVQLckI5s4BeEmKVZKsStUZkIBictQKG6riQgqSdVQO5caLfs4nByfj73Os8+737XXb0tWc89Zz1rv+r3P2uu/1t7r9MviRYAAAQIECBAgMCuBL5vV3tpZAgQIECBAgACBCICagAABAgQIECAwMwEBcGYTbncJECBAgAABAgKgHiBAgAABAgQIzExAAJzZhNtdAgQIECBAgIAAqAcIECBAgAABAjMTEABnNuF2lwABAgQIECAgAOoBAgQIECBAgMDMBATAmU243SVAgAABAgQICIB6gAABAgQIECAwMwEBcGYTbncJECBAgAABAgKgHiBAgAABAgQIzExAAJzZhNtdAgQIECBAgIAAqAcIECBAgAABAjMTEABnNuF2lwABAgQIECAgAOoBAgQIECBAgMDMBATAmU243SVAgAABAgQICIB6gAABAgQIECAwMwEBcGYTbncJECBAgAABAgKgHiBAgAABAgQIzExAAJzZhNtdAgQIECBAgIAAqAcIECBAgAABAjMTEABnNuF2lwABAgQIECAgAOoBAgQIECBAgMDMBATAmU243SVAgAABAgQICIB6gAABAgQIECAwMwEBcGYTbncJECBAgAABAgKgHiBAgAABAgQIzExAAJzZhNtdAgQIECBAgIAAqAcIECBAgAABAjMTEABnNuF2lwABAgQIECAgAOoBAgQIECBAgMDMBATAmU243SVAgAABAgQICIB6gAABAgQIECAwMwEBcGYTbncJECBAgAABAgKgHiBAgAABAgQIzExAAJzZhNtdAgQIECBAgIAAqAcIECBAgAABAjMTEABnNuF2lwABAgQIECAgAOoBAgQIECBAgMDMBATAmU243SVAgAABAgQICIB6gAABAgQIECAwMwEBcGYTbncJECBAgAABAgKgHiBAgAABAgQIzExAAJzZhNtdAgQIECBAgIAAqAcIECBAgAABAjMTEABrEz74/YokP1dbjWoCBAgQIECgscAvS/IzSe403m4XmxMAa9PwK5P8VG0VqgkQIECAAIEVCXx1kp9e0bZXulkBsMb/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w5OIw/e2hj9LMXxU4PWgwO/a/GrBX07yDKAdBYa7fMOThsOfNhnC4PBU+fAd0+Ep4PeZPSAwPEn+V5M8tvlQA6K9BX5pkuEBmfuv4b3rZpI/uvmx+X8GuKPA/7IZ9P7A5hPnwx3n4etSw3fmPQk8smkEwJFgDRYfGnr4Uuvw5en/P8n/meSv+xtHC8vP+TuAiyINf2ZieMP8L9sKhr+fOARnr3sCw98BHL7v94nNk8s5fwdw19YYvr823Hkf/izH1tdwoh6ecvXaX8B3APc3GpYYPuodvj/5PyT54uZx+upipZbaKiAA6gcCBAgQIECAwMwEBMCZTbjdJUCAAAECBAgIgHqAAAECBAgQIDAzAQFwZhNudwkQIECAAAECAqAeIECAAAECBAjMTEAAnNmE210CBAgQIECAgACoBwgQIECAAAECMxMQAGc24XaXAAECBAgQICAA6gECBAgQIECAwMwEBMCZTbjdJUCAAAECBAgIgHqAAAECBAgQIDAzAQFwZhNudwkQIECAAAECAqAeIECAAAECBAjMTEAAnNmE210CBAgQIECAgACoBwgQIECAAAECMxMQAGc24XaXAAECBAgQICAA6gECBAgQIECAwMwEBMCZTbjdJUCAAAECBAgIgHqAAAECBAgQIDAzAQFwZhNudwkQIECAAAECAqAeIECAAAECBAjMTEAAnNmE210CBAgQIECAgACoBwgQIECAAAECMxMQAGc24XaXAAECBAgQICAA6gECBAgQIECAwMwEBMCZTbjdJUCAAAECBAgIgHqAAAECBAgQIDAzAQFwZhNudwkQIECAAAECAqAeIECAAAECBAjMTEAAnNmE210CBAgQIECAgACoBwgQIECAAAECMxMQAGc24XaXAAECBAgQICAA6gECBAgQIECAwMwEBMCZTbjdJUCAAAECBAj8N7J9ku7RpGuJAAAAAElFTkSuQmCC"><div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Thanks to a judicious choice of <tt class="docutils literal"><span class="pre">search_range</span></tt> (roughly 0.9 would be
+appropriate), instead of evaluating <span class="math">\(\sim N!\)</span> possibilities for
+the entire frame, we are now left with 4 independent <em>subnetworks</em> (or
+&#8220;subnets&#8221;) of <span class="math">\(n\)</span> particles and their <span class="math">\(\sim n!\)</span>
+possibilities. But <tt class="docutils literal"><span class="pre">trackpy</span></tt> must still decide how to form
+trajectories within each subnet — how to link the blue and green dots,
+and which unlucky features from the first frame must go unlinked. If we
+intuitively assume that particles are unlikely to move by large
+distances, there is an optimal, most-likely solution. But the problem is
+generally non-trivial — just try to do it by eye! (For details, see the
+original paper by Crocker &amp; Grier, referenced in the introduction to the
+<tt class="docutils literal"><span class="pre">trackpy</span></tt> documentation. In general not all <span class="math">\(n!\)</span> possibilities
+are explicitly evaluated, but very many are.)</p>
+<p>The preceding example is a little extreme, but non-trivial subnets do
+arise in many practical tracking applications. Solving subnets is
+usually the most time-consuming part of the linking process, and can
+sometimes even make <tt class="docutils literal"><span class="pre">trackpy</span></tt>&#8216;s algorithm unusable. With certain types
+of movies, controlling the size of subnets is the central challenge of
+the linking step.</p>
+</div>
+<div class="section" id="techniques-for-limiting-subnetwork-size">
+<h2>Techniques for limiting subnetwork size<a class="headerlink" href="#techniques-for-limiting-subnetwork-size" title="Permalink to this headline">¶</a></h2>
+<p>In light of this example, there are several <tt class="docutils literal"><span class="pre">trackpy</span></tt> features related
+to this problem at the heart of tracking:</p>
+<div class="section" id="search-range">
+<h3><tt class="docutils literal"><span class="pre">search_range</span></tt><a class="headerlink" href="#search-range" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">search_range</span></tt> radius can be adjusted, causing subnets to include
+more or fewer particles.</p>
+<p>Ideally, <tt class="docutils literal"><span class="pre">search_range</span></tt> should be larger than the largest displacement
+of any particle between successive frames, but smaller than the smallest
+separation between any two particles. <tt class="docutils literal"><span class="pre">trackpy</span></tt> will then typically
+find just one candidate for each particle&#8217;s next position, avoiding
+complex subnetworks altogether. Sometimes this arrangement is possible:
+the two length scales are very different, and so choosing a
+<tt class="docutils literal"><span class="pre">search_range</span></tt> between them is easy.</p>
+<p>When those two scales are closer to each other, or when they vary
+significantly across the image, there can be problems. To avoid
+unbearably large subnetworks, one&#8217;s options for <tt class="docutils literal"><span class="pre">search_range</span></tt> are not
+always practical (or even possible):</p>
+<ul class="simple">
+<li>Reduce <tt class="docutils literal"><span class="pre">search_range</span></tt> so much that many particles are left
+untracked or incorrectly tracked.</li>
+<li>Lower the density of particles in the frame.</li>
+<li>Increase the camera framerate (to have smaller displacements between
+successive frames).</li>
+</ul>
+<p>Such a dilemma often arises for dense packings of particles.</p>
+</div>
+<div class="section" id="subnetwork-size-limit">
+<h3>Subnetwork size limit<a class="headerlink" href="#subnetwork-size-limit" title="Permalink to this headline">¶</a></h3>
+<p>When faced with a subnetwork of <span class="math">\(n\)</span> particles, is may be simply
+unreasonable to consider those <span class="math">\(\sim n!\)</span> possibilities. In order
+to avoid taking hours, days, or weeks to link a single pair of frames,
+<tt class="docutils literal"><span class="pre">trackpy</span></tt> sets a limit on the number of particles <span class="math">\(n\)</span> involved
+in a single subnet computation; if this limit is exceeded, the linking
+step aborts by raising a <tt class="docutils literal"><span class="pre">SubnetOversizeException</span></tt>. This limit is an
+integer number of particles, stored in
+<tt class="docutils literal"><span class="pre">trackpy.linking.Linker.MAX_SUB_NET_SIZE</span></tt>. Depending on your patience
+and the speed of your computer, you can adjust this limit, keeping in
+mind that the time required for these computations generally scales as
+<span class="math">\(n!\)</span>.</p>
+</div>
+<div class="section" id="accelerated-subnetwork-solver">
+<h3>Accelerated subnetwork solver<a class="headerlink" href="#accelerated-subnetwork-solver" title="Permalink to this headline">¶</a></h3>
+<p>In the tutorial on performance, we briefly discuss how to measure the
+time spent on subnet computations, and how <tt class="docutils literal"><span class="pre">trackpy</span></tt> can use the
+<tt class="docutils literal"><span class="pre">numba</span></tt> package to greatly speed them up. In most cases, you already
+have <tt class="docutils literal"><span class="pre">numba</span></tt> and <tt class="docutils literal"><span class="pre">trackpy</span></tt> is using it, but it is worth checking if
+you are unsure.</p>
+</div>
+<div class="section" id="prediction">
+<h3>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h3>
+<p>The region of radius <tt class="docutils literal"><span class="pre">search_range</span></tt> is centered on what <tt class="docutils literal"><span class="pre">trackpy</span></tt>
+guesses as the most likely future position for the particle. Improving
+this guess may allow one to use a smaller <tt class="docutils literal"><span class="pre">search_range</span></tt>. This is
+called <em>prediction</em> and is the subject of one of the tutorials.</p>
+</div>
+<div class="section" id="adaptive-search">
+<h3>Adaptive search<a class="headerlink" href="#adaptive-search" title="Permalink to this headline">¶</a></h3>
+<p>Rather than having to choose a single value of <tt class="docutils literal"><span class="pre">search_range</span></tt> for the
+entire image (with its attendant tradeoffs), one can specify a <em>maximum</em>
+value, and let <tt class="docutils literal"><span class="pre">trackpy</span></tt> reduce it where necessary. This essentially
+gives <tt class="docutils literal"><span class="pre">trackpy</span></tt> license to ignore some potentially valid candidates,
+but only when the alternative is to halt with a
+<tt class="docutils literal"><span class="pre">SubnetOversizeException</span></tt>. It is a &#8220;scalpel&#8221; approach, as opposed to
+the usual hatchet of repeatedly cutting the global <tt class="docutils literal"><span class="pre">search_range</span></tt> and
+retrying linking until a <tt class="docutils literal"><span class="pre">SubnetOversizeException</span></tt> is no longer
+raised. This feature is called <em>adaptive search</em> and is discussed in its
+own tutorial.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/subnets.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

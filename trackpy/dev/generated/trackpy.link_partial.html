@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.link_partial &#8212; trackpy 0.4.1+62.gf1595d9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.1+62.gf1595d9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="trackpy 0.4.1+62.gf1595d9 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.static.proximity" href="trackpy.static.proximity.html" />
+    <link rel="prev" title="trackpy.link_df_iter" href="trackpy.link_df_iter.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.1+62.gf1595d9</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Tracking Large Features Such As Bubbles</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.link_partial</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-link-partial">
+<h1>trackpy.link_partial<a class="headerlink" href="#trackpy-link-partial" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.link_partial">
+<code class="descclassname">trackpy.</code><code class="descname">link_partial</code><span class="sig-paren">(</span><em>f</em>, <em>search_range</em>, <em>link_range</em>, <em>pos_columns=None</em>, <em>t_column='frame'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.link_partial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Patch the trajectories in a DataFrame by linking only a range of frames</p>
+<p>A por dataset can be divided into several patches (time intervals) and
+linked separately with this function, for e.g. parallel processing. The
+results can then be stitched back together with reconnect_traj_patch().</p>
+<p>Another application is to link a portion of a dataset again with adjusted
+parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f</strong> : DataFrame</p>
+<blockquote>
+<div><p>The DataFrame must include any number of column(s) for position and a
+column of frame numbers. By default, &#8216;x&#8217; and &#8216;y&#8217; are expected for
+position, and &#8216;frame&#8217; is expected for frame number. See below for
+options to use custom column names.</p>
+</div></blockquote>
+<p><strong>search_range</strong> : float or tuple</p>
+<blockquote>
+<div><p>the maximum distance features can move between frames,
+optionally per dimension</p>
+</div></blockquote>
+<p><strong>link_range</strong> : tuple of int</p>
+<blockquote>
+<div><p>Only in the range(start, stop) will be analyzed.</p>
+</div></blockquote>
+<p><strong>memory</strong> : integer, optional</p>
+<blockquote>
+<div><p>the maximum number of frames during which a feature can vanish,
+then reappear nearby, and be considered the same particle. 0 by default.</p>
+</div></blockquote>
+<p><strong>pos_columns</strong> : list of str, optional</p>
+<blockquote>
+<div><p>Default is [&#8216;y&#8217;, &#8216;x&#8217;], or [&#8216;z&#8217;, &#8216;y&#8217;, &#8216;x&#8217;] when &#8216;z&#8217; is present in f</p>
+</div></blockquote>
+<p><strong>t_column</strong> : str, optional</p>
+<blockquote>
+<div><p>Default is &#8216;frame&#8217;</p>
+</div></blockquote>
+<p><strong>predictor</strong> : function, optional</p>
+<blockquote>
+<div><p>Improve performance by guessing where a particle will be in
+the next frame.
+For examples of how this works, see the &#8220;predict&#8221; module.</p>
+</div></blockquote>
+<p><strong>adaptive_stop</strong> : float, optional</p>
+<blockquote>
+<div><p>If not None, when encountering an oversize subnet, retry by progressively
+reducing search_range until the subnet is solvable. If search_range
+becomes &lt;= adaptive_stop, give up and raise a SubnetOversizeException.</p>
+</div></blockquote>
+<p><strong>adaptive_step</strong> : float, optional</p>
+<blockquote>
+<div><p>Reduce search_range by multiplying it by this factor.</p>
+</div></blockquote>
+<p><strong>link_strategy</strong> : {&#8216;recursive&#8217;, &#8216;nonrecursive&#8217;, &#8216;numba&#8217;, &#8216;drop&#8217;, &#8216;auto&#8217;}</p>
+<blockquote>
+<div><p>algorithm used to resolve subnetworks of nearby particles
+&#8216;auto&#8217; uses numba if available
+&#8216;drop&#8217; causes particles in subnetworks to go unlinked</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DataFrame with added column &#8216;particle&#8217; containing trajectory labels.</p>
+<p class="last">The t_column (by default: &#8216;frame&#8217;) will be coerced to integer.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal"><span class="pre">reconnect_traj_patch</span></code></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The memory option cannot retain particles at the boundaries between
+patches. Likewise, if a predictor depends on past trajectories, it may
+work poorly at the start of each patch.</p>
+<p class="rubric">Examples</p>
+<p>We purposely define a DataFrame with erroneously linked particles:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">15.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">14.</span><span class="p">,</span> <span class="mf">19.</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;particle&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;frame&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">})</span>
+</pre></div>
+</div>
+<p>We can fix the missed link at frame 1 by calling link_partial like so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">link_partial</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">search_range</span><span class="o">=</span><span class="mf">20.</span><span class="p">,</span> <span class="n">link_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">      x    y  particle  frame</span>
+<span class="go">0   5.0  0.0         5      0</span>
+<span class="go">1  10.0  0.0         5      1</span>
+<span class="go">4  10.0  2.0         8      1</span>
+<span class="go">2  15.0  0.0         5      2</span>
+<span class="go">5  14.0  4.0         8      2</span>
+<span class="go">3  20.0  0.0         5      3</span>
+<span class="go">6  19.0  6.0         8      3</span>
+</pre></div>
+</div>
+<p>Note that this partial link remapped the particle indices after the
+link_range. This is done by the function <code class="docutils literal"><span class="pre">reconnect_traj_patch</span></code></p>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.link_partial.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2019, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

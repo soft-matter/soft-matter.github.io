@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.static.pair_correlation_2d &#8212; trackpy 0.4.1+62.gf1595d9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.1+62.gf1595d9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="trackpy 0.4.1+62.gf1595d9 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.static.pair_correlation_3d" href="trackpy.static.pair_correlation_3d.html" />
+    <link rel="prev" title="trackpy.static.proximity" href="trackpy.static.proximity.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.1+62.gf1595d9</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Tracking Large Features Such As Bubbles</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.static.pair_correlation_2d</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-static-pair-correlation-2d">
+<h1>trackpy.static.pair_correlation_2d<a class="headerlink" href="#trackpy-static-pair-correlation-2d" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.static.pair_correlation_2d">
+<code class="descclassname">trackpy.static.</code><code class="descname">pair_correlation_2d</code><span class="sig-paren">(</span><em>feat</em>, <em>cutoff</em>, <em>fraction=1.0</em>, <em>dr=0.5</em>, <em>p_indices=None</em>, <em>ndensity=None</em>, <em>boundary=None</em>, <em>handle_edge=True</em>, <em>max_rel_ndensity=10</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.static.pair_correlation_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the pair correlation function in 2 dimensions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>feat</strong> : Pandas DataFrame</p>
+<blockquote>
+<div><p>DataFrame containing the x and y coordinates of particles</p>
+</div></blockquote>
+<p><strong>cutoff</strong> : float</p>
+<blockquote>
+<div><p>Maximum distance to calculate g(r)</p>
+</div></blockquote>
+<p><strong>fraction</strong> : float, optional</p>
+<blockquote>
+<div><p>The fraction of particles to calculate g(r) with. May be used to
+increase speed of function. Particles selected at random.</p>
+</div></blockquote>
+<p><strong>dr</strong> : float, optional</p>
+<blockquote>
+<div><p>The bin width</p>
+</div></blockquote>
+<p><strong>p_indices</strong> : list or ndarray, optional</p>
+<blockquote>
+<div><p>Only consider a pair of particles if one of them is in &#8216;p_indices&#8217;.
+Uses zero-based indexing, regardless of how &#8216;feat&#8217; is indexed.</p>
+</div></blockquote>
+<p><strong>ndensity</strong> : float, optional</p>
+<blockquote>
+<div><p>Density of particle packing. If not specified, density will be
+calculated assuming rectangular homogeneous arrangement.</p>
+</div></blockquote>
+<p><strong>boundary</strong> : tuple, optional</p>
+<blockquote>
+<div><p>Tuple specifying rectangular prism boundary of particles (xmin, xmax,
+ymin, ymax). Must be floats. Default is to assume a rectangular packing.
+Boundaries are determined by edge particles.</p>
+</div></blockquote>
+<p><strong>handle_edge</strong> : boolean, optional</p>
+<blockquote>
+<div><p>If true, compensate for reduced area around particles near the edges.</p>
+</div></blockquote>
+<p><strong>max_rel_ndensity</strong> : number, optional</p>
+<blockquote>
+<div><p>The relative maximum density deviation, used to estimate the maximum
+number of neighbours. Lower numbers increase performance, until the
+method fails because there are more neighbours than expected.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>r_edges</strong> : array</p>
+<blockquote>
+<div><p>The bin edges, with 1 more element than g_r.</p>
+</div></blockquote>
+<p><strong>g_r</strong> : array</p>
+<blockquote class="last">
+<div><p>The values of g_r.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.static.pair_correlation_2d.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2019, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

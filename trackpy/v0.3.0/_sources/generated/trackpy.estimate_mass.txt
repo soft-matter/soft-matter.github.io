@@ -1,0 +1,6 @@
+trackpy.estimate_mass
+=====================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: estimate_mass

@@ -1,0 +1,35 @@
+trackpy.PandasHDFStoreBig
+=========================
+
+.. currentmodule:: trackpy
+
+.. autoclass:: PandasHDFStoreBig
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         PandasHDFStoreBig.close
+         PandasHDFStoreBig.dump
+         PandasHDFStoreBig.get
+         PandasHDFStoreBig.put
+         PandasHDFStoreBig.rebuild_cache
+
+
+
+
+   
+
+
+   .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         PandasHDFStoreBig.frames
+         PandasHDFStoreBig.max_frame
+         PandasHDFStoreBig.t_column
+
+

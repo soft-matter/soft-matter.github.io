@@ -1,0 +1,6 @@
+trackpy.predict.instrumented
+============================
+
+.. currentmodule:: trackpy.predict
+
+.. autofunction:: instrumented

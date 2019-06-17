@@ -1,0 +1,6 @@
+trackpy.find_link
+=================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: find_link

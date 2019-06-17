@@ -1,0 +1,6 @@
+trackpy.compute_drift
+=====================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: compute_drift

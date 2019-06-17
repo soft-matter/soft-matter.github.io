@@ -1,0 +1,6 @@
+trackpy.motion.direction_corr
+=============================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: direction_corr

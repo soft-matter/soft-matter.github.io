@@ -1,0 +1,25 @@
+trackpy.predict.NearestVelocityPredict
+======================================
+
+.. currentmodule:: trackpy.predict
+
+.. autoclass:: NearestVelocityPredict
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         NearestVelocityPredict.link_df
+         NearestVelocityPredict.link_df_iter
+         NearestVelocityPredict.observe
+         NearestVelocityPredict.predict
+         NearestVelocityPredict.state
+
+
+
+
+   
+

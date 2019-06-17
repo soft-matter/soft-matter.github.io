@@ -1,0 +1,6 @@
+trackpy.link_df
+===============
+
+.. currentmodule:: trackpy
+
+.. autofunction:: link_df

@@ -1,0 +1,423 @@
+
+Streaming: Processing Unlimited Frames On-Disk
+==============================================
+
+A key feature of trackpy is the ability to process an unlimited number
+of frames.
+
+For feature-finding, this is straightforward: a frame is loaded,
+features are located, the locations are saved the disk, and the memory
+is cleared for the next frame. For linking, the problem is more
+challenging, but trackpy handles all this complexity for you, using as
+little memory as possible throughout.
+
+When data sets become large, beginning-friendly file formats like CSV or
+Excel become impractical. We recommend using the HDF5 file format, which
+is trackpy can read and write out of the box. (HDF5 is `widely
+used <http://en.wikipedia.org/wiki/Hierarchical_Data_Format>`__; you can
+be sure it will be around for many, many years to come.)
+
+If you have some other format in mind, see the end of this tutorial,
+where we explain how to extend trackpy's interface to support other
+formats.
+
+Install PyTables
+----------------
+
+You need pytables, which you can easily install using conda. (Type this
+command into a Terminal or Command Prompt.)
+
+::
+
+    conda install pytables
+
+Locate Features, Streaming Results into an HDF5 File
+----------------------------------------------------
+
+.. code:: python
+
+    import trackpy as tp
+    import pims
+
+.. code:: python
+
+    def gray(image):
+        return image[:, :, 0]
+    
+    images = pims.ImageSequence('../sample_data/bulk_water/*.png', process_func=gray)
+    images = images[:10]  # We'll take just the first 10 frames for demo purposes.
+
+.. code:: python
+
+    # For this demo, we'll first remove the file if it already exists.
+    !rm -f data.h5
+
+We can use ``locate`` inside a loop:
+
+.. code:: python
+
+    with tp.PandasHDFStore('data.h5') as s:  # This opens an HDF5 file. Data will be stored and retrieved by frame number.
+        for image in images:
+            features = tp.locate(image, 11, invert=True)  # Find the features in a given frame.
+            s.put(features)  # Save the features to the file before continuing to the next frame.
+
+or, equivalently, we can use ``batch``, which accepts the storage file
+as ``output``.
+
+.. code:: python
+
+    with tp.PandasHDFStore('data.h5') as s:
+        tp.batch(images, 11, invert=True, output=s)
+
+
+.. parsed-literal::
+
+    Frame 9: 510 features
+
+
+We can get the data for a given frame:
+
+.. code:: python
+
+    with tp.PandasHDFStore('data.h5') as s:
+        frame_2_results = s.get(2)
+        
+    frame_2_results.head()  # Display the first few rows.
+
+
+
+
+.. raw:: html
+
+    <div>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>x</th>
+          <th>y</th>
+          <th>mass</th>
+          <th>size</th>
+          <th>ecc</th>
+          <th>signal</th>
+          <th>raw_mass</th>
+          <th>ep</th>
+          <th>frame</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>295.886941</td>
+          <td>5.624598</td>
+          <td>372.183679</td>
+          <td>2.580235</td>
+          <td>0.189920</td>
+          <td>17.396842</td>
+          <td>8915</td>
+          <td>0.108849</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>68.203651</td>
+          <td>6.471969</td>
+          <td>416.980545</td>
+          <td>2.888723</td>
+          <td>0.088487</td>
+          <td>13.265092</td>
+          <td>9267</td>
+          <td>0.069054</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>336.888818</td>
+          <td>6.445367</td>
+          <td>340.325712</td>
+          <td>2.565562</td>
+          <td>0.028504</td>
+          <td>16.418269</td>
+          <td>8815</td>
+          <td>0.130158</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>432.423210</td>
+          <td>6.799269</td>
+          <td>564.962429</td>
+          <td>3.048429</td>
+          <td>0.302762</td>
+          <td>17.614302</td>
+          <td>9131</td>
+          <td>0.080412</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>460.570088</td>
+          <td>7.785952</td>
+          <td>359.136047</td>
+          <td>2.924729</td>
+          <td>0.124871</td>
+          <td>12.503980</td>
+          <td>8907</td>
+          <td>0.110293</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+Or dump all the data, if your machine has enough memory to hold it:
+
+.. code:: python
+
+    with tp.PandasHDFStore('data.h5') as s:
+        all_results = s.dump()
+        
+    all_results.head()  # Display the first few rows.
+
+
+
+
+.. raw:: html
+
+    <div>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>x</th>
+          <th>y</th>
+          <th>mass</th>
+          <th>size</th>
+          <th>ecc</th>
+          <th>signal</th>
+          <th>raw_mass</th>
+          <th>ep</th>
+          <th>frame</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>103.430478</td>
+          <td>5.247191</td>
+          <td>308.202079</td>
+          <td>2.738100</td>
+          <td>0.039502</td>
+          <td>11.795655</td>
+          <td>8983</td>
+          <td>0.098772</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>294.831759</td>
+          <td>5.692167</td>
+          <td>355.060049</td>
+          <td>2.574877</td>
+          <td>0.162698</td>
+          <td>17.422941</td>
+          <td>8917</td>
+          <td>0.109846</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>311.069767</td>
+          <td>7.223679</td>
+          <td>255.933257</td>
+          <td>3.321975</td>
+          <td>0.007893</td>
+          <td>5.627285</td>
+          <td>8644</td>
+          <td>0.204852</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>431.496378</td>
+          <td>7.273025</td>
+          <td>627.442294</td>
+          <td>2.872567</td>
+          <td>0.273653</td>
+          <td>19.695498</td>
+          <td>9199</td>
+          <td>0.074267</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>36.061983</td>
+          <td>8.255091</td>
+          <td>483.621872</td>
+          <td>2.973328</td>
+          <td>0.123753</td>
+          <td>13.635345</td>
+          <td>9531</td>
+          <td>0.053765</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+You can dump the first N frames using ``s.dump(N)``.
+
+Link Trajectories, Streaming From and Updating the HDF5 File
+------------------------------------------------------------
+
+.. code:: python
+
+    with tp.PandasHDFStore('data.h5') as s:
+        for linked in tp.link_df_iter(s, 3, neighbor_strategy='KDTree'):
+            s.put(linked)
+
+
+.. parsed-literal::
+
+    Frame 9: 510 trajectories present
+
+
+The original data is overwritten.
+
+.. code:: python
+
+    with tp.PandasHDFStore('data.h5') as s:
+        frame_2_results = s.get(2)
+        
+    frame_2_results.head()  # Display the first few rows.
+
+
+
+
+.. raw:: html
+
+    <div>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>x</th>
+          <th>y</th>
+          <th>mass</th>
+          <th>size</th>
+          <th>ecc</th>
+          <th>signal</th>
+          <th>raw_mass</th>
+          <th>ep</th>
+          <th>frame</th>
+          <th>particle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>295.886941</td>
+          <td>5.624598</td>
+          <td>372.183679</td>
+          <td>2.580235</td>
+          <td>0.189920</td>
+          <td>17.396842</td>
+          <td>8915</td>
+          <td>0.108849</td>
+          <td>2</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>432.423210</td>
+          <td>6.799269</td>
+          <td>564.962429</td>
+          <td>3.048429</td>
+          <td>0.302762</td>
+          <td>17.614302</td>
+          <td>9131</td>
+          <td>0.080412</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>36.560049</td>
+          <td>8.409618</td>
+          <td>440.901203</td>
+          <td>3.004805</td>
+          <td>0.132634</td>
+          <td>12.938901</td>
+          <td>9508</td>
+          <td>0.055229</td>
+          <td>2</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>68.203651</td>
+          <td>6.471969</td>
+          <td>416.980545</td>
+          <td>2.888723</td>
+          <td>0.088487</td>
+          <td>13.265092</td>
+          <td>9267</td>
+          <td>0.069054</td>
+          <td>2</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>629.016761</td>
+          <td>7.998041</td>
+          <td>499.506812</td>
+          <td>3.298593</td>
+          <td>0.183847</td>
+          <td>9.350802</td>
+          <td>9374</td>
+          <td>0.062147</td>
+          <td>2</td>
+          <td>7</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+Framewise Data Interfaces
+-------------------------
+
+Built-in interfaces
+~~~~~~~~~~~~~~~~~~~
+
+There are three different interfaces. You can use them interchangeably.
+They offer different performance advantages.
+
+-  ``PandasHDFStore`` -- fastest for a small (~100) number of frames
+-  ``PandasHDFStoreBig`` -- fastest for a medium or large number of
+   frames
+-  ``PandasHDFStoreSingleNode`` -- optimizes HDF queries that access
+   multiple frames (advanced)
+
+Writing your own interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Trackpy implements a generic interface that could be used to store and
+retrieve particle tracking data in any file format. We hope that it can
+make it easier for researchers who use different file formats to
+exchange data. Any in-house format could be accessed using the same
+simple interface demonstrated above.
+
+At present, the interface is implemented only for HDF5 files. To extend
+it to any format, write a class subclassing ``trackpy.FramewiseData``.
+This custom class must implement the methods ``put``, ``get``,
+``close``, and ``__iter__`` and the properties ``max_frame`` and
+``t_column``. Refer to the built-in classes in
+`framewise\_data.py <https://github.com/soft-matter/trackpy/blob/master/trackpy/framewise_data.py>`__
+for examples to work from.
+

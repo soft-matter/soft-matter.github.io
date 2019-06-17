@@ -1,0 +1,6 @@
+trackpy.Track.remove_point
+==========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: Track.remove_point

@@ -1,0 +1,6 @@
+trackpy.PointND.track
+=====================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: PointND.track

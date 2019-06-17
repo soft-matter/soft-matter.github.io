@@ -1,0 +1,6 @@
+trackpy.preprocessing.lowpass
+=============================
+
+.. currentmodule:: trackpy.preprocessing
+
+.. autofunction:: lowpass

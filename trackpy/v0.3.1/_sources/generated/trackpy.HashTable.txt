@@ -1,0 +1,22 @@
+trackpy.HashTable
+=================
+
+.. currentmodule:: trackpy
+
+.. autoclass:: HashTable
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         HashTable.add_point
+         HashTable.get_region
+
+
+
+
+   
+

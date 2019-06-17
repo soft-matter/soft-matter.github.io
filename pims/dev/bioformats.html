@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bioformats &mdash; pims 0.4+137.g7e2fbaf documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Video" href="video.html" />
+    <link rel="prev" title="TiffStack" href="tiff_stack.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pims
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4+137.g7e2fbaf
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bioformats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#special-functions">Special functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pims</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Bioformats</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/bioformats.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bioformats">
+<h1>Bioformats<a class="headerlink" href="#bioformats" title="Permalink to this headline">¶</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The section <a class="reference internal" href="multidimensional.html"><span class="doc">Multidimensional Readers</span></a> describes how to deal with multidimensional files.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Bioformats</span></code> reader interfaces with Bio-Formats, an open-source Java
+library for reading and writing multidimensional image data, especially from
+file formats used in microscopy.</p>
+<p>See the <a class="reference external" href="https://www.openmicroscopy.org/site/support/bio-formats5.1/supported-formats.html">list of supported formats</a>.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>To interface with the java library, we use
+<a class="reference external" href="https://github.com/originell/jpype">JPype</a>, which allows fast and easy access
+to all java functions. JRE or JDK are not required.</p>
+<p>For <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda</a> users,
+platforms, jpype is available via the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install jpype1 -c conda-forge
+</pre></div>
+</div>
+<p>For installation with pip, type in the following into the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install jpype1
+</pre></div>
+</div>
+<p>Or, for windows users,
+download the binary from <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#jpype">Christoph Gohlke’s website</a>.</p>
+<p>On first use of pims.Bioformats(filename), the required java library
+<code class="file docutils literal notranslate"><span class="pre">loci_tools.jar</span></code> will be automatically downloaded from
+<a class="reference external" href="http://downloads.openmicroscopy.org/bio-formats/">openmicroscopy.org</a>.</p>
+</div>
+<div class="section" id="special-functions">
+<h2>Special functions<a class="headerlink" href="#special-functions" title="Permalink to this headline">¶</a></h2>
+<p>Some files contain multiple experiments. The <code class="docutils literal notranslate"><span class="pre">series</span></code> argument or property
+switches between them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># open a multi-experiment file and read the first experiment</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">BioformatsReader</span><span class="p">(</span><span class="s1">&#39;path/to/file&#39;</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># switch to the third experiment</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">series</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Very large files may need more Java memory. If you ever encounter a memory error,
+open a file with for instance 1 GB of java memory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">BioformatsReader</span><span class="p">(</span><span class="s1">&#39;path/to/file&#39;</span><span class="p">,</span> <span class="n">java_memory</span><span class="o">=</span><span class="s1">&#39;1024m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Bioformats</span></code> reader can be used to access the metadata stored in the image,
+including physical dimensions pixel, instrument parameters, and other useful information.
+For performance increase, this function may be toggled off using the <code class="docutils literal notranslate"><span class="pre">meta=False</span></code>
+keyword argument.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">metadata</span>
+
+<span class="n">image_count</span> <span class="o">=</span> <span class="n">meta</span><span class="o">.</span><span class="n">ImageCount</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Total number of images: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_count</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image_count</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Dimensions for image {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">PixelsSizeX</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">meta</span><span class="o">.</span><span class="n">PixelsSizeY</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">meta</span><span class="o">.</span><span class="n">PixelsSizeZ</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">dxyz</span> <span class="o">=</span> <span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">PixelsPhysicalSizeX</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+            <span class="n">meta</span><span class="o">.</span><span class="n">PixelsPhysicalSizeY</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+            <span class="n">meta</span><span class="o">.</span><span class="n">PixelsPhysicalSizeZ</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Shape: {} x {} x {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">shape</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Dxyz:  {:2.2f} x {:2.2f} x {:2.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">dxyz</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>See the documentation for the <a class="reference external" href="http://www.openmicroscopy.org/site/support/bio-formats5.1/developers/cpp/tutorial.html">Metadata retrieve API</a> for more details.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="video.html" class="btn btn-neutral float-right" title="Video" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tiff_stack.html" class="btn btn-neutral float-left" title="TiffStack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2019, PIMS Contributors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

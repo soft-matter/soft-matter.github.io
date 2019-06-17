@@ -1,0 +1,6 @@
+trackpy.HashTable.add_point
+===========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: HashTable.add_point

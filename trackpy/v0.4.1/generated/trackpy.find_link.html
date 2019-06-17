@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.find_link &#8212; trackpy 0.4.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="trackpy 0.4.1 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.refine_com" href="trackpy.refine_com.html" />
+    <link rel="prev" title="trackpy.grey_dilation" href="trackpy.grey_dilation.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/linking-diagnostics.html">Linking Diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Bubble Tracking in Foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.find_link</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-find-link">
+<h1>trackpy.find_link<a class="headerlink" href="#trackpy-find-link" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.find_link">
+<code class="descclassname">trackpy.</code><code class="descname">find_link</code><span class="sig-paren">(</span><em>reader</em>, <em>search_range</em>, <em>separation</em>, <em>diameter=None</em>, <em>memory=0</em>, <em>minmass=0</em>, <em>noise_size=1</em>, <em>smoothing_size=None</em>, <em>threshold=None</em>, <em>percentile=64</em>, <em>preprocess=True</em>, <em>before_link=None</em>, <em>after_link=None</em>, <em>refine=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.find_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find and link features, using image data to re-find lost features.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>reader</strong> : pims.FramesSequence</p>
+<p><strong>search_range</strong> : number or tuple</p>
+<blockquote>
+<div><p>maximum displacement of features between subsequent frames</p>
+</div></blockquote>
+<p><strong>separation</strong> : number or tuple</p>
+<blockquote>
+<div><p>minimum separation distance between features</p>
+</div></blockquote>
+<p><strong>diameter</strong> : number or tuple, optional</p>
+<blockquote>
+<div><p>feature diameter, used for characterization only.
+Also determines the margin (margin = diameter // 2).
+Default: <code class="docutils literal"><span class="pre">separation</span></code>.</p>
+</div></blockquote>
+<p><strong>memory</strong> : number, optional</p>
+<blockquote>
+<div><p>number of frames that features are allowed to disappear. Experimental.
+Default 0.</p>
+</div></blockquote>
+<p><strong>minmass</strong> : number, optional</p>
+<blockquote>
+<div><p>minimum integrated intensity (in masked image). Default 0.</p>
+</div></blockquote>
+<p><strong>noise_size</strong> : number or tuple, optional</p>
+<blockquote>
+<div><p>Size of Gaussian kernel with whith the image is convoluted for noise
+reduction. Default 1.</p>
+</div></blockquote>
+<p><strong>smoothing_size</strong> : number or tuple, optional</p>
+<blockquote>
+<div><p>Size of rolling average box for background subtraction.
+By default, equals <code class="docutils literal"><span class="pre">separation</span></code>. This may introduce bias when refined on
+the background subtracted image!</p>
+</div></blockquote>
+<p><strong>threshold</strong> : number, optional</p>
+<blockquote>
+<div><p>Threshold value for image. Default None.</p>
+</div></blockquote>
+<p><strong>percentile</strong> : number, optional</p>
+<blockquote>
+<div><p>The upper percentile of intensities in the image are considered as
+feature locations. Default 64.</p>
+</div></blockquote>
+<p><strong>preprocess</strong> : boolean</p>
+<blockquote>
+<div><p>Set to False to turn off bandpass preprocessing.</p>
+</div></blockquote>
+<p><strong>before_link</strong> : function, optional</p>
+<blockquote>
+<div><p>This function is executed after the initial find of each frame, but
+but before the linking and relocating.
+It should take the following arguments (or <code class="docutils literal"><span class="pre">**kwargs</span></code>):</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">coords</span></code>: <a href="#id1"><span class="problematic" id="id2">`</span></a>ndarray``containing the initially found feature coordinates</li>
+<li><code class="docutils literal"><span class="pre">reader</span></code>: unprocessed reader (for access to other frames)</li>
+<li><code class="docutils literal"><span class="pre">image</span></code>: unprocessed image</li>
+<li><code class="docutils literal"><span class="pre">image_proc</span></code>: the processed image</li>
+<li><code class="docutils literal"><span class="pre">diameter</span></code></li>
+<li><code class="docutils literal"><span class="pre">separation</span></code></li>
+<li><code class="docutils literal"><span class="pre">search_range</span></code></li>
+<li><code class="docutils literal"><span class="pre">margin</span></code></li>
+<li><code class="docutils literal"><span class="pre">minmass</span></code></li>
+</ul>
+<p>It should return an ndarray of the same shape as <code class="docutils literal"><span class="pre">coords</span></code>.</p>
+</div></blockquote>
+<p><strong>after_link</strong> : function, optional</p>
+<blockquote>
+<div><p>This function is executed after the find and link of each frame. It
+should not change the number of features.
+It should take the following arguments (or <code class="docutils literal"><span class="pre">**kwargs</span></code>):</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">features</span></code>: a DataFrame containing the feature coordinates and characterization.</li>
+<li><code class="docutils literal"><span class="pre">reader</span></code>: unprocessed reader (for access to other frames)</li>
+<li><code class="docutils literal"><span class="pre">image</span></code>: unprocessed image</li>
+<li><code class="docutils literal"><span class="pre">image_proc</span></code>: the processed image</li>
+<li><code class="docutils literal"><span class="pre">diameter</span></code></li>
+<li><code class="docutils literal"><span class="pre">separation</span></code></li>
+<li><code class="docutils literal"><span class="pre">search_range</span></code></li>
+<li><code class="docutils literal"><span class="pre">margin</span></code></li>
+<li><code class="docutils literal"><span class="pre">minmass</span></code></li>
+</ul>
+<p>It should return a DataFrame like <code class="docutils literal"><span class="pre">features</span></code>.</p>
+</div></blockquote>
+<p><strong>refine</strong> : boolean, optional</p>
+<blockquote class="last">
+<div><p>Convenience parameter to do center-of-mass refinement. Cannot be used
+combined with an <code class="docutils literal"><span class="pre">after_link</span></code> function. Default False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This feature is a recent addition to trackpy that is still in its
+experimental phase. Please report any issues you encounter on Github.</p>
+<p>If you use this specific algorithm for your scientific publications, please
+mention the accompanying publication <a class="reference internal" href="#r6" id="id3">[R6]</a></p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[R6]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> van der Wel C., Kraft D.J. Automated tracking of colloidal clusters</td></tr>
+</tbody>
+</table>
+<p>with sub-pixel accuracy and precision. J. Phys. Condens. Mat. 29:44001 (2017)
+DOI: <a class="reference external" href="http://dx.doi.org/10.1088/1361-648X/29/4/044001">http://dx.doi.org/10.1088/1361-648X/29/4/044001</a></p>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.find_link.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2018, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
