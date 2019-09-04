@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /trackpy/0.3.0/
+Disallow: /trackpy/v0.2.4/
+Disallow: /trackpy/v0.3.1/
+Disallow: /trackpy/v0.3.2/
+Disallow: /trackpy/v0.3.3/
+
