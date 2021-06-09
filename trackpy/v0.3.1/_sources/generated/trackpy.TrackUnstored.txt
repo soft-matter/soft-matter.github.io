@@ -1,0 +1,32 @@
+trackpy.TrackUnstored
+=====================
+
+.. currentmodule:: trackpy
+
+.. autoclass:: TrackUnstored
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         TrackUnstored.add_point
+         TrackUnstored.incr_memory
+         TrackUnstored.report_memory
+         TrackUnstored.reset_counter
+
+
+
+
+   
+
+
+   .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         TrackUnstored.count
+
+

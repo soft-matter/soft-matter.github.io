@@ -1,0 +1,6 @@
+trackpy.Track.incr_memory
+=========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: Track.incr_memory

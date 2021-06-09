@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>What’s new in the package &#8212; trackpy 0.4.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.4.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="trackpy 0.4.2 documentation" href="index.html" />
+    <link rel="next" title="walkthrough" href="tutorial/walkthrough.html" />
+    <link rel="prev" title="trackpy.masks.slice_image" href="generated/trackpy.masks.slice_image.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/custom-feature-detection.html">Tracking Large Features Such As Bubbles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/brightfield.html">Tracking Particles&#8217; Rings in Bright-Field Microscopy</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">What&#8217;s new in the package</a><ul>
+<li><a class="reference internal" href="#v0-4-2">v0.4.2</a><ul>
+<li><a class="reference internal" href="#api-changes">API Changes</a></li>
+<li><a class="reference internal" href="#enhancements">Enhancements</a></li>
+<li><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v0-4-1">v0.4.1</a><ul>
+<li><a class="reference internal" href="#id3">API Changes</a></li>
+<li><a class="reference internal" href="#id4">Enhancements</a></li>
+<li><a class="reference internal" href="#id5">Bug fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v0-4-0">v0.4.0</a><ul>
+<li><a class="reference internal" href="#id6">API Changes</a></li>
+<li><a class="reference internal" href="#id7">Enhancements</a></li>
+<li><a class="reference internal" href="#id8">Bug fixes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="what-s-new-in-the-package">
+<span id="whatsnew"></span><h1>What&#8217;s new in the package<a class="headerlink" href="#what-s-new-in-the-package" title="Permalink to this headline">¶</a></h1>
+<p>A catalog of new features, improvements, and bug-fixes in each release. Follow links to the relevant GitHub issue or pull request for specific code changes and any related discussion.</p>
+<div class="section" id="v0-4-2">
+<h2>v0.4.2<a class="headerlink" href="#v0-4-2" title="Permalink to this headline">¶</a></h2>
+<p>This is a minor release with two major new features: parallel processing to
+speed up feature-finding, and a new method for locating features in
+bright-field microscopy. There is also an overhaul of the walkthrough and other
+tutorials, and compatibility with the latest version of Pandas (0.25.1).</p>
+<div class="section" id="api-changes">
+<h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>&#8220;trackpy.locate&#8221; and associated functions now report &#8220;ep&#8221; to be NaN when
+there is only one usable background pixel to sample. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/519">GH519</a>)</li>
+<li>&#8220;trackpy.legacy.linking.link_df&#8221; does not copy a DataFrame automatically
+anymore if the provided DataFrame is a view. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/503">GH503</a>)</li>
+<li>The &#8220;locate&#8221; options in &#8220;trackpy.batch&#8221; are now collected in &#8220;<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs&#8221;
+(except for &#8220;diameter&#8221;) and passed to the wrapped &#8220;trackpy.locate&#8221; function.
+This means when using the &#8220;meta&#8221; option of &#8220;trackpy.batch&#8221; only explicitly
+given options for the wrapped &#8220;trackpy.locate&#8221; are saved to the file;
+unspecified options using default values from &#8220;locate&#8221; aren&#8217;t saved.
+(<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/499">GH499</a>)</li>
+</ul>
+</div>
+<div class="section" id="enhancements">
+<h3>Enhancements<a class="headerlink" href="#enhancements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Added support for multiprocessing to &#8220;trackpy.batch&#8221;. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/499">GH499</a>)</li>
+<li>&#8220;trackpy.locate_brightfield_ring&#8221; enables precise tracking of large
+particles in bright-field microscopy. There is a new tutorial to demonstrate
+it. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/527">GH527</a>)</li>
+<li>Added &#8220;trackpy.linking.link_partial&#8221; to allow linking a movie in separate
+pieces. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/445">GH445</a>)</li>
+<li>Many updates and improvements to the tutorials. Most notably, the walkthrough
+is revised and updated for the latest versions of trackpy and pims, and code
+from all tutorials should now run in recent Python environments.
+(<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/567">GH567</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/524">GH524</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/539">GH539</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/543">GH543</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/541">GH541</a>,
+<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/532">GH532</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/157">GH157</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/558">GH558</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/505">GH505</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/525">GH525</a>). Most of
+these changes were made in the trackpy-examples repository on GitHub.</li>
+<li>Smaller improvements to other documentation for the linking and
+feature-finding APIs. (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/545">GH545</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/551">GH551</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/550">GH550</a>,
+<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/522">GH522</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/540">GH540</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/542">GH542</a>)</li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed incompatibility with recent Pandas (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/529">GH529</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/538">GH538</a>)</li>
+<li>Removed warnings in case Pandas 0.23 is used (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/503">GH503</a>)</li>
+<li>Removed warnings in case Pandas 0.25 is used (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/545">GH545</a>)</li>
+<li>&#8220;trackpy.diag.dependencies&#8221; now gives information about a more complete set
+of packages.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v0-4-1">
+<h2>v0.4.1<a class="headerlink" href="#v0-4-1" title="Permalink to this headline">¶</a></h2>
+<p>This is a minor release with some important fixes. Additionally, PIMS is no
+longer a required dependency, which makes installation easier.</p>
+<div class="section" id="id3">
+<h3>API Changes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>PIMS (Python IMage Sequence) is no longer a required dependency (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/492">GH492</a>)</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Enhancements<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Improved performance of adaptive search (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/489">GH489</a>)</li>
+<li>Reduced memory usage during linking (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/489">GH489</a>)</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>Bug fixes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fix enable_numba on Py3.6 and MS Windows systems (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/486">GH486</a>)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v0-4-0">
+<h2>v0.4.0<a class="headerlink" href="#v0-4-0" title="Permalink to this headline">¶</a></h2>
+<p>This is a major release that includes new choices for linking and feature-finding algorithms, as well as many
+performance increases and clean-ups. It is recommended for all trackpy users, but may require
+minor changes to existing code, as detailed below.</p>
+<div class="section" id="id6">
+<h3>API Changes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>locate has a more modular structure that makes it easier to customize feature-finding (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/400">GH400</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/406">GH406</a>)</li>
+<li>The default value of smoothing_size is smaller, and more consistent with
+other implementations of this algorithm. In general, particle
+mass values will be different. The new minmass_v04_change function helps
+update minmass values in existing code (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/401">GH401</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/465">GH465</a>)</li>
+<li>The &#8220;minmass&#8221; parameter now has a default value of 0 (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/400">GH400</a>)</li>
+<li>The &#8220;filter_before&#8221; option is no longer supported (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/400">GH400</a>)</li>
+<li>Major refactor of the linking code giving linking a better API (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/416">GH416</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/414">GH414</a>)</li>
+<li>Linking diagnostics are no longer supported (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/414">GH414</a>)</li>
+<li>link_df always creates a copy of the data; it can no longer work in-place (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/414">GH414</a>)</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>Enhancements<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Improved performance of feature finding (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/361">GH361</a>)</li>
+<li>Improved performance of linking (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/400">GH400</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/406">GH406</a>)</li>
+<li>New refinement method using least squares optimization (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/407">GH407</a>)</li>
+<li>New linker that combines feature-finding with linking (FindLinker) (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/407">GH407</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/410">GH410</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/411">GH411</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/416">GH416</a>, <a class="reference external" href="https://github.com/soft-matter/trackpy/issues/428">GH428</a>)</li>
+<li>Linking in non-Euclidean coordinate systems and curved metrics (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/448">GH448</a>)</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>Bug fixes<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fix compute_drift if dataframes are not sorted (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/409">GH409</a>)</li>
+<li>Fix double counting of non-linking penalty in non-numba linkers (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/430">GH430</a>)</li>
+<li>Fix the N column for emsd (<a class="reference external" href="https://github.com/soft-matter/trackpy/issues/434">GH434</a>)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/whatsnew.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2019, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

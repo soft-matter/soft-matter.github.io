@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trackpy.motion.vanhove &#8212; trackpy 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.6/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="trackpy 0.4 documentation" href="../index.html" />
+    <link rel="up" title="API reference" href="../api.html" />
+    <link rel="next" title="trackpy.motion.relate_frames" href="trackpy.motion.relate_frames.html" />
+    <link rel="prev" title="trackpy.motion.subtract_drift" href="trackpy.motion.subtract_drift.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.4</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/linking-diagnostics.html">Linking Diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Bubble Tracking in Foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.motion.vanhove</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="trackpy-motion-vanhove">
+<h1>trackpy.motion.vanhove<a class="headerlink" href="#trackpy-motion-vanhove" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="trackpy.motion.vanhove">
+<code class="descclassname">trackpy.motion.</code><code class="descname">vanhove</code><span class="sig-paren">(</span><em>pos</em>, <em>lagtime</em>, <em>mpp=1</em>, <em>ensemble=False</em>, <em>bins=24</em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.motion.vanhove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the van Hove correlation (histogram of displacements).</p>
+<p>The van Hove correlation function is simply a histogram of particle
+displacements. It is useful for detecting physical heterogeneity
+(or tracking errors).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pos</strong> : DataFrame</p>
+<blockquote>
+<div><p>x or (or!) y positions, one column per particle, indexed by frame</p>
+</div></blockquote>
+<p><strong>lagtime</strong> : integer interval of frames</p>
+<blockquote>
+<div><p>Compare the correlation function at this lagtime.</p>
+</div></blockquote>
+<p><strong>mpp</strong> : microns per pixel, DEFAULT TO 1 because it is usually fine to use</p>
+<blockquote>
+<div><p>pixels for this analysis</p>
+</div></blockquote>
+<p><strong>ensemble</strong> : boolean, defaults False</p>
+<p><strong>bins</strong> : integer or sequence</p>
+<blockquote>
+<div><p>Specify a number of equally spaced bins, or explicitly specifiy a
+sequence of bin edges. See np.histogram docs.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>vh</strong> : DataFrame or Series</p>
+<blockquote class="last">
+<div><p>If ensemble=True, a DataFrame with each particle&#8217;s van Hove correlation
+function, indexed by displacement. If ensemble=False, a Series with
+the van Hove correlation function of the whole ensemble.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pos</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;particle&#39;</span><span class="p">])[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span> <span class="c1"># particles as columns</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vh</span> <span class="o">=</span> <span class="n">vanhove</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.motion.vanhove.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2018, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

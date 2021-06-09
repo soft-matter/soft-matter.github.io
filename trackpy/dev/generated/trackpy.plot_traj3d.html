@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>trackpy.plot_traj3d &#8212; trackpy 0.5.0+3.g3b280ea documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="trackpy.plot_displacements" href="trackpy.plot_displacements.html" />
+    <link rel="prev" title="trackpy.scatter3d" href="trackpy.scatter3d.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.5.0+3.g3b280ea</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Tracking Large Features Such As Bubbles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/brightfield.html">Tracking Particles' Rings in Bright-Field Microscopy</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.plot_traj3d</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="trackpy-plot-traj3d">
+<h1>trackpy.plot_traj3d<a class="headerlink" href="#trackpy-plot-traj3d" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="trackpy.plot_traj3d">
+<code class="sig-prename descclassname"><span class="pre">trackpy.</span></code><code class="sig-name descname"><span class="pre">plot_traj3d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.plot_traj3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>The 3D equivalent of <cite>plot_traj</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>traj</strong><span class="classifier">DataFrame</span></dt><dd><p>The DataFrame should include time and spatial coordinate columns.</p>
+</dd>
+<dt><strong>mpp</strong><span class="classifier">float, optional</span></dt><dd><p>Microns per pixel. If omitted, the labels will have units of pixels.</p>
+</dd>
+<dt><strong>label</strong><span class="classifier">boolean, optional</span></dt><dd><p>Set to True to write particle ID numbers next to trajectories.</p>
+</dd>
+<dt><strong>superimpose</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Background image, default None</p>
+</dd>
+<dt><strong>cmap</strong><span class="classifier">colormap, optional</span></dt><dd><p>This is only used in colorby=’frame’ mode. Default = mpl.cm.winter</p>
+</dd>
+<dt><strong>ax</strong><span class="classifier">matplotlib axes object, optional</span></dt><dd><p>Defaults to current axes</p>
+</dd>
+<dt><strong>t_column</strong><span class="classifier">string, optional</span></dt><dd><p>DataFrame column name for time coordinate. Default is ‘frame’.</p>
+</dd>
+<dt><strong>pos_columns</strong><span class="classifier">list of strings, optional</span></dt><dd><p>Dataframe column names for spatial coords. Default is [‘x’, ‘y’, ‘z’].</p>
+</dd>
+<dt><strong>plot_style</strong><span class="classifier">dictionary</span></dt><dd><p>Keyword arguments passed through to the <cite>Axes.plot(…)</cite> command</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Axes object</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="trackpy.plot_traj.html#trackpy.plot_traj" title="trackpy.plot_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_traj</span></code></a></dt><dd><p>plot 2D trajectories</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.plot_traj3d.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2021, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

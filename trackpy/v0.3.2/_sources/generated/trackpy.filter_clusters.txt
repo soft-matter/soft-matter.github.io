@@ -1,0 +1,6 @@
+trackpy.filter_clusters
+=======================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: filter_clusters

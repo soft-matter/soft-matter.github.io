@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Custom Feature Detection: Bubble tracking in 2D foams &mdash; trackpy 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0 documentation" href="../index.html" />
+    <link rel="prev" title="Parallelized Feature Location using IPython Parallel" href="parallel-locate.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Custom Feature Detection: Bubble tracking in 2D foams</a><ul>
+<li><a class="reference internal" href="#scientific-libraries">Scientific libraries</a></li>
+<li><a class="reference internal" href="#image-preprocessing">Image preprocessing</a></li>
+<li><a class="reference internal" href="#custom-feature-detection">Custom feature detection</a></li>
+<li><a class="reference internal" href="#bubble-tracking">Bubble tracking</a></li>
+<li><a class="reference internal" href="#velocity-field">Velocity field</a><ul>
+<li><a class="reference internal" href="#step-1-calculation">Step 1: calculation</a></li>
+<li><a class="reference internal" href="#step-2-rendering">Step 2: rendering</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#about-this-work">About this work</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="custom-feature-detection-bubble-tracking-in-2d-foams">
+<h1>Custom Feature Detection: Bubble tracking in 2D foams<a class="headerlink" href="#custom-feature-detection-bubble-tracking-in-2d-foams" title="Permalink to this headline">¶</a></h1>
+<p>As illustrated in the <a class="reference external" href="http://nbviewer.ipython.org/github/soft-matter/trackpy-examples/blob/master/notebooks/walkthrough.ipynb">walktrough
+example</a>,
+the tracking relies on two steps:</p>
+<ul class="simple">
+<li>the detection of features</li>
+<li>the tracking of these features</li>
+</ul>
+<p>In many situations, we track particles. However, it is also possible to
+track other features such as bubbles. Trackpy provides a &#8216;locate&#8217;
+function to detect particles, seen as spots. But, in the case of bubbles
+in foams, bubbles are in contact with their neighbors and the &#8216;locate&#8217;
+function could not detect their position.</p>
+<p>In this notebook, we show that we can apply a custom method to detect
+the position of the bubbles and then, pass the list to the tracking
+algorithm.</p>
+<div class="section" id="scientific-libraries">
+<h2>Scientific libraries<a class="headerlink" href="#scientific-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
+
+import numpy as np
+import pandas as pd
+
+import pims
+import trackpy as tp
+import os
+
+import matplotlib  as mpl
+import matplotlib.pyplot as plt
+
+# Optionally, tweak styles.
+mpl.rc(&#39;figure&#39;,  figsize=(22, 12))
+mpl.rc(&#39;image&#39;, cmap=&#39;gray&#39;)
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">datapath</span> <span class="o">=</span> <span class="s">&#39;../sample_data/foam&#39;</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s">&#39;V1.75f3.125000&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="image-preprocessing">
+<h2>Image preprocessing<a class="headerlink" href="#image-preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>First, we load the batch of pictures and we display the first image</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">id_example</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">rawframes</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">ImageSequence</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datapath</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s">&#39;*.tif&#39;</span><span class="p">),</span> <span class="n">process_func</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rawframes</span><span class="p">[</span><span class="n">id_example</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x7f2450ad33d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_7_1.png" src="../_images/custom-feature-detection_7_1.png" />
+<p>Because, we will need to apply several image processing steps to detect
+the positions of the bubbles, we crop the picture to keep only the
+region of interest. This is done by passing a preprocessing function to
+&#8216;ImageSequence&#8217;.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop the image to select the region of interest</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_min</span> <span class="o">=</span> <span class="mi">45</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="o">-</span><span class="mi">35</span>
+    <span class="n">y_min</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">y_max</span> <span class="o">=</span> <span class="o">-</span><span class="mi">300</span>
+    <span class="k">return</span> <span class="n">img</span><span class="p">[</span><span class="n">y_min</span><span class="p">:</span><span class="n">y_max</span><span class="p">,</span><span class="n">x_min</span><span class="p">:</span><span class="n">x_max</span><span class="p">]</span>
+
+<span class="n">rawframes</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">ImageSequence</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datapath</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s">&#39;*.tif&#39;</span><span class="p">),</span> <span class="n">process_func</span><span class="o">=</span><span class="n">crop</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rawframes</span><span class="p">[</span><span class="n">id_example</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x7f2450aa2710&gt;
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_9_1.png" src="../_images/custom-feature-detection_9_1.png" />
+<p>The next step is to use <a class="reference external" href="http://scikit-image.org/">scikit-image</a>[1]
+to make a binary image of the edge of the bubbles. It usually requires
+several trials before getting a successful procedure.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span><span class="p">,</span> <span class="n">util</span><span class="p">,</span> <span class="nb">filter</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_foam</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply image processing functions to return a binary image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Crop the pictures as for raw images.</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">crop</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="c"># Apply thresholds</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_adaptive</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">img</span> <span class="o">&gt;</span> <span class="n">img</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="n">threshold</span>
+    <span class="n">idx2</span> <span class="o">=</span> <span class="n">img</span> <span class="o">&lt;</span> <span class="n">img</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="n">threshold</span>
+    <span class="n">img</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">img</span><span class="p">[</span><span class="n">idx2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+    <span class="c"># Dilatate to get a continous network</span>
+    <span class="c"># of liquid films</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">img_as_int</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+
+<span class="n">frames</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">ImageSequence</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datapath</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s">&#39;*.tif&#39;</span><span class="p">),</span> <span class="n">process_func</span><span class="o">=</span><span class="n">preprocess_foam</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">frames</span><span class="p">[</span><span class="n">id_example</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.image.AxesImage at 0x7f24506ee210&gt;
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_11_1.png" src="../_images/custom-feature-detection_11_1.png" />
+</div>
+<div class="section" id="custom-feature-detection">
+<h2>Custom feature detection<a class="headerlink" href="#custom-feature-detection" title="Permalink to this headline">¶</a></h2>
+<p>Our features are the bubbles represented by the small black areas
+surrounded by white edges. Note that the black area at the bottom is the
+liquid should not be considered as a feature. We use again scikit-image
+with the labeling function to detect the bubbles. The function returns
+several values such as the positon, the mean intensity, the area, the
+excentricity, etc. that can be used to remove false-postive labels. In
+our example, we must choose smart criterions because the bubble size is
+clearly different on the top and on the bottom.</p>
+<p>We make a test on one picture first to seek and validate our criterions.
+We use matplotlib to draw rectangles around each feature.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">skimage</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="kn">as</span> <span class="nn">mpatches</span>
+
+<span class="n">img_example</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">id_example</span><span class="p">]</span>
+
+<span class="c"># Label elements on the picture</span>
+<span class="n">label_image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">measure</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">img_example</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_example</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">skimage</span><span class="o">.</span><span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">label_image</span><span class="p">,</span> <span class="n">intensity_image</span><span class="o">=</span><span class="n">img_example</span><span class="p">):</span>
+    <span class="c"># Everywhere, skip small and large areas</span>
+    <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">area</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">region</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="mi">800</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="c"># Only black areas</span>
+    <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">mean_intensity</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="c"># On the top, skip small area with a second threshold</span>
+    <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">centroid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">260</span> <span class="ow">and</span> <span class="n">region</span><span class="o">.</span><span class="n">area</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="c"># Draw rectangle which survived to the criterions</span>
+    <span class="n">minr</span><span class="p">,</span> <span class="n">minc</span><span class="p">,</span> <span class="n">maxr</span><span class="p">,</span> <span class="n">maxc</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">bbox</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">minc</span><span class="p">,</span> <span class="n">minr</span><span class="p">),</span> <span class="n">maxc</span> <span class="o">-</span> <span class="n">minc</span><span class="p">,</span> <span class="n">maxr</span> <span class="o">-</span> <span class="n">minr</span><span class="p">,</span>
+                              <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_14_0.png" src="../_images/custom-feature-detection_14_0.png" />
+<p>Now, we use this algorithm on each picture of the stack. The features
+are stored in a pandas DataFrame [2].</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+    <span class="n">label_image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">measure</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">skimage</span><span class="o">.</span><span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">label_image</span><span class="p">,</span> <span class="n">intensity_image</span><span class="o">=</span><span class="n">img</span><span class="p">):</span>
+        <span class="c"># Everywhere, skip small and large areas</span>
+        <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">area</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">region</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="mi">800</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c"># Only black areas</span>
+        <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">mean_intensity</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c"># On the top, skip small area with a second threshold</span>
+        <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">centroid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">260</span> <span class="ow">and</span> <span class="n">region</span><span class="o">.</span><span class="n">area</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c"># Store features which survived to the criterions</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">([{</span><span class="s">&#39;y&#39;</span><span class="p">:</span> <span class="n">region</span><span class="o">.</span><span class="n">centroid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                     <span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="n">region</span><span class="o">.</span><span class="n">centroid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                     <span class="s">&#39;frame&#39;</span><span class="p">:</span> <span class="n">num</span><span class="p">,</span>
+                                     <span class="p">},])</span>
+</pre></div>
+</div>
+<p>We can also use &#8216;annotate&#8217; provided with trackpy to display the features
+which will be track in the next step.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">tp</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="n">id_example</span><span class="p">],</span> <span class="n">img_example</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_18_0.png" src="../_images/custom-feature-detection_18_0.png" />
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f24504e24d0&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="bubble-tracking">
+<h2>Bubble tracking<a class="headerlink" href="#bubble-tracking" title="Permalink to this headline">¶</a></h2>
+<p>As for particle tracking, this step links the successive positions of
+each feature. We superimpose the trajectories with the first picture to
+check their consistancy.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">search_range</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">link_df</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">search_range</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">tp</span><span class="o">.</span><span class="n">plot_traj</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 8: 365 trajectories present
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_21_1.png" src="../_images/custom-feature-detection_21_1.png" />
+<div class="highlight-python"><div class="highlight"><pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f2447297290&gt;
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">unstacked</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">&#39;frame&#39;</span><span class="p">,</span> <span class="s">&#39;particle&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="velocity-field">
+<h2>Velocity field<a class="headerlink" href="#velocity-field" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-calculation">
+<h3>Step 1: calculation<a class="headerlink" href="#step-1-calculation" title="Permalink to this headline">¶</a></h3>
+<p>With the position of the center of mass of each bubble, we can calculate
+the velocity vector.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">particle</span><span class="p">):</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">particle</span><span class="o">==</span><span class="n">item</span><span class="p">]</span>
+    <span class="n">dvx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">dvy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sub</span><span class="o">.</span><span class="n">y</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dvx</span><span class="p">,</span> <span class="n">dvy</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">frame</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([{</span><span class="s">&#39;dx&#39;</span><span class="p">:</span> <span class="n">dx</span><span class="p">,</span>
+                             <span class="s">&#39;dy&#39;</span><span class="p">:</span> <span class="n">dy</span><span class="p">,</span>
+                             <span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+                             <span class="s">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+                             <span class="s">&#39;frame&#39;</span><span class="p">:</span> <span class="n">frame</span><span class="p">,</span>
+                             <span class="s">&#39;particle&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span>
+                            <span class="p">}])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-2-rendering">
+<h3>Step 2: rendering<a class="headerlink" href="#step-2-rendering" title="Permalink to this headline">¶</a></h3>
+<p>We now display the picture and plot the velocity field on the top with
+matplotlib[3]. Here, we plot only the first picture for illustrative
+purposes.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">quiver</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="n">i</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rawframes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span> <span class="o">-</span><span class="n">d</span><span class="o">.</span><span class="n">dy</span><span class="p">,</span> <span class="n">pivot</span><span class="o">=</span><span class="s">&#39;middle&#39;</span><span class="p">,</span> <span class="n">headwidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">headlength</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">687.5</span><span class="p">,</span> <span class="mf">367.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/custom-feature-detection_30_1.png" src="../_images/custom-feature-detection_30_1.png" />
+</div>
+</div>
+<div class="section" id="about-this-work">
+<h2>About this work<a class="headerlink" href="#about-this-work" title="Permalink to this headline">¶</a></h2>
+<p>This presentation is based on a scientific work which aims to understand
+the damping of a thin layer of foam placed on the top of an oscillating
+liquid bath. The main idea of this work is presented in the reference
+[4] and the scientific results are in reference [5]. This work has been
+performed in Princeton University (USA) by all the co-authors and this
+presentation has been written by F. Boulogne.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>[1] Stéfan van der Walt, Johannes L. Schönberger, Juan Nunez-Iglesias,
+François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
+Tony Yu and the scikit-image contributors. scikit-image: Image
+processing in Python. PeerJ 2:e453, 2014.
+<a class="reference external" href="http://dx.doi.org/10.7717/peerj.453">http://dx.doi.org/10.7717/peerj.453</a></p>
+<p>[2] Wes Mckinney. Data structures for statistical computing in Python.
+In : Proc. 9th Python Sci. Conf. 2010. p. 51-56.</p>
+<p>[3] Hunter, John D. Matplotlib: A 2D graphics environment. Computing in
+Science &amp; Engineering, 2007, vol. 9, no 3, p. 90-95.</p>
+<p>[4] J. Cappello, A. Sauret, F. Boulogne, E. Dressaire and H.A. Stone,
+Journal of Visualization, 18, 269-271 (2015).
+<a class="reference external" href="http://arxiv.org/abs/1411.2123">http://arxiv.org/abs/1411.2123</a></p>
+<p>[5] A. Sauret, F. Boulogne, J. Cappello, E. Dressaire and H.A. Stone,
+Physics of Fluids, 27 (2015). <a class="reference external" href="http://arxiv.org/abs/1411.6542">http://arxiv.org/abs/1411.6542</a></p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/custom-feature-detection.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

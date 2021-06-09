@@ -1,0 +1,6 @@
+trackpy.PandasHDFStore.close
+============================
+
+.. currentmodule:: trackpy
+
+.. automethod:: PandasHDFStore.close

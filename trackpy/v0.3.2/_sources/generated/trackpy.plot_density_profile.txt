@@ -1,0 +1,6 @@
+trackpy.plot_density_profile
+============================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: plot_density_profile

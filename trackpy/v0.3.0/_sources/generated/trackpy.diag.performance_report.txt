@@ -1,0 +1,6 @@
+trackpy.diag.performance_report
+===============================
+
+.. currentmodule:: trackpy.diag
+
+.. autofunction:: performance_report

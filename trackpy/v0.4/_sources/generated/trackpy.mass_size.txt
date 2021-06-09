@@ -1,0 +1,6 @@
+trackpy.mass_size
+=================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: mass_size

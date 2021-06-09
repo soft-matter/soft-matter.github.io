@@ -1,0 +1,6 @@
+trackpy.predict.NearestVelocityPredict.wrap_single
+==================================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: NearestVelocityPredict.wrap_single

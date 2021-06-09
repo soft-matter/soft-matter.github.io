@@ -1,0 +1,6 @@
+trackpy.masks.gaussian_kernel
+=============================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: masks.gaussian_kernel

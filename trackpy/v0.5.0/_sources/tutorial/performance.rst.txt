@@ -1,0 +1,4 @@
+performance
+------------------------------------------------
+.. raw:: html
+    :file: performance.html

@@ -1,0 +1,6 @@
+﻿trackpy.grey\_dilation
+======================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: grey_dilation

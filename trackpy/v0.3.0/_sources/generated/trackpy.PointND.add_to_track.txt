@@ -1,0 +1,6 @@
+trackpy.PointND.add_to_track
+============================
+
+.. currentmodule:: trackpy
+
+.. automethod:: PointND.add_to_track

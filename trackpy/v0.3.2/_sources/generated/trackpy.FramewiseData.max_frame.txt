@@ -1,0 +1,6 @@
+trackpy.FramewiseData.max_frame
+===============================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: FramewiseData.max_frame

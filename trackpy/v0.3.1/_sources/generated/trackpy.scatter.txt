@@ -1,0 +1,6 @@
+trackpy.scatter
+===============
+
+.. currentmodule:: trackpy
+
+.. autofunction:: scatter

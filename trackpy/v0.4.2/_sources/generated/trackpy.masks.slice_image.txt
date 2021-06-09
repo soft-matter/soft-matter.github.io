@@ -1,0 +1,6 @@
+trackpy.masks.slice_image
+=========================
+
+.. currentmodule:: trackpy.masks
+
+.. autofunction:: slice_image

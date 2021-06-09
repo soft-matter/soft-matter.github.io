@@ -1,0 +1,6 @@
+﻿trackpy.filtering.filter\_stubs
+===============================
+
+.. currentmodule:: trackpy.filtering
+
+.. autofunction:: filter_stubs

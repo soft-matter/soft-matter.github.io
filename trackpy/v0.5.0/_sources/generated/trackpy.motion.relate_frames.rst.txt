@@ -1,0 +1,6 @@
+﻿trackpy.motion.relate\_frames
+=============================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: relate_frames

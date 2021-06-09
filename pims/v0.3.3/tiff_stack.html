@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TiffStack &mdash; pims v0.3 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="pims v0.3 documentation" href="index.html"/>
+        <link rel="next" title="Bioformats" href="bioformats.html"/>
+        <link rel="prev" title="ImageSequence" href="image_sequence.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> pims</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#recommended-conda">Recommended: conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#development-version">Development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#pip">pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#source">source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v0-3-3">v0.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v0-3-2">v0.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v0-3-1">v0.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v0-3-0">v0.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v0-2-2">v0.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#v0-2-1">v0.2.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opening_files.html#quickstart">QuickStart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opening_files.html#using-specific-readers">Using Specific Readers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#accessing-individual-images">Accessing Individual Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#slices-and-slices-of-slices">Slices &#8211; and Slices of Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#fancy-indexing">Fancy Indexing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#ipython-rich-display">IPython Rich Display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#caveats">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#axes-bundling">Axes bundling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#axes-iteration">Axes iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#default-coordinates">Default coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#make-your-own-multidimensional-reader">Make your own multidimensional reader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#basic-example">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#plugging-into-pims-s-open-function">Plugging into PIMS&#8217;s open function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#example-demonstrating-generality-of-pims-design">Example Demonstrating Generality of PIMS Design</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_sequence.html#imagesequencend">ImageSequenceND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_sequence.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">TiffStack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bioformats.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="video.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">pims</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>TiffStack</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/tiff_stack.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="tiffstack">
+<h1>TiffStack<a class="headerlink" href="#tiffstack" title="Permalink to this headline">¶</a></h1>
+<p>PIMS can read most TIFF files out of the box, so you should try reading
+you files <code class="docutils literal"><span class="pre">pims.open('my_tiff_file.tif')</span></code> and revisit this section if you
+encounter an error.</p>
+<p>A tiff stack is a single file (.tif or .tiff) containing several images,
+often a time series or &#8220;Z stack.&#8221;</p>
+<p><code class="docutils literal"><span class="pre">TiffStack</span></code> expects a single filename. To load a collection of many
+single-image tiff files (e.g., <code class="file docutils literal"><span class="pre">img-1.tif</span></code>, <code class="file docutils literal"><span class="pre">img-2.tif</span></code>) see
+<a class="reference internal" href="image_sequence.html"><em>ImageSequence</em></a>.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>There are several Python packages for reading TIFFs. Our default reader, built
+around <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/code/tifffile.py.html">Christoph Gohlke&#8217;s tifffile.py</a>,
+handles all the formats we have personally encountered. But we have
+alternative TIFF readers built around Pillow (see above) and libtiff.
+To use a specific reader, use
+<code class="docutils literal"><span class="pre">TiffStack_tifffile</span></code>, <code class="docutils literal"><span class="pre">TiffStack_libtiff</span></code>, or <code class="docutils literal"><span class="pre">TiffStack_pil</span></code>, which
+depend, respectively, on the packages below. The &#8220;default&#8221; reader,
+<code class="docutils literal"><span class="pre">TiffStack</span></code> is an alias. At import time, it is pointed to the first
+reader for which the required package is installed.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pypi.python.org/pypi/tifffile">tifffile</a></li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/libtiff">pylibtiff</a></li>
+<li><a class="reference external" href="https://pillow.readthedocs.org/">Pillow</a> or <a class="reference external" href="http://www.pythonware.com/products/pil/">PIL</a></li>
+</ul>
+<p>Tifffile is installed with the PIMS conda package.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bioformats.html" class="btn btn-neutral float-right" title="Bioformats">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="image_sequence.html" class="btn btn-neutral" title="ImageSequence"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, PIMS Contributors.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

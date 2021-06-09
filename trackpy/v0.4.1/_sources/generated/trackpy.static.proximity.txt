@@ -1,0 +1,6 @@
+trackpy.static.proximity
+========================
+
+.. currentmodule:: trackpy.static
+
+.. autofunction:: proximity

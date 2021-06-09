@@ -1,0 +1,6 @@
+trackpy.motion.msd
+==================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: msd

@@ -1,0 +1,6 @@
+trackpy.Track.report_memory
+===========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: Track.report_memory

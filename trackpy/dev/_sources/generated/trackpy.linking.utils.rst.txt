@@ -1,0 +1,47 @@
+trackpy.linking.utils
+=====================
+
+.. automodule:: trackpy.linking.utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      coords_from_df
+      coords_from_df_iter
+      points_from_arr
+      points_to_arr
+      verify_integrity
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Point
+      TrackUnstored
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      SubnetOversizeException
+      UnknownLinkingError
+   
+   
+
+
+

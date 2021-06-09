@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to Trackpy &mdash; trackpy 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0 documentation" href="index.html" />
+    <link rel="next" title="Installing Trackpy" href="installation.html" />
+    <link rel="prev" title="Trackpy: Fast, Flexible Particle-Tracking Toolkit" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/prediction.html">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Introduction to Trackpy</a><ul>
+<li><a class="reference internal" href="#features">Features</a><ul>
+<li><a class="reference internal" href="#basics">Basics</a></li>
+<li><a class="reference internal" href="#special-capabilities">Special Capabilities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#citing-trackpy">Citing Trackpy</a></li>
+<li><a class="reference internal" href="#related-projects">Related Projects</a></li>
+<li><a class="reference internal" href="#core-contributors">Core Contributors</a></li>
+<li><a class="reference internal" href="#support">Support</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="introduction-to-trackpy">
+<span id="introduction"></span><h1>Introduction to Trackpy<a class="headerlink" href="#introduction-to-trackpy" title="Permalink to this headline">¶</a></h1>
+<p>Trackpy is a package for finding blob-like features in video, tracking them
+through time,  and analyzing their trajectories. It implements and extends the
+widely-used Crocker&#8211;Grier algorithm in Python.</p>
+<p>There are many similar projects. (See table below.)
+Our implementation is distinguished by succinct and flexible usage,
+a thorough testing framework ensuring code stability and accuracy,
+scalability, and thorough documentation.</p>
+<p>Several researchers have merged their independent efforts into this code.
+We would like to see others in the community adopt it and potentially
+contribute code to it.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>The <a class="reference external" href="http://www.physics.emory.edu/~weeks/idl/tracking.html">widely-used particle tracking algorithm</a>
+originally implemented by John Crocker and Eric Weeks in IDL is reimplemented
+in Python. Wherever possible, existing tools from widely-used Python modules
+are employed.</li>
+<li>This reimplemention is full-featured, including subpixel precision
+verified with test cases.</li>
+<li>The module is actively used and tested on <strong>Windows, Mac OSX, and Linux</strong>,
+and it uses only free, open-source software.</li>
+<li>Frames of video can be loaded from a <strong>video file (AVI, MOV, etc.), a</strong>
+<strong>multi-frame TIFF, or a directory of sequential images (TIFF,
+PNG, JPG, etc.)</strong>.</li>
+<li>Results are given as DataFrames, high-performance spreadsheet-like objects
+from <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/overview.html">Python pandas</a>
+which can easily be saved to a <strong>CSV file, Excel spreadsheet,
+SQL database, HDF5 file</strong>, and more.</li>
+<li>Particle trajectories can be
+characterized, grouped, and plotted using a suite of convenient functions.</li>
+<li>To verify correctness and stability, a <strong>suite of 150+ tests reproduces
+basic results</strong>.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="special-capabilities">
+<h3>Special Capabilities<a class="headerlink" href="#special-capabilities" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Both feature-finding and trajectory-linking can be performed on
+<strong>arbitrarily long videos</strong> using a fixed, modest amount of memory. (Results
+can be read and saved to disk throughout.)</li>
+<li>A <strong>prediction framework</strong> helps track particles in fluid flows,
+or other scenarios where velocity is correlated between time steps.</li>
+<li>Feature-finding and trajectory-linking works on <strong>images with any number of dimensions</strong>,
+making possible some creative applications.</li>
+<li><strong>Uncertainty is estimated</strong> following a method <a class="reference external" href="http://dx.doi.org/10.1529/biophysj.104.042457">described in this paper</a> by Savin and Doyle.</li>
+<li><strong>High-performance</strong> components (numba acceleration and FFTW support) are used only if
+if available. Since these can be tricky to install on some machines,
+the code will automatically fall back on slower pure Python implementations</li>
+<li><strong>Adaptive search</strong> can prevent the tracking algorithm from failing
+or becoming too slow, by automatically making adjustments when needed.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="citing-trackpy">
+<h2>Citing Trackpy<a class="headerlink" href="#citing-trackpy" title="Permalink to this headline">¶</a></h2>
+<p>Trackpy can be cited using a DOI provided through Zenodo. To direct your
+readers to the specific version of trackpy that they can use to reproduce
+your results, cite the release of trackpy that you used for your work. The
+record pages linked below contain author lists, other details, and complete
+citations in various formats. If your citation style allows for a URL,
+please include a link to the github repository:
+<cite>github.com/soft-matter/trackpy</cite>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="57%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Release (version)</th>
+<th class="head">Zenodo Record Pages with info and citations</th>
+<th class="head">DOI</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>v0.2.4</td>
+<td><a class="reference external" href="https://zenodo.org/record/12255">Record Page</a></td>
+<td>10.5281/zenodo.12255</td>
+</tr>
+<tr class="row-odd"><td>v0.2.3</td>
+<td><a class="reference external" href="https://zenodo.org/record/11956">Record Page</a></td>
+<td>10.5281/zenodo.11956</td>
+</tr>
+<tr class="row-even"><td>v0.2.2</td>
+<td><a class="reference external" href="https://zenodo.org/record/11132">Record Page</a></td>
+<td>10.5281/zenodo.11132</td>
+</tr>
+<tr class="row-odd"><td>v0.2</td>
+<td><a class="reference external" href="https://zenodo.org/record/9971">Record Page</a></td>
+<td>10.5281/zenodo.9971</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="related-projects">
+<h2>Related Projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="47%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Author(s)</th>
+<th class="head">Project URL</th>
+<th class="head">Language</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Crocker and Grier</td>
+<td><a class="reference external" href="http://physics.nyu.edu/grierlab/software.html">http://physics.nyu.edu/grierlab/software.html</a></td>
+<td>IDL</td>
+</tr>
+<tr class="row-odd"><td>Crocker and Weeks</td>
+<td><a class="reference external" href="http://www.physics.emory.edu/~weeks/idl/">http://www.physics.emory.edu/~weeks/idl/</a></td>
+<td>IDL</td>
+</tr>
+<tr class="row-even"><td>Blair and Dufresne</td>
+<td><a class="reference external" href="http://physics.georgetown.edu/matlab/">http://physics.georgetown.edu/matlab/</a></td>
+<td>MATLAB</td>
+</tr>
+<tr class="row-odd"><td>Maria Kilfoil</td>
+<td><a class="reference external" href="http://people.umass.edu/kilfoil/downloads.html">http://people.umass.edu/kilfoil/downloads.html</a></td>
+<td>MATLAB and Python</td>
+</tr>
+<tr class="row-even"><td>Graham Milne</td>
+<td><a class="reference external" href="http://zone.ni.com/devzone/cda/epd/p/id/948">http://zone.ni.com/devzone/cda/epd/p/id/948</a></td>
+<td>LabVIEW</td>
+</tr>
+<tr class="row-odd"><td>Ryan Smith and Gabe Spalding</td>
+<td><a class="reference external" href="http://titan.iwu.edu/~gspaldin/rytrack.html">http://titan.iwu.edu/~gspaldin/rytrack.html</a></td>
+<td>stand alone/IDL GUI</td>
+</tr>
+<tr class="row-even"><td>Peter J Lu</td>
+<td><a class="reference external" href="https://github.com/peterlu/PLuTARC_centerfind2D">https://github.com/peterlu/PLuTARC_centerfind2D</a></td>
+<td>C++ (identification only)</td>
+</tr>
+<tr class="row-odd"><td>Thomas A Caswell</td>
+<td><a class="reference external" href="https://github.com/tacaswell/tracking">https://github.com/tacaswell/tracking</a></td>
+<td>C++</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="core-contributors">
+<h2>Core Contributors<a class="headerlink" href="#core-contributors" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Daniel Allan</strong> feature-finding, uncertainty estimation,
+motion characterization and discrimination, plotting tools, tests</li>
+<li><strong>Nathan Keim</strong> alternative trajectory-linking implementations, major
+speed-ups, prediction, adaptive search</li>
+<li><strong>Thomas Caswell</strong> multiple implementations of sophisticated trajectory-linking, tests</li>
+<li><strong>Casper van der Wel</strong> anisotropic (3D) feature-finding, 3D plotting and analyses</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<p>This package was developed in part by Daniel Allan, as part of his
+PhD thesis work on microrheology in Robert L. Leheny&#8217;s group at Johns Hopkins
+University in Baltimore, MD. The work was supported by the National Science Foundation
+under grant number CBET-1033985.  Dan can be reached at <a class="reference external" href="mailto:dallan&#37;&#52;&#48;pha&#46;jhu&#46;edu">dallan<span>&#64;</span>pha<span>&#46;</span>jhu<span>&#46;</span>edu</a>.</p>
+<p>This package was developed in part by Thomas A Caswell as part of his
+PhD thesis work in Sidney R Nagel&#8217;s and Margaret L Gardel&#8217;s groups at
+the University of Chicago, Chicago IL.  This work was supported in
+part by NSF Grant DMR-1105145 and NSF-MRSEC DMR-0820054.  Tom can be
+reached at <a class="reference external" href="mailto:tcaswell&#37;&#52;&#48;gmail&#46;com">tcaswell<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
+<p>This package was developed in part by Nathan C. Keim, as part of his postdoctoral
+research in Paulo Arratia&#8217;s group at the University of Pennsylvania,
+Philadelphia. This work was supported by NSF-MRSEC DMR-1120901.</p>
+<p>This package was developed in part by Casper van der Wel, as part of his
+PhD thesis work in Daniela Kraft’s group at the Huygens-Kamerlingh-Onnes laboratory,
+Institute of Physics, Leiden University, The Netherlands. This work was
+supported by the Netherlands Organisation for Scientific Research (NWO/OCW).</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/introduction.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

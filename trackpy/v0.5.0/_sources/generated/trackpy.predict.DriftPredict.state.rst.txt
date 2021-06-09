@@ -1,0 +1,6 @@
+trackpy.predict.DriftPredict.state
+==================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: DriftPredict.state

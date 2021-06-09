@@ -1,0 +1,6 @@
+﻿trackpy.subpx\_bias
+===================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: subpx_bias

@@ -1,0 +1,6 @@
+trackpy.scatter3d
+=================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: scatter3d

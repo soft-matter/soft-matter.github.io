@@ -1,0 +1,6 @@
+trackpy.mass_ecc
+================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: mass_ecc

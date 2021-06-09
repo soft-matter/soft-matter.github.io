@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pipelines &mdash; pims 0.5 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Frame" href="frame.html" />
+    <link rel="prev" title="Slicing and Iteration" href="slicing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pims
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conversion-to-greyscale">Conversion to greyscale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cropping">Cropping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#converting-existing-functions-to-a-pipeline">Converting existing functions to a pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtype-conversion-using-lambda-functions">Dtype conversion using lambda functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pims</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Pipelines</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pipelines.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pipelines">
+<h1>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this headline">¶</a></h1>
+<p>Videos loaded by pims (<code class="docutils literal notranslate"><span class="pre">FramesSequence</span></code> objects) are like lists of numpy
+arrays. Unlike Python lists of arrays they are “lazy”, they only load the data
+from the harddrive when it is necessary.</p>
+<p>In order to modify a <code class="docutils literal notranslate"><span class="pre">FramesSequence</span></code>, for instance to convert RGB color
+videos to grayscale, one could load all the video frames in memory and do the
+conversion. This however costs a lot of time and memory, and for very large
+videos this is just not feasible. To solve this problem, PIMS uses
+so-called pipeline decorators from a sister project called <code class="docutils literal notranslate"><span class="pre">slicerator</span></code>.
+A pipeline-decorated function is only evaluated when needed, so that the
+underlying video data is only accessed one element at a time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This supersedes the <code class="docutils literal notranslate"><span class="pre">process_func</span></code> and <code class="docutils literal notranslate"><span class="pre">as_grey</span></code> reader keyword
+arguments starting from PIMS v0.4</p>
+</div>
+<div class="section" id="conversion-to-greyscale">
+<h2>Conversion to greyscale<a class="headerlink" href="#conversion-to-greyscale" title="Permalink to this headline">¶</a></h2>
+<p>Say we want to convert an RGB video to greyscale. A pipeline to do this is
+already provided as <code class="xref py py-obj docutils literal notranslate"><span class="pre">pims.as_grey</span></code>, but it is also easy to make our own.
+We define a function as follows and decorate it with <code class="docutils literal notranslate"><span class="pre">&#64;pipeline</span></code> to turn
+it into a pipeline:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pims</span><span class="o">.</span><span class="n">pipeline</span>
+<span class="k">def</span> <span class="nf">as_grey</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">green</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">blue</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="mf">0.2125</span> <span class="o">*</span> <span class="n">red</span> <span class="o">+</span> <span class="mf">0.7154</span> <span class="o">*</span> <span class="n">green</span> <span class="o">+</span> <span class="mf">0.0721</span> <span class="o">*</span> <span class="n">blue</span>
+</pre></div>
+</div>
+<p>The behavior of <code class="docutils literal notranslate"><span class="pre">as_grey</span></code> is unchanged if it is used on a single frame:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">frame</span> <span class="o">=</span> <span class="n">video</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [2]: </span><span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># the shape of the example video is RGB</span>
+<span class="go">(256, 256, 3)</span>
+
+<span class="gp">In [3]: </span><span class="n">processed_frame</span> <span class="o">=</span> <span class="n">as_grey</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="nb">print</span><span class="p">(</span><span class="n">processed_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># the converted frame is indeed greyscale</span>
+<span class="go">(256, 256)</span>
+</pre></div>
+</div>
+<p>However, the <code class="docutils literal notranslate"><span class="pre">&#64;pipeline</span></code> decorator enables lazy evaluation of full videos:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">processed_video</span> <span class="o">=</span> <span class="n">as_grey</span><span class="p">(</span><span class="n">video</span><span class="p">)</span>  <span class="c1"># this would not be possible without @pipeline</span>
+
+<span class="go"># nothing has been converted yet!</span>
+<span class="gp">In [6]: </span><span class="n">processed_frame</span> <span class="o">=</span> <span class="n">processed_video</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># now the conversion takes place</span>
+
+<span class="gp">In [7]: </span><span class="nb">print</span><span class="p">(</span><span class="n">processed_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(256, 256)</span>
+</pre></div>
+</div>
+<p>This means that the modified video can be used exactly as you would use the
+original one. In most cases, it will look as though you are accessing
+a grayscale video file, even though the file on disk is still in color.
+Please keep in mind that these simple pipelines do not change the reader
+properties, such as <code class="docutils literal notranslate"><span class="pre">video.frame_shape</span></code>.</p>
+<p>Propagating metadata properly through
+pipelines is partly implemented, but currently still experimental.
+For a detailed description of this tricky point, please consult
+<a class="reference external" href="https://github.com/soft-matter/slicerator/pull/5#issuecomment-143560978">this</a>
+discussion on GitHub.</p>
+</div>
+<div class="section" id="cropping">
+<h2>Cropping<a class="headerlink" href="#cropping" title="Permalink to this headline">¶</a></h2>
+<p>Along with the built-in <code class="docutils literal notranslate"><span class="pre">pims.as_grey</span></code> pipeline that saves you from typing out
+the previous example, there’s also a <code class="xref py py-obj docutils literal notranslate"><span class="pre">pims.process.crop</span></code> pipeline that _does_
+change <code class="docutils literal notranslate"><span class="pre">frame_shape</span></code>. This example takes the video we had converted to
+grayscale in the previous example, and removes 15 pixels from the left side of each
+image:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="nb">print</span><span class="p">(</span><span class="n">video</span><span class="o">.</span><span class="n">frame_shape</span><span class="p">)</span>
+<span class="go">(256, 256, 3)</span>
+
+<span class="go"># Because this is a color video, we need 3 pairs of cropping parameters</span>
+<span class="gp">In [9]: </span><span class="n">cropped_video</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">video</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">)</span>
+
+<span class="gp">In [10]: </span><span class="nb">print</span><span class="p">(</span><span class="n">cropped_video</span><span class="o">.</span><span class="n">frame_shape</span><span class="p">)</span>
+<span class="go">(256, 241, 3)</span>
+
+<span class="gp">In [11]: </span><span class="n">cropped_frame</span> <span class="o">=</span> <span class="n">cropped_video</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># now the cropping happens</span>
+
+<span class="gp">In [12]: </span><span class="nb">print</span><span class="p">(</span><span class="n">cropped_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(256, 241, 3)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-existing-functions-to-a-pipeline">
+<h2>Converting existing functions to a pipeline<a class="headerlink" href="#converting-existing-functions-to-a-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>We are now going to do the same greyscale conversion as above, but using an
+existing function from <code class="docutils literal notranslate"><span class="pre">skimage</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="kn">from</span> <span class="nn">skimage.color</span> <span class="kn">import</span> <span class="n">rgb2gray</span>
+
+<span class="gp">In [14]: </span><span class="n">rgb2gray_pipeline</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="n">rgb2gray</span><span class="p">)</span>
+
+<span class="gp">In [15]: </span><span class="n">processed_video</span> <span class="o">=</span> <span class="n">rgb2gray_pipeline</span><span class="p">(</span><span class="n">video</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="n">processed_frame</span> <span class="o">=</span> <span class="n">processed_video</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [17]: </span><span class="nb">print</span><span class="p">(</span><span class="n">processed_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(256, 256)</span>
+</pre></div>
+</div>
+<p>Any function that takes a single frame and returns a single frame can be converted
+into a pipeline in this way.</p>
+</div>
+<div class="section" id="dtype-conversion-using-lambda-functions">
+<h2>Dtype conversion using lambda functions<a class="headerlink" href="#dtype-conversion-using-lambda-functions" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This supersedes the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> reader keyword argument starting from PIMS v0.4</p>
+</div>
+<p>We are now going to convert the data type of a video to float using an
+unnamed lambda function in a single line:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">processed_video</span> <span class="o">=</span> <span class="n">pims</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))(</span><span class="n">video</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">processed_frame</span> <span class="o">=</span> <span class="n">processed_video</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [20]: </span><span class="nb">print</span><span class="p">(</span><span class="n">processed_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(256, 256, 3)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="frame.html" class="btn btn-neutral float-right" title="Frame" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="slicing.html" class="btn btn-neutral float-left" title="Slicing and Iteration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020, PIMS Contributors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

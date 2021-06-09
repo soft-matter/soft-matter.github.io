@@ -1,0 +1,6 @@
+trackpy.motion.velocity_corr
+============================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: velocity_corr

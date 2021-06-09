@@ -1,0 +1,6 @@
+trackpy.masks.theta_mask
+========================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: masks.theta_mask

@@ -1,0 +1,4 @@
+-e adaptive-search
+------------------------------------------------
+.. raw:: html
+    :file: adaptive-search.html

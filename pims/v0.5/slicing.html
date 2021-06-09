@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Slicing and Iteration &mdash; pims 0.5 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pipelines" href="pipelines.html" />
+    <link rel="prev" title="Opening Files" href="opening_files.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pims
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Slicing and Iteration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-individual-images">Accessing Individual Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slices-and-slices-of-slices">Slices – and Slices of Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fancy-indexing">Fancy Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slicing-in-space">Slicing in Space</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pims</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Slicing and Iteration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/slicing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="slicing-and-iteration">
+<h1>Slicing and Iteration<a class="headerlink" href="#slicing-and-iteration" title="Permalink to this headline">¶</a></h1>
+<p>PIMS objects are like lists or numpy arrays that lazily load and “stream” data
+like Python generators. Unlike Python
+generators, they can be sliced and indexed, and they have a length. But unlike
+lists or arrays, the underlying data is only accessed one element at a time.</p>
+<div class="section" id="accessing-individual-images">
+<h2>Accessing Individual Images<a class="headerlink" href="#accessing-individual-images" title="Permalink to this headline">¶</a></h2>
+<p>Images can be randomly accessed with standard Python slicing syntax.
+The built-in PIMS readers all enable random access, even if the underlying
+file format does not support it natively, as with video files.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># first image</span>
+<span class="gh">Out[1]: </span><span class="go"></span>
+<span class="go">Frame([[155, 127, 164, ..., 108, 247, 185],</span>
+<span class="go">       [248, 148, 187, ..., 113,  50, 103],</span>
+<span class="go">       [224, 212, 133, ..., 169, 114,  71],</span>
+<span class="go">       ...,</span>
+<span class="go">       [127,  77,  12, ..., 125, 243,  18],</span>
+<span class="go">       [158,  74, 239, ..., 225, 146, 121],</span>
+<span class="go">       [174,  97, 120, ..., 143,  70,  68]], dtype=uint8)</span>
+
+<span class="gp">In [2]: </span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># fifth from the end</span>
+<span class="gh">Out[2]: </span><span class="go"></span>
+<span class="go">Frame([[146, 177,  85, ..., 226, 125, 180],</span>
+<span class="go">       [129,  61,   4, ...,  40,  43, 168],</span>
+<span class="go">       [132, 228, 212, ...,  26, 161,  61],</span>
+<span class="go">       ...,</span>
+<span class="go">       [ 53, 169,  69, ..., 141,  35,  16],</span>
+<span class="go">       [ 75, 183, 193, ..., 115,   5, 115],</span>
+<span class="go">       [152, 153, 216, ..., 227,  72,  83]], dtype=uint8)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iteration">
+<h2>Iteration<a class="headerlink" href="#iteration" title="Permalink to this headline">¶</a></h2>
+<p>The images are iterable. Data is loaded one image at a time, conserving
+memory.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="gp">In [4]: </span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># do something</span>
+<span class="gp">   ...: </span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slices-and-slices-of-slices">
+<h2>Slices – and Slices of Slices<a class="headerlink" href="#slices-and-slices-of-slices" title="Permalink to this headline">¶</a></h2>
+<p>Slicing <code class="docutils literal notranslate"><span class="pre">images</span></code> returns another lazy-loading object that is also iterable
+and sliceable.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">subsection</span> <span class="o">=</span> <span class="n">images</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># the first five images</span>
+
+<span class="gp">In [6]: </span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+<span class="gh">Out[6]: </span><span class="go">9</span>
+
+<span class="gp">In [7]: </span><span class="nb">len</span><span class="p">(</span><span class="n">subsection</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">5</span>
+
+<span class="gp">In [8]: </span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">subsection</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># do something</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [9]: </span><span class="n">subsubsection</span> <span class="o">=</span> <span class="n">subsection</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># every other of the first five images</span>
+</pre></div>
+</div>
+<p>You can creates slices of slices of slices to any depth.</p>
+</div>
+<div class="section" id="fancy-indexing">
+<h2>Fancy Indexing<a class="headerlink" href="#fancy-indexing" title="Permalink to this headline">¶</a></h2>
+<p>Numpy-like “fancy indexing” is supported. As above, the examples below
+create more sliceable, iterable objects.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">subsection2</span> <span class="o">=</span> <span class="n">images</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+
+<span class="gp">In [11]: </span><span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+
+<span class="gp">In [12]: </span><span class="n">subsection3</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slicing-in-space">
+<h2>Slicing in Space<a class="headerlink" href="#slicing-in-space" title="Permalink to this headline">¶</a></h2>
+<p>It’s easy to make a sequence with all images cropped using the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pims.process.crop</span></code> pipeline, or to make a sequence with any sort of
+slicing by creating a new pipeline. See the <cite>doc:pipelines</cite> documentation
+for details.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pipelines.html" class="btn btn-neutral float-right" title="Pipelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="opening_files.html" class="btn btn-neutral float-left" title="Opening Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2020, PIMS Contributors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

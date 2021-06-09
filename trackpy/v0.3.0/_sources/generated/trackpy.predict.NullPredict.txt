@@ -1,0 +1,25 @@
+trackpy.predict.NullPredict
+===========================
+
+.. currentmodule:: trackpy.predict
+
+.. autoclass:: NullPredict
+
+   
+
+
+  .. HACK -- the point here is that we don't want this to appear in the output, but the autosummary should still generate the pages.
+      .. autosummary::
+         :toctree:
+      
+         NullPredict.link_df
+         NullPredict.link_df_iter
+         NullPredict.observe
+         NullPredict.predict
+         NullPredict.state
+
+
+
+
+   
+

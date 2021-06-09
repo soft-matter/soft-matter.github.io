@@ -1,0 +1,6 @@
+trackpy.ignore_logging
+======================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: ignore_logging

@@ -1,0 +1,6 @@
+trackpy.motion.vanhove
+======================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: vanhove

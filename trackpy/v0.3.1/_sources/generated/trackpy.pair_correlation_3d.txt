@@ -1,0 +1,6 @@
+trackpy.pair_correlation_3d
+===========================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: pair_correlation_3d

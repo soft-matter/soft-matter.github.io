@@ -1,0 +1,6 @@
+﻿trackpy.motion.is\_typical
+==========================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: is_typical

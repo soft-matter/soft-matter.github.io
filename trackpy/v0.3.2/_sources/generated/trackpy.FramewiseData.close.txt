@@ -1,0 +1,6 @@
+trackpy.FramewiseData.close
+===========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: FramewiseData.close

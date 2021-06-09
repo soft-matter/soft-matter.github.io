@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Video &mdash; pims 0.4+30.g9cb60ce documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="pims 0.4+30.g9cb60ce documentation" href="index.html"/>
+        <link rel="prev" title="Bioformats" href="bioformats.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pims
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4+30.g9cb60ce
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Video</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyav-fastest">PyAV (fastest)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#imageio-and-moviepy">ImageIO and MoviePy</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pims</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Video</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/video.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="video">
+<h1>Video<a class="headerlink" href="#video" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pyav-fastest">
+<h2>PyAV (fastest)<a class="headerlink" href="#pyav-fastest" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://mikeboers.github.io/PyAV/">PyAV</a> can be installed via Anaconda, as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>conda install av -c conda-forge
+</pre></div>
+</div>
+<p>Non-anaconda users will have to compile PyAV themselves, which is complicated,
+especially on Windows. For this we refer the
+users to the <a class="reference external" href="https://mikeboers.github.io/PyAV/">PyAV documentation</a>.</p>
+<p>There are two ways PIMS provides random access to video files, which is not
+something that video formats natively support:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">PyAVReaderTimed</span></code> bases the indices of the video frames on the
+<code class="docutils literal"><span class="pre">frame_rate</span></code> that is reported by the video file, along with the timestamps
+that are imprinted on the separate video frames. The readers <code class="docutils literal"><span class="pre">PyAVVideoReader</span></code>
+and <code class="docutils literal"><span class="pre">Video</span></code> are different names for this reader.</li>
+<li><code class="docutils literal"><span class="pre">PyAVReaderIndexed</span></code> scans through the entire video to build a table
+of contents. This means that opening the file can take some time, but
+once it is open, random access is fast. In the case timestamps or <cite>frame_rate`</cite>
+are not available, this reader is the preferred option.</li>
+</ul>
+</div>
+<div class="section" id="imageio-and-moviepy">
+<h2>ImageIO and MoviePy<a class="headerlink" href="#imageio-and-moviepy" title="Permalink to this headline">¶</a></h2>
+<p>Both <a class="reference external" href="https://imageio.github.io">ImageIO</a> and <a class="reference external" href="http://zulko.github.io/moviepy">MoviePy</a>
+implement interfaces with ffmpeg through a Pipe. These are implemented through
+<code class="docutils literal"><span class="pre">ImageIOReader</span></code> and <code class="docutils literal"><span class="pre">MoviePyReader</span></code>, respectively.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="bioformats.html" class="btn btn-neutral" title="Bioformats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, PIMS Contributors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.4+30.g9cb60ce',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

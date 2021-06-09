@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multidimensional Readers &mdash; pims 0.4+30.g9cb60ce documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="pims 0.4+30.g9cb60ce documentation" href="index.html"/>
+        <link rel="next" title="Custom Readers" href="custom_readers.html"/>
+        <link rel="prev" title="Frame" href="frame.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pims
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.4+30.g9cb60ce
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Multidimensional Readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#axes-bundling">Axes bundling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axes-iteration">Axes iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#default-coordinates">Default coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-your-own-multidimensional-reader">Make your own multidimensional reader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pims</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Multidimensional Readers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/multidimensional.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multidimensional-readers">
+<h1>Multidimensional Readers<a class="headerlink" href="#multidimensional-readers" title="Permalink to this headline">¶</a></h1>
+<p>Multidimensional files are files that have for instance an extra z-axis (making
+the image 3D, an extra channel axis, or a multipoint axis. PIMS provides a
+flexible and uniform interface for working with these kind of files through the
+base class <code class="docutils literal"><span class="pre">FramesSequenceND</span></code>. The readers <code class="docutils literal"><span class="pre">ImageSequenceND</span></code> and <code class="docutils literal"><span class="pre">Bioformats</span></code>
+(see <a class="reference internal" href="image_sequence.html"><span class="doc">ImageSequence</span></a> or <a class="reference internal" href="bioformats.html"><span class="doc">Bioformats</span></a>).
+are based on this baseclass and provide the axis-aware methods describe below.</p>
+<p>To avoid ambiguity, we call a point along one axis a <em>coordinate</em>. The word
+<em>index</em> refers to the working of <code class="docutils literal"><span class="pre">frames[index]</span></code>. The index is equal to the
+coordinate along the iterating axis (normally, <cite>t</cite>), except when the iterating
+axis is nested (see below).</p>
+<p>The names and sizes of each axis is provided with the <code class="docutils literal"><span class="pre">sizes</span></code> property:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">images</span><span class="o">.</span><span class="n">sizes</span>
+<span class="gh">Out[1]: </span><span class="go">{&#39;c&#39;: 2, &#39;t&#39;: 4, &#39;x&#39;: 128, &#39;y&#39;: 64, &#39;z&#39;: 10}</span>
+</pre></div>
+</div>
+<div class="section" id="axes-bundling">
+<h2>Axes bundling<a class="headerlink" href="#axes-bundling" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">bundle_axes</span></code> property defines which axes will be present in a single frame.
+The <code class="docutils literal"><span class="pre">frame_shape</span></code> property is changed accordingly:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">images</span><span class="o">.</span><span class="n">bundle_axes</span> <span class="o">=</span> <span class="s1">&#39;czyx&#39;</span>
+
+<span class="gp">In [3]: </span><span class="n">images</span><span class="o">.</span><span class="n">frame_shape</span>
+<span class="gh">Out[3]: </span><span class="go">(2, 10, 64, 128)</span>
+
+<span class="gp">In [4]: </span><span class="n">images</span><span class="o">.</span><span class="n">bundle_axes</span> <span class="o">=</span> <span class="s1">&#39;yx&#39;</span>
+
+<span class="gp">In [5]: </span><span class="n">images</span><span class="o">.</span><span class="n">frame_shape</span>
+<span class="gh">Out[5]: </span><span class="go">(64, 128)</span>
+</pre></div>
+</div>
+<p>Currently, the last two axes have to be <code class="docutils literal"><span class="pre">'yx'</span></code>. For multi-symbol axis names,
+provide a list like this: <code class="docutils literal"><span class="pre">images.bundle_axes</span> <span class="pre">=</span> <span class="pre">['one',</span> <span class="pre">'two']</span></code>.</p>
+</div>
+<div class="section" id="axes-iteration">
+<h2>Axes iteration<a class="headerlink" href="#axes-iteration" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">iter_axes</span></code> property defines which axis will be used as the index axis. The
+reader length is updated accordingly:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">images</span><span class="o">.</span><span class="n">iter_axes</span> <span class="o">=</span> <span class="s1">&#39;t&#39;</span>
+
+<span class="gp">In [7]: </span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+<span class="gh">Out[7]: </span><span class="go">4</span>
+</pre></div>
+</div>
+<p>When multiple axes are provided to <code class="docutils literal"><span class="pre">iter_axes</span></code>, a nested iteration will be
+performed in which the last element will iterate fastest:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">images</span><span class="o">.</span><span class="n">iter_axes</span> <span class="o">=</span> <span class="s1">&#39;tz&#39;</span>
+
+<span class="gp">In [9]: </span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>  <span class="c1"># 4 * 10</span>
+<span class="gh">Out[9]: </span><span class="go">40</span>
+
+<span class="gp">In [10]: </span><span class="n">images</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span>  <span class="c1"># returns the image at t == 1 and z = 2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="default-coordinates">
+<h2>Default coordinates<a class="headerlink" href="#default-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>What if an axis is not present in <code class="docutils literal"><span class="pre">bundle_axes</span></code> and <code class="docutils literal"><span class="pre">iter_axes</span></code>? Then the
+<em>default coordinate</em> is returned, as defined in the dictionary <code class="docutils literal"><span class="pre">default_coords</span></code>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">images</span><span class="o">.</span><span class="n">bundle_axes</span> <span class="o">=</span> <span class="s1">&#39;zyx&#39;</span>
+
+<span class="gp">In [12]: </span><span class="n">images</span><span class="o">.</span><span class="n">iter_axes</span> <span class="o">=</span> <span class="s1">&#39;t&#39;</span>
+
+<span class="gp">In [13]: </span><span class="n">images</span><span class="o">.</span><span class="n">default_coords</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="gp">In [14]: </span><span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>  <span class="c1"># returns the 3D image at t == 2 and c = 1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-your-own-multidimensional-reader">
+<h2>Make your own multidimensional reader<a class="headerlink" href="#make-your-own-multidimensional-reader" title="Permalink to this headline">¶</a></h2>
+<p>Making a multidimensional reader class yourself is simple. The following
+example is already a fully-functioning multidimensional reader. The crucial
+method here is <code class="docutils literal"><span class="pre">_register_get_frame</span></code>, that registers a <code class="docutils literal"><span class="pre">get_frame</span></code> method
+and tells the reader which axes to expect from that method. You can also define
+multiple <code class="docutils literal"><span class="pre">get_frame</span></code> methods to increase the reader performance.</p>
+<p>The reader then figures out how to efficiently use this function, to present
+the image in the shape that corresponds with the <code class="docutils literal"><span class="pre">bundle_axes</span></code> settings.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pims</span> <span class="kn">import</span> <span class="n">FramesSequenceND</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">class</span> <span class="nc">IndexReturningReader</span><span class="p">(</span><span class="n">FramesSequenceND</span><span class="p">):</span>
+   <span class="nd">@property</span>
+   <span class="k">def</span> <span class="nf">pixel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span>  <span class="c1"># the pixel datatype</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size_c</span><span class="p">,</span> <span class="n">size_t</span><span class="p">,</span> <span class="n">size_z</span><span class="p">):</span>
+       <span class="c1"># first call the baseclass initialization</span>
+       <span class="nb">super</span><span class="p">(</span><span class="n">IndexReturningReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">_init_axis</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">_init_axis</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">_init_axis</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">size_c</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">_init_axis</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">size_t</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">_init_axis</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">size_z</span><span class="p">)</span>
+       <span class="c1"># register the get_frame function</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">_register_get_frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_frame_func</span><span class="p">,</span> <span class="s1">&#39;yx&#39;</span><span class="p">)</span>
+
+   <span class="k">def</span> <span class="nf">get_frame_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+       <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="custom_readers.html" class="btn btn-neutral float-right" title="Custom Readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="frame.html" class="btn btn-neutral" title="Frame" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015-2017, PIMS Contributors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.4+30.g9cb60ce',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

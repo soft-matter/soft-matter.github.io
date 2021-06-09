@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prediction: Beyond Simple Random Walks &mdash; trackpy 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/spacelab/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="trackpy 0.3.0 documentation" href="../index.html" />
+    <link rel="next" title="Feature finding in 3D confocal images" href="tracking-3d.html" />
+    <link rel="prev" title="Walkthrough" href="walkthrough.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#updating-your-installation">Updating Your Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What&#8217;s new in the package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Prediction: Beyond Simple Random Walks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking-3d.html">Feature finding in 3D confocal images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Subpixel Accuracy and Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subnets.html">Advanced Linking: Subnetworks and <tt class="docutils literal"><span class="pre">search_range</span></tt></a></li>
+<li class="toctree-l1"><a class="reference internal" href="adaptive-search.html">Adaptive Search: Changing <tt class="docutils literal"><span class="pre">search_range</span></tt> on the Fly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on-disk.html">Streaming: Processing Unlimited Frames On-Disk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Making trackpy fast(er)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking-diagnostics.html">Obtaining Diagnostic Information from Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel-locate.html">Parallelized Feature Location using IPython Parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-feature-detection.html">Custom Feature Detection: Bubble tracking in 2D foams</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Prediction: Beyond Simple Random Walks</a><ul>
+<li><a class="reference internal" href="#prescribed-predictors">Prescribed predictors</a></li>
+<li><a class="reference internal" href="#dynamic-predictors">Dynamic predictors</a><ul>
+<li><a class="reference internal" href="#channel-flow-prediction">Channel flow prediction</a></li>
+<li><a class="reference internal" href="#drift-prediction">Drift prediction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="prediction-beyond-simple-random-walks">
+<h1>Prediction: Beyond Simple Random Walks<a class="headerlink" href="#prediction-beyond-simple-random-walks" title="Permalink to this headline">¶</a></h1>
+<p>The tracking algorithm, at its simplest level, takes each particle in
+the previous frame and tries to find it in the current frame. This
+requires knowing where to look for it; if we find an actual particle
+near that spot, it&#8217;s probably a match. The basic algorithm (Crocker &amp;
+Grier) was developed to track particles undergoing Brownian diffusion,
+which ideally means that a particle&#8217;s velocity is uncorrelated from one
+frame to the next. Therefore, the best guess for where a particle is
+going is that it will be near its most recent location.</p>
+<p>Let&#8217;s formalize this guessing as <em>prediction</em>. Consider a function</p>
+<div class="math">
+\[P(t_1, t_0, \vec x(t_0))\]</div>
+<p>that takes the particle at position <span class="math">\(\vec x(t_0)\)</span> and predicts its
+future position <span class="math">\(\vec x(t_1)\)</span>. The optimal predictor for Brownian
+motion is</p>
+<div class="math">
+\[P(t_1, t_0, \vec x(t_0)) = \vec x(t_0)\]</div>
+<p>which happily is also the easiest to implement.</p>
+<p>The better our prediction about where to look in the next frame, the
+more likely we will find the one and only particle we seek. <tt class="docutils literal"><span class="pre">trackpy</span></tt>
+looks for the particle in a small region of radius <tt class="docutils literal"><span class="pre">search_range</span></tt>,
+centered on <span class="math">\(P(t_1, t_0, \vec x(t_0))\)</span>. So to successfully track
+particle <span class="math">\(i\)</span> puts a limit on the error in our prediction:</p>
+<div class="math">
+\[\|P(t_1, t_0, \vec x_i(t_0)) - \vec x_i(t_1)\| \le \tt{search\_range}\]</div>
+<p>This favors a generous <tt class="docutils literal"><span class="pre">search_range</span></tt>. However, if <tt class="docutils literal"><span class="pre">search_range</span></tt> is
+too big, then for each particle in the previous frame there will be many
+possible matches in the current frame, and so matching one frame to the
+next requires the computer to consider a mind-boggling set of
+possibilities. Tracking may become impossibly slow, and this causes
+<tt class="docutils literal"><span class="pre">trackpy</span></tt> to halt and raise a <tt class="docutils literal"><span class="pre">SubnetOversizeException</span></tt>, rather than
+keep you waiting forever. So for the Brownian <span class="math">\(P\)</span> above,
+<tt class="docutils literal"><span class="pre">search_range</span></tt> must be bigger than the largest particle displacement
+between frames, but smaller than the typical spacing between particles.
+If such a value cannot be found among the real numbers, then you have a
+problem.</p>
+<p>However, if particle motion is not strictly Brownian, its velocity
+probably <em>is</em> correlated in time. We may be able to improve <span class="math">\(P\)</span>.
+We will now do this with <tt class="docutils literal"><span class="pre">trackpy</span></tt>.</p>
+<div class="section" id="prescribed-predictors">
+<h2>Prescribed predictors<a class="headerlink" href="#prescribed-predictors" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s start by demonstrating the mechanics of <span class="math">\(P\)</span> in <tt class="docutils literal"><span class="pre">trackpy</span></tt>.
+<tt class="docutils literal"><span class="pre">trackpy</span></tt>&#8216;s various <tt class="docutils literal"><span class="pre">link_</span></tt> functions accept a <tt class="docutils literal"><span class="pre">predictor</span></tt>
+argument, which is a Python function that implements <span class="math">\(P\)</span>.</p>
+<p>Before we see how, let&#8217;s fake some data: a regular array of particles,
+translating with constant velocity.</p>
+<div class="code python highlight-python"><div class="highlight"><pre>%matplotlib inline
+from pylab import *  # not recommended usage, but we use it for brevity here
+import numpy as np
+import pandas
+
+def fakeframe(t=0, Nside=4):
+    xg, yg = np.mgrid[:Nside,:Nside]
+    dx = 1 * t
+    dy = -1 * t
+    return pandas.DataFrame(
+            dict(x=xg.flatten() + dx, y=yg.flatten() + dy, frame=t))
+</pre></div>
+</div>
+<p>Let&#8217;s visualize 2 frames. In all of the plots below, the blue circles
+are the particles of the first frame and the green squares are the
+particles of the last frame.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">f0</span> <span class="o">=</span> <span class="n">fakeframe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">fakeframe</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">f0</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">f0</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">f1</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;gs&#39;</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">);</span> <span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/prediction_4_1.png" src="../_images/prediction_4_1.png" />
+<p>Track and visualize.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">trackpy</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">((</span><span class="n">f0</span><span class="p">,</span> <span class="n">f1</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Frame 0: 16 trajectories present
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">first_style</span><span class="o">=</span><span class="s">&#39;bo&#39;</span><span class="p">,</span> <span class="n">last_style</span><span class="o">=</span><span class="s">&#39;gs&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">&#39;b.&#39;</span><span class="p">):</span>
+    <span class="n">frames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;frame&#39;</span><span class="p">))</span>
+    <span class="n">nframes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">fnum</span><span class="p">,</span> <span class="n">pts</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sty</span> <span class="o">=</span> <span class="n">first_style</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">nframes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">sty</span> <span class="o">=</span> <span class="n">last_style</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sty</span> <span class="o">=</span> <span class="n">style</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">pts</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pts</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">sty</span><span class="p">)</span>
+    <span class="n">trackpy</span><span class="o">.</span><span class="n">plot_traj</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">colorby</span><span class="o">=</span><span class="s">&#39;frame&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">gca</span><span class="p">())</span>
+    <span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">);</span> <span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+    <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_8_2.png" src="../_images/prediction_8_2.png" />
+<p>Obviously this is not what we wanted at all! Let&#8217;s give
+<tt class="docutils literal"><span class="pre">trackpy.link_df_iter()</span></tt> a <span class="math">\(P\)</span> which reflects this constant
+velocity.</p>
+<p>We define <tt class="docutils literal"><span class="pre">predict()</span></tt> for a single particle, and use the
+<tt class="docutils literal"><span class="pre">trackpy.predict.predictor</span></tt> decorator to let it make predictions for
+many particles at once. Then, we pass it to <tt class="docutils literal"><span class="pre">link_df_iter()</span></tt> via the
+<tt class="docutils literal"><span class="pre">predictor</span></tt> argument.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">trackpy.predict</span>
+
+<span class="nd">@trackpy.predict.predictor</span>
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">particle</span><span class="p">):</span>
+    <span class="n">velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c"># See fakeframe()</span>
+    <span class="k">return</span> <span class="n">particle</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">velocity</span> <span class="o">*</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">particle</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">trackpy</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">((</span><span class="n">f0</span><span class="p">,</span> <span class="n">f1</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">predictor</span><span class="o">=</span><span class="n">predict</span><span class="p">))</span>
+<span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_10_2.png" src="../_images/prediction_10_2.png" />
+<p>Yay! Remember: Our predictor doesn&#8217;t have to know exactly where the
+particle will be; it just has to bias the search enough that the correct
+identification will be made.</p>
+</div>
+<div class="section" id="dynamic-predictors">
+<h2>Dynamic predictors<a class="headerlink" href="#dynamic-predictors" title="Permalink to this headline">¶</a></h2>
+<p>Of course, it&#8217;s rare that you will know your particles&#8217; velocities ahead
+of time. It would be much better for the predictor to &#8220;learn&#8221; about the
+velocities, and allow different particles to have different velocities
+that can change over time. To accomplish this, we have to do more than
+just supply <span class="math">\(P\)</span>: we have to know particles&#8217; most recent
+velocities.</p>
+<div class="math">
+\[P(t_1, t_0, \vec x_i(t_0)) = \vec x_i(t_0) + \frac{\vec x_i(t_0) - \vec x_i(t_{-1})}{t_0 - t_{-1}} (t_1 - t_0)\]</div>
+<p>To implement this kind of prediction in <tt class="docutils literal"><span class="pre">trackpy</span></tt>, we use instances of
+the <tt class="docutils literal"><span class="pre">trackpy.predict.NearestVelocityPredict</span></tt> class.</p>
+<p>There are a few caveats:</p>
+<ul class="simple">
+<li>Defining this new <span class="math">\(P\)</span> for particle <span class="math">\(i\)</span> specifically is
+problematic, because if a new particle is in frame <span class="math">\(t_0\)</span> but
+wasn&#8217;t in <span class="math">\(t_{-1}\)</span>, we won&#8217;t know its velocity. So
+newly-appeared particles just borrow the velocity of the closest old
+particle.</li>
+<li>Velocities are undefined in the first frame of the movie, because
+there is no previous frame. The code falls back to an initial guess
+of <span class="math">\(\vec v_0 = 0\)</span>. However, <tt class="docutils literal"><span class="pre">NearestVelocityPredict</span></tt>, and the
+other classes in <tt class="docutils literal"><span class="pre">trackpy.predict</span></tt>, allow one to instead specify an
+initial velocity profile, field, etc. See the docstring of each
+class.</li>
+<li>Even though particles may be in motion at the start of the movie, the
+default of <span class="math">\(\vec v_0 = 0\)</span> is not always so bad. In many cases,
+at least some of the particles are moving slowly enough that they can
+be tracked and their velocity can be obtained. Because particles with
+unknown velocity just borrow the nearest known velocity, as we just
+discussed, this may give the code a foothold to track more particles
+in later frames. Your mileage may vary.</li>
+</ul>
+<p>OK, let&#8217;s see this in action. We&#8217;ll make a 3-frame movie that starts
+with small displacements (because of the <span class="math">\(\vec v_0 = 0\)</span>
+assumption) and then speeds up.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">frames</span> <span class="o">=</span> <span class="p">(</span><span class="n">fakeframe</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">fakeframe</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span> <span class="n">fakeframe</span><span class="p">(</span><span class="mf">0.65</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Without prediction, linking of the particles in the top row can&#8217;t even
+make it to the 3rd frame.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">tr</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">trackpy</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_15_2.png" src="../_images/prediction_15_2.png" />
+<p><tt class="docutils literal"><span class="pre">NearestVelocityPredict</span></tt> objects work by watching the output of
+linking as it happens, and updating <span class="math">\(P\)</span> to use the latest
+velocities. These objects provide modified versions of trackpy&#8217;s two
+main linking functions, <tt class="docutils literal"><span class="pre">link_df_iter()</span></tt> and <tt class="docutils literal"><span class="pre">link_df()</span></tt>, that work
+like their namesakes but add dynamic prediction.</p>
+<p>First, we use <tt class="docutils literal"><span class="pre">link_df_iter()</span></tt> to link the frames with prediction:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pred</span> <span class="o">=</span> <span class="n">trackpy</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">NearestVelocityPredict</span><span class="p">()</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_17_2.png" src="../_images/prediction_17_2.png" />
+<p>Alternatively, we can use <tt class="docutils literal"><span class="pre">link_df()</span></tt>:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pred</span> <span class="o">=</span> <span class="n">trackpy</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">NearestVelocityPredict</span><span class="p">()</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">link_df</span><span class="p">(</span><span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_19_2.png" src="../_images/prediction_19_2.png" />
+<p>We&#8217;ll use <tt class="docutils literal"><span class="pre">link_df_iter()</span></tt> for the remaining examples, but
+<tt class="docutils literal"><span class="pre">link_df()</span></tt> is always available as well.</p>
+<p>(<em>Note:</em> Unlike <tt class="docutils literal"><span class="pre">link_df_iter()</span></tt>, this <tt class="docutils literal"><span class="pre">link_df()</span></tt> is usually — but
+not always — a drop-in replacment for <tt class="docutils literal"><span class="pre">trackpy.link_df()</span></tt>. Consult the
+documentation or source code for details.)</p>
+<div class="section" id="channel-flow-prediction">
+<h3>Channel flow prediction<a class="headerlink" href="#channel-flow-prediction" title="Permalink to this headline">¶</a></h3>
+<p>There is one special case that is common enough to deserve a special
+<span class="math">\(P\)</span>: channel flow, in which velocities are relatively uniform in
+one direction. For example, if the channel is in the <span class="math">\(x\)</span> (i.e.
+<span class="math">\(\hat i\)</span>) direction, particle velocities are very well
+approximated as</p>
+<div class="math">
+\[\vec v = \hat i v_x(y)\]</div>
+<p>where the velocity profile <span class="math">\(v_x(y)\)</span> is a smoothly-varying function
+defined across the channel.</p>
+<p>This is implemented by the <tt class="docutils literal"><span class="pre">trackpy.predict.ChannelPredict</span></tt> class.
+When creating an instance, you must specify the size of the bins used to
+create the velocity profile. You can also specify the direction of flow;
+see the class&#8217;s docstring for details.</p>
+<p>Let&#8217;s create some particles undergoing accelerating shear.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">fakeshear</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nside</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">xg</span><span class="p">,</span> <span class="n">yg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[:</span><span class="n">Nside</span><span class="p">,:</span><span class="n">Nside</span><span class="p">]</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mf">0.45</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">yg</span>
+    <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">xg</span> <span class="o">+</span> <span class="n">dx</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">yg</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">frame</span><span class="o">=</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When we attempt to track them, the algorithm fails for the top row of
+particles.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">frames</span> <span class="o">=</span> <span class="p">(</span><span class="n">fakeshear</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">fakeshear</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span> <span class="n">fakeshear</span><span class="p">(</span><span class="mf">0.65</span><span class="p">))</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">trackpy</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="mf">3.5</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_24_2.png" src="../_images/prediction_24_2.png" />
+<p>Now, let&#8217;s try it with prediction:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pred</span> <span class="o">=</span> <span class="n">trackpy</span><span class="o">.</span><span class="n">predict</span><span class="o">.</span><span class="n">ChannelPredict</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">minsamples</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">link_df_iter</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">trshow</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<span class="n">ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="mf">3.5</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Drawing multicolor lines takes awhile. Come back in a minute.
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>/Users/dallan/miniconda/envs/trackpy-examples/lib/python3.4/site-packages/matplotlib/collections.py:590: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if self._edgecolors == str(&#39;face&#39;):
+</pre></div>
+</div>
+<img alt="../_images/prediction_26_2.png" src="../_images/prediction_26_2.png" />
+<p>Much better!</p>
+</div>
+<div class="section" id="drift-prediction">
+<h3>Drift prediction<a class="headerlink" href="#drift-prediction" title="Permalink to this headline">¶</a></h3>
+<p>Finally, the most symmetric prediction class in <tt class="docutils literal"><span class="pre">trackpy.predict</span></tt> is
+<tt class="docutils literal"><span class="pre">DriftPredict</span></tt>. This just makes predictions based on the average
+velocity of all particles. It is useful when you have some background
+convective flow that you&#8217;d like to ignore.</p>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/tutorial/prediction.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2014, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

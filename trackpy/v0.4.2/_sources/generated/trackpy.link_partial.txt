@@ -1,0 +1,6 @@
+trackpy.link_partial
+====================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: link_partial

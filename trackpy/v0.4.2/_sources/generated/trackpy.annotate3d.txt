@@ -1,0 +1,6 @@
+trackpy.annotate3d
+==================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: annotate3d

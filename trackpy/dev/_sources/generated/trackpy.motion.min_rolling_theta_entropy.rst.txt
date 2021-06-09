@@ -1,0 +1,6 @@
+﻿trackpy.motion.min\_rolling\_theta\_entropy
+===========================================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: min_rolling_theta_entropy

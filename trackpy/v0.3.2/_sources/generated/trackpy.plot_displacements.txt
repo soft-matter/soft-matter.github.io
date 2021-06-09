@@ -1,0 +1,6 @@
+trackpy.plot_displacements
+==========================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: plot_displacements

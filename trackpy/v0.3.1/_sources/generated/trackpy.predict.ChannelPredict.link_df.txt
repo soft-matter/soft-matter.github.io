@@ -1,0 +1,6 @@
+trackpy.predict.ChannelPredict.link_df
+======================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: ChannelPredict.link_df

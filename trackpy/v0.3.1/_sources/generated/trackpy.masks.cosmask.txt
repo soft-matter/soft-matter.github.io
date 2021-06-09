@@ -1,0 +1,6 @@
+trackpy.masks.cosmask
+=====================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: masks.cosmask

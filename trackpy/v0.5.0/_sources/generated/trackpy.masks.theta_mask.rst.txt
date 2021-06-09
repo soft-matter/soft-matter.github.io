@@ -1,0 +1,6 @@
+﻿trackpy.masks.theta\_mask
+=========================
+
+.. currentmodule:: trackpy.masks
+
+.. autofunction:: theta_mask

@@ -1,0 +1,6 @@
+trackpy.preprocessing.bandpass
+==============================
+
+.. currentmodule:: trackpy.preprocessing
+
+.. autofunction:: bandpass

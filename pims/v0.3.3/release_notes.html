@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Release notes &mdash; pims v0.3 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="pims v0.3 documentation" href="index.html"/>
+        <link rel="next" title="Opening Files" href="opening_files.html"/>
+        <link rel="prev" title="Installation" href="install.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> pims</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#recommended-conda">Recommended: conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#development-version">Development version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#pip">pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#source">source</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Release notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-3-3">v0.3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-3-2">v0.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-3-1">v0.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-3-0">v0.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-2">v0.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-1">v0.2.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opening_files.html#quickstart">QuickStart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opening_files.html#using-specific-readers">Using Specific Readers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#accessing-individual-images">Accessing Individual Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#slices-and-slices-of-slices">Slices &#8211; and Slices of Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slicing.html#fancy-indexing">Fancy Indexing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#ipython-rich-display">IPython Rich Display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#caveats">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#axes-bundling">Axes bundling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#axes-iteration">Axes iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#default-coordinates">Default coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidimensional.html#make-your-own-multidimensional-reader">Make your own multidimensional reader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#basic-example">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#plugging-into-pims-s-open-function">Plugging into PIMS&#8217;s open function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_readers.html#example-demonstrating-generality-of-pims-design">Example Demonstrating Generality of PIMS Design</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_sequence.html#imagesequencend">ImageSequenceND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_sequence.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tiff_stack.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bioformats.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="video.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">pims</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Release notes</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/release_notes.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="release-notes">
+<h1>Release notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-3-3">
+<h2>v0.3.3<a class="headerlink" href="#v0-3-3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fix compatibility with Pillow v0.3.0 (PR 204)</li>
+<li>API: <code class="docutils literal"><span class="pre">plot_to_frame</span></code> and <code class="docutils literal"><span class="pre">plots_to_frame</span></code> now take <code class="docutils literal"><span class="pre">fig_size_inches</span></code> and <code class="docutils literal"><span class="pre">bbox_inches</span></code> as keyword arguments instead of passing on all keyword arguments to <code class="docutils literal"><span class="pre">imsave</span></code> (PR 206)</li>
+<li>Fix zipfile handling in Py3 (PR 199)</li>
+<li>Fix CINE reader for Py2 (PR 219)</li>
+<li>Support non-monochrome and packed-bits images in NorpixSeq (PR 218)</li>
+<li>Update documentation</li>
+<li>Update slicerator dependency to v0.9.7 (fixes pipeline nesting)</li>
+<li>Update bioformats version to v5.1.7 (PR 224)</li>
+</ul>
+</div>
+<div class="section" id="v0-3-2">
+<h2>v0.3.2<a class="headerlink" href="#v0-3-2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bug fixes</li>
+<li>Build fixes and fewer required deps</li>
+</ul>
+</div>
+<div class="section" id="v0-3-1">
+<h2>v0.3.1<a class="headerlink" href="#v0-3-1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fix build-related mistakes in v0.3.0.</li>
+</ul>
+</div>
+<div class="section" id="v0-3-0">
+<h2>v0.3.0<a class="headerlink" href="#v0-3-0" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Refactor the slicing logic into a separate package, slicerator.</li>
+<li>Extend the slicing logic to allow nested lazy slicing.</li>
+<li>Add pipeline feature; deprecate process_func.</li>
+<li>Support multispectral and multidimensional images.</li>
+<li>Add Norpix reader.</li>
+</ul>
+</div>
+<div class="section" id="v0-2-2">
+<h2>v0.2.2<a class="headerlink" href="#v0-2-2" title="Permalink to this headline">¶</a></h2>
+<p>This is a simple maintenance release, introducing no functionality changes. The
+packaging and installation are simplified by adopting tifffile as a dependency
+rather than directly including the source PIMS.</p>
+<p>Henceforth, to install PIMS on any platform, we recommend
+<code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">soft-matter</span> <span class="pre">pims</span></code>, but <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pims</span></code> is also supported.</p>
+</div>
+<div class="section" id="v0-2-1">
+<h2>v0.2.1<a class="headerlink" href="#v0-2-1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use PyAV for handling video files</li>
+<li>Ships with Christoph Gohlke&#8217;s tifffile</li>
+<li>Added support for .cine files</li>
+<li>Added prototype of universal open function which tries to guess the correct class to use to handle a given file based on the extension</li>
+<li>Added ability to create an ImageSequence from a list of paths</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opening_files.html" class="btn btn-neutral float-right" title="Opening Files">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral" title="Installation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, PIMS Contributors.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

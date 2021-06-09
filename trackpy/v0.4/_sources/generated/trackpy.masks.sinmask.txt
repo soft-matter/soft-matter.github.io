@@ -1,0 +1,6 @@
+trackpy.masks.sinmask
+=====================
+
+.. currentmodule:: trackpy
+
+.. autoattribute:: masks.sinmask

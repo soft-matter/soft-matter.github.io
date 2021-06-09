@@ -1,0 +1,30 @@
+trackpy.diag
+============
+
+.. automodule:: trackpy.diag
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      dependencies
+      performance_report
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

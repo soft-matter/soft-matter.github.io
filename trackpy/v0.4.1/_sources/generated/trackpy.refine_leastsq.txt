@@ -1,0 +1,6 @@
+trackpy.refine_leastsq
+======================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: refine_leastsq

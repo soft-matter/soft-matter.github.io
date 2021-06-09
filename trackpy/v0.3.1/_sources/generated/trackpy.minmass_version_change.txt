@@ -1,0 +1,6 @@
+trackpy.minmass_version_change
+==============================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: minmass_version_change
