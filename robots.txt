@@ -14,3 +14,4 @@ Disallow: /pims/0.3.3/
 Disallow: /pims/v0.3.3/
 Disallow: /pims/v0.4/
 Disallow: /pims/v0.4.1/
+Disallow: /pims/v0.5/
