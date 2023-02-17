@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>trackpy.motion.subtract_drift &#8212; trackpy 0.5.0+3.g3b280ea documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <title>trackpy.motion.subtract_drift &#8212; trackpy 0.6.0rc1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -20,10 +21,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -38,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.0+3.g3b280ea</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.0rc1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -117,21 +118,21 @@
     <div class="body col-md-12 content" role="main">
       
   <section id="trackpy-motion-subtract-drift">
-<h1>trackpy.motion.subtract_drift<a class="headerlink" href="#trackpy-motion-subtract-drift" title="Permalink to this headline">¶</a></h1>
+<h1>trackpy.motion.subtract_drift<a class="headerlink" href="#trackpy-motion-subtract-drift" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt id="trackpy.motion.subtract_drift">
-<code class="sig-prename descclassname"><span class="pre">trackpy.motion.</span></code><code class="sig-name descname"><span class="pre">subtract_drift</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.motion.subtract_drift" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="trackpy.motion.subtract_drift">
+<span class="sig-prename descclassname"><span class="pre">trackpy.motion.</span></span><span class="sig-name descname"><span class="pre">subtract_drift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.motion.subtract_drift" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of particle trajectories with the overall drift subtracted
 out.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>traj</strong><span class="classifier">DataFrame of trajectories, including columns x, y, and frame</span></dt><dd></dd>
 <dt><strong>drift</strong><span class="classifier">optional DataFrame([x, y], index=frame) like output of</span></dt><dd><p>compute_drift(). If no drift is passed, drift is computed from traj.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><strong>traj</strong><span class="classifier">a copy, having modified columns x and y</span></dt><dd></dd>
 </dl>
@@ -160,8 +161,8 @@ out.</p>
       
     </p>
     <p>
-        &copy; Copyright 2010-2021, Trackpy Contributors.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
     </p>
   </div>
 </footer>

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>trackpy.predict &#8212; trackpy 0.5.0+3.g3b280ea documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <title>trackpy.predict &#8212; trackpy 0.6.0rc1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -20,10 +21,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -38,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.0+3.g3b280ea</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.0rc1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -117,14 +118,10 @@
     <div class="body col-md-12 content" role="main">
       
   <section id="module-trackpy.predict">
-<span id="trackpy-predict"></span><h1>trackpy.predict<a class="headerlink" href="#module-trackpy.predict" title="Permalink to this headline">¶</a></h1>
+<span id="trackpy-predict"></span><h1>trackpy.predict<a class="headerlink" href="#module-trackpy.predict" title="Permalink to this heading">¶</a></h1>
 <p>Tools to improve tracking performance by guessing where a particle will appear next.</p>
 <p class="rubric">Functions</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="trackpy.predict.instrumented.html#trackpy.predict.instrumented" title="trackpy.predict.instrumented"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instrumented</span></code></a>([limit])</p></td>
 <td><p>Decorate a predictor class and allow it to record inputs and outputs.</p></td>
@@ -138,20 +135,16 @@
 </tbody>
 </table>
 <p class="rubric">Classes</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.predict.ChannelPredict.html#trackpy.predict.ChannelPredict" title="trackpy.predict.ChannelPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChannelPredict</span></code></a>(bin_size[, flow_axis, …])</p></td>
-<td><p>Predict a particle’s position based on its spanwise coordinate in a channel.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.predict.ChannelPredict.html#trackpy.predict.ChannelPredict" title="trackpy.predict.ChannelPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChannelPredict</span></code></a>(bin_size[, flow_axis, ...])</p></td>
+<td><p>Predict a particle's position based on its spanwise coordinate in a channel.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="trackpy.predict.DriftPredict.html#trackpy.predict.DriftPredict" title="trackpy.predict.DriftPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DriftPredict</span></code></a>([initial_guess, span])</p></td>
-<td><p>Predict a particle’s position based on the mean velocity of all particles.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.predict.DriftPredict.html#trackpy.predict.DriftPredict" title="trackpy.predict.DriftPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DriftPredict</span></code></a>([initial_guess, pos_columns, span])</p></td>
+<td><p>Predict a particle's position based on the mean velocity of all particles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.predict.NearestVelocityPredict.html#trackpy.predict.NearestVelocityPredict" title="trackpy.predict.NearestVelocityPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NearestVelocityPredict</span></code></a>([…])</p></td>
-<td><p>Predict a particle’s position based on the most recent nearby velocity.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.predict.NearestVelocityPredict.html#trackpy.predict.NearestVelocityPredict" title="trackpy.predict.NearestVelocityPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NearestVelocityPredict</span></code></a>([...])</p></td>
+<td><p>Predict a particle's position based on the most recent nearby velocity.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="trackpy.predict.NullPredict.html#trackpy.predict.NullPredict" title="trackpy.predict.NullPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NullPredict</span></code></a>()</p></td>
 <td><p>Predict that particles will not move.</p></td>
@@ -179,8 +172,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2010-2021, Trackpy Contributors.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
     </p>
   </div>
 </footer>

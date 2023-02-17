@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>API reference &#8212; trackpy 0.5.0+3.g3b280ea documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <title>API reference &#8212; trackpy 0.6.0rc1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -20,10 +21,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -38,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.0+3.g3b280ea</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.0rc1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -142,7 +143,7 @@
     <div class="body col-md-12 content" role="main">
       
   <section id="api-reference">
-<span id="api-ref"></span><h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<span id="api-ref"></span><h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">¶</a></h1>
 <p>The core functionality of trackpy is grouped into three separate steps:</p>
 <ol class="arabic simple">
 <li><p>Locating features in an image</p></li>
@@ -150,50 +151,38 @@
 <li><p>Identifying features through time, linking them into trajectories.</p></li>
 </ol>
 <p>Convenience functions for feature finding, refinement, and linking are readily available:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.locate.html#trackpy.locate" title="trackpy.locate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.locate</span></code></a>(raw_image, diameter[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.locate.html#trackpy.locate" title="trackpy.locate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.locate</span></code></a>(raw_image, diameter[, ...])</p></td>
 <td><p>Locate Gaussian-like blobs of some approximate size in an image.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.batch.html#trackpy.batch" title="trackpy.batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.batch</span></code></a>(frames, diameter[, output, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.batch.html#trackpy.batch" title="trackpy.batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.batch</span></code></a>(frames, diameter[, output, ...])</p></td>
 <td><p>Locate Gaussian-like blobs of some approximate size in a set of images.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link.html#trackpy.link" title="trackpy.link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link</span></code></a>(f, search_range[, pos_columns, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link.html#trackpy.link" title="trackpy.link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link</span></code></a>(f, search_range[, pos_columns, ...])</p></td>
 <td><p>Link a DataFrame of coordinates into trajectories.</p></td>
 </tr>
 </tbody>
 </table>
 <p>For more control on your tracking “pipeline”, the following core functions are provided:</p>
 <section id="feature-finding">
-<h2>Feature finding<a class="headerlink" href="#feature-finding" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Feature finding<a class="headerlink" href="#feature-finding" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.grey_dilation.html#trackpy.grey_dilation" title="trackpy.grey_dilation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.grey_dilation</span></code></a>(image, separation[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.grey_dilation.html#trackpy.grey_dilation" title="trackpy.grey_dilation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.grey_dilation</span></code></a>(image, separation[, ...])</p></td>
 <td><p>Find local maxima whose brightness is above a given percentile.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.find_link.html#trackpy.find_link" title="trackpy.find_link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.find_link</span></code></a>(reader, search_range, …)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.find_link.html#trackpy.find_link" title="trackpy.find_link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.find_link</span></code></a>(reader, search_range, ...)</p></td>
 <td><p>Find and link features, using image data to re-find lost features.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="coordinate-refinement">
-<h2>Coordinate refinement<a class="headerlink" href="#coordinate-refinement" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Coordinate refinement<a class="headerlink" href="#coordinate-refinement" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.refine_com.html#trackpy.refine_com" title="trackpy.refine_com"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.refine_com</span></code></a>(raw_image, image, radius, …)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.refine_com.html#trackpy.refine_com" title="trackpy.refine_com"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.refine_com</span></code></a>(raw_image, image, radius, ...)</p></td>
 <td><p>Find the center of mass of a bright feature starting from an estimate.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.refine_leastsq.html#trackpy.refine_leastsq" title="trackpy.refine_leastsq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.refine_leastsq</span></code></a>(f, reader, diameter)</p></td>
@@ -203,24 +192,23 @@
 </table>
 </section>
 <section id="linking">
-<h2>Linking<a class="headerlink" href="#linking" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Linking<a class="headerlink" href="#linking" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link.html#trackpy.link" title="trackpy.link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link</span></code></a>(f, search_range[, pos_columns, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link.html#trackpy.link" title="trackpy.link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link</span></code></a>(f, search_range[, pos_columns, ...])</p></td>
 <td><p>Link a DataFrame of coordinates into trajectories.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.link_iter.html#trackpy.link_iter" title="trackpy.link_iter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link_iter</span></code></a>(coords_iter, search_range)</p></td>
 <td><p>Link an iterable of per-frame coordinates into trajectories.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link_df_iter.html#trackpy.link_df_iter" title="trackpy.link_df_iter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link_df_iter</span></code></a>(f_iter, search_range[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link_df_iter.html#trackpy.link_df_iter" title="trackpy.link_df_iter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link_df_iter</span></code></a>(f_iter, search_range[, ...])</p></td>
 <td><p>Link an iterable of DataFrames into trajectories.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.link_partial.html#trackpy.link_partial" title="trackpy.link_partial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link_partial</span></code></a>(f, search_range, link_range)</p></td>
 <td><p>Patch the trajectories in a DataFrame by linking only a range of frames</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.reconnect_traj_patch.html#trackpy.reconnect_traj_patch" title="trackpy.reconnect_traj_patch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.reconnect_traj_patch</span></code></a>(f, link_range, ...)</p></td>
+<td><p>Reconnect the trajectory inside a range of frames to the trajectories outside the range.</p></td>
 </tr>
 </tbody>
 </table>
@@ -236,15 +224,11 @@ an already linked dataset.</p>
 <p>See the tutorial on large data sets for more.</p>
 </section>
 <section id="static-analysis">
-<h2>Static Analysis<a class="headerlink" href="#static-analysis" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Static Analysis<a class="headerlink" href="#static-analysis" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.static.proximity.html#trackpy.static.proximity" title="trackpy.static.proximity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.static.proximity</span></code></a>(features[, pos_columns])</p></td>
-<td><p>Find the distance to each feature’s nearest neighbor.</p></td>
+<td><p>Find the distance to each feature's nearest neighbor.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.static.pair_correlation_2d.html#trackpy.static.pair_correlation_2d" title="trackpy.static.pair_correlation_2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.static.pair_correlation_2d</span></code></a>(feat, cutoff)</p></td>
 <td><p>Calculate the pair correlation function in 2 dimensions.</p></td>
@@ -252,49 +236,45 @@ an already linked dataset.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.static.pair_correlation_3d.html#trackpy.static.pair_correlation_3d" title="trackpy.static.pair_correlation_3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.static.pair_correlation_3d</span></code></a>(feat, cutoff)</p></td>
 <td><p>Calculate the pair correlation function in 3 dimensions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.static.cluster.html#trackpy.static.cluster" title="trackpy.static.cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.static.cluster</span></code></a>(f, separation[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.static.cluster.html#trackpy.static.cluster" title="trackpy.static.cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.static.cluster</span></code></a>(f, separation[, ...])</p></td>
 <td><p>Cluster features from one or several frames.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="motion-analysis">
-<h2>Motion Analysis<a class="headerlink" href="#motion-analysis" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Motion Analysis<a class="headerlink" href="#motion-analysis" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.msd.html#trackpy.motion.msd" title="trackpy.motion.msd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.msd</span></code></a>(traj, mpp, fps[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.msd.html#trackpy.motion.msd" title="trackpy.motion.msd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.msd</span></code></a>(traj, mpp, fps[, ...])</p></td>
 <td><p>Compute the mean displacement and mean squared displacement of one trajectory over a range of time intervals.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.imsd.html#trackpy.motion.imsd" title="trackpy.motion.imsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.imsd</span></code></a>(traj, mpp, fps[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.imsd.html#trackpy.motion.imsd" title="trackpy.motion.imsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.imsd</span></code></a>(traj, mpp, fps[, ...])</p></td>
 <td><p>Compute the mean squared displacement of each particle.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.emsd.html#trackpy.motion.emsd" title="trackpy.motion.emsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.emsd</span></code></a>(traj, mpp, fps[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.emsd.html#trackpy.motion.emsd" title="trackpy.motion.emsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.emsd</span></code></a>(traj, mpp, fps[, ...])</p></td>
 <td><p>Compute the ensemble mean squared displacements of many particles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.compute_drift.html#trackpy.motion.compute_drift" title="trackpy.motion.compute_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.compute_drift</span></code></a>(traj[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.compute_drift.html#trackpy.motion.compute_drift" title="trackpy.motion.compute_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.compute_drift</span></code></a>(traj[, ...])</p></td>
 <td><p>Return the ensemble drift, xy(t).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.subtract_drift.html#trackpy.motion.subtract_drift" title="trackpy.motion.subtract_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.subtract_drift</span></code></a>(traj[, drift, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.subtract_drift.html#trackpy.motion.subtract_drift" title="trackpy.motion.subtract_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.subtract_drift</span></code></a>(traj[, drift, ...])</p></td>
 <td><p>Return a copy of particle trajectories with the overall drift subtracted out.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.vanhove.html#trackpy.motion.vanhove" title="trackpy.motion.vanhove"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.vanhove</span></code></a>(pos, lagtime[, mpp, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.vanhove.html#trackpy.motion.vanhove" title="trackpy.motion.vanhove"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.vanhove</span></code></a>(pos, lagtime[, mpp, ...])</p></td>
 <td><p>Compute the van Hove correlation (histogram of displacements).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.relate_frames.html#trackpy.motion.relate_frames" title="trackpy.motion.relate_frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.relate_frames</span></code></a>(t, frame1, frame2)</p></td>
 <td><p>Find the displacement vector of all particles between two frames.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.velocity_corr.html#trackpy.motion.velocity_corr" title="trackpy.motion.velocity_corr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.velocity_corr</span></code></a>(t, frame1, frame2)</p></td>
-<td><p>Compute the velocity correlation between every pair of particles’ displacements.</p></td>
+<td><p>Compute the velocity correlation between every pair of particles' displacements.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.direction_corr.html#trackpy.motion.direction_corr" title="trackpy.motion.direction_corr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.direction_corr</span></code></a>(t, frame1, frame2)</p></td>
-<td><p>Compute the cosine between every pair of particles’ displacements.</p></td>
+<td><p>Compute the cosine between every pair of particles' displacements.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.is_typical.html#trackpy.motion.is_typical" title="trackpy.motion.is_typical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.is_typical</span></code></a>(msds, frame[, …])</p></td>
-<td><p>Identify which paritcles’ MSDs are in the central quantile.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.motion.is_typical.html#trackpy.motion.is_typical" title="trackpy.motion.is_typical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.is_typical</span></code></a>(msds, frame[, ...])</p></td>
+<td><p>Identify which paritcles' MSDs are in the central quantile.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.diagonal_size.html#trackpy.motion.diagonal_size" title="trackpy.motion.diagonal_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.diagonal_size</span></code></a>(single_trajectory)</p></td>
 <td><p>Measure the diagonal size of a trajectory.</p></td>
@@ -305,35 +285,31 @@ an already linked dataset.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.motion.min_rolling_theta_entropy.html#trackpy.motion.min_rolling_theta_entropy" title="trackpy.motion.min_rolling_theta_entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.motion.min_rolling_theta_entropy</span></code></a>(pos)</p></td>
 <td><p>Compute the minimum Shannon entropy in any window.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.filtering.filter_stubs.html#trackpy.filtering.filter_stubs" title="trackpy.filtering.filter_stubs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.filtering.filter_stubs</span></code></a>(tracks[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.filtering.filter_stubs.html#trackpy.filtering.filter_stubs" title="trackpy.filtering.filter_stubs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.filtering.filter_stubs</span></code></a>(tracks[, ...])</p></td>
 <td><p>Filter out trajectories with few points.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.filtering.filter_clusters.html#trackpy.filtering.filter_clusters" title="trackpy.filtering.filter_clusters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.filtering.filter_clusters</span></code></a>(tracks[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.filtering.filter_clusters.html#trackpy.filtering.filter_clusters" title="trackpy.filtering.filter_clusters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.filtering.filter_clusters</span></code></a>(tracks[, ...])</p></td>
 <td><p>Filter out trajectories with a mean particle size above a given quantile.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="prediction-framework">
-<h2>Prediction Framework<a class="headerlink" href="#prediction-framework" title="Permalink to this headline">¶</a></h2>
+<h2>Prediction Framework<a class="headerlink" href="#prediction-framework" title="Permalink to this heading">¶</a></h2>
 <p>Trackpy extends the Crocker–Grier algoritm using a prediction framework, described in the prediction tutorial.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.predict.NullPredict.html#trackpy.predict.NullPredict" title="trackpy.predict.NullPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.NullPredict</span></code></a>()</p></td>
 <td><p>Predict that particles will not move.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.predict.ChannelPredict.html#trackpy.predict.ChannelPredict" title="trackpy.predict.ChannelPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.ChannelPredict</span></code></a>(bin_size[, …])</p></td>
-<td><p>Predict a particle’s position based on its spanwise coordinate in a channel.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.predict.ChannelPredict.html#trackpy.predict.ChannelPredict" title="trackpy.predict.ChannelPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.ChannelPredict</span></code></a>(bin_size[, ...])</p></td>
+<td><p>Predict a particle's position based on its spanwise coordinate in a channel.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.predict.DriftPredict.html#trackpy.predict.DriftPredict" title="trackpy.predict.DriftPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.DriftPredict</span></code></a>([…])</p></td>
-<td><p>Predict a particle’s position based on the mean velocity of all particles.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.predict.DriftPredict.html#trackpy.predict.DriftPredict" title="trackpy.predict.DriftPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.DriftPredict</span></code></a>([...])</p></td>
+<td><p>Predict a particle's position based on the mean velocity of all particles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.predict.NearestVelocityPredict.html#trackpy.predict.NearestVelocityPredict" title="trackpy.predict.NearestVelocityPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.NearestVelocityPredict</span></code></a>([…])</p></td>
-<td><p>Predict a particle’s position based on the most recent nearby velocity.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.predict.NearestVelocityPredict.html#trackpy.predict.NearestVelocityPredict" title="trackpy.predict.NearestVelocityPredict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.NearestVelocityPredict</span></code></a>([...])</p></td>
+<td><p>Predict a particle's position based on the most recent nearby velocity.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.predict.predictor.html#trackpy.predict.predictor" title="trackpy.predict.predictor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.predict.predictor</span></code></a>(predict_func)</p></td>
 <td><p>Decorator to vectorize a predictor function for a single particle.</p></td>
@@ -345,21 +321,17 @@ an already linked dataset.</p>
 </table>
 </section>
 <section id="plotting-tools">
-<h2>Plotting Tools<a class="headerlink" href="#plotting-tools" title="Permalink to this headline">¶</a></h2>
+<h2>Plotting Tools<a class="headerlink" href="#plotting-tools" title="Permalink to this heading">¶</a></h2>
 <p>Trackpy includes functions for plotting the data in ways that are commonly useful. If you don’t find what you need here, you can plot the data any way you like using matplotlib, seaborn, or any other plotting library.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.annotate.html#trackpy.annotate" title="trackpy.annotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.annotate</span></code></a>(centroids, image[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.annotate.html#trackpy.annotate" title="trackpy.annotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.annotate</span></code></a>(centroids, image[, ...])</p></td>
 <td><p>Mark identified features with white circles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.scatter.html#trackpy.scatter" title="trackpy.scatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.scatter</span></code></a>(centroids[, mpp, cmap, ax, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.scatter.html#trackpy.scatter" title="trackpy.scatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.scatter</span></code></a>(centroids[, mpp, cmap, ax, ...])</p></td>
 <td><p>Scatter plot of all particles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.plot_traj.html#trackpy.plot_traj" title="trackpy.plot_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.plot_traj</span></code></a>(traj[, colorby, mpp, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.plot_traj.html#trackpy.plot_traj" title="trackpy.plot_traj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.plot_traj</span></code></a>(traj[, colorby, mpp, ...])</p></td>
 <td><p>Plot traces of trajectories for each particle.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.annotate3d.html#trackpy.annotate3d" title="trackpy.annotate3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.annotate3d</span></code></a>(centroids, image, **kwargs)</p></td>
@@ -377,54 +349,46 @@ an already linked dataset.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.subpx_bias.html#trackpy.subpx_bias" title="trackpy.subpx_bias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.subpx_bias</span></code></a>(f[, pos_columns])</p></td>
 <td><p>Histogram the fractional part of the x and y position.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.plot_density_profile.html#trackpy.plot_density_profile" title="trackpy.plot_density_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.plot_density_profile</span></code></a>(f, binsize[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.plot_density_profile.html#trackpy.plot_density_profile" title="trackpy.plot_density_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.plot_density_profile</span></code></a>(f, binsize[, ...])</p></td>
 <td><p>Plot a histogram showing the density profile in one direction.</p></td>
 </tr>
 </tbody>
 </table>
 <p>These two are almost too simple to justify their existence – just a convenient shorthand for a common plotting task.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.mass_ecc.html#trackpy.mass_ecc" title="trackpy.mass_ecc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.mass_ecc</span></code></a>(f[, ax])</p></td>
-<td><p>Plot each particle’s mass versus eccentricity.</p></td>
+<td><p>Plot each particle's mass versus eccentricity.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.mass_size.html#trackpy.mass_size" title="trackpy.mass_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.mass_size</span></code></a>(f[, ax])</p></td>
-<td><p>Plot each particle’s mass versus size.</p></td>
+<td><p>Plot each particle's mass versus size.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="image-conversion">
-<h2>Image Conversion<a class="headerlink" href="#image-conversion" title="Permalink to this headline">¶</a></h2>
+<h2>Image Conversion<a class="headerlink" href="#image-conversion" title="Permalink to this heading">¶</a></h2>
 <p>By default, <code class="xref py py-func docutils literal notranslate"><span class="pre">locate()</span></code> applies a bandpass and a percentile-based
 threshold to the image(s) before finding features. You can turn off this functionality
 using <code class="docutils literal notranslate"><span class="pre">preprocess=False,</span> <span class="pre">percentile=0</span></code>.) In many cases, the default bandpass, which
 guesses good length scales from the <code class="docutils literal notranslate"><span class="pre">diameter</span></code> parameter, “just works.” But if you want
 to executre these steps manually, you can.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.find.percentile_threshold.html#trackpy.find.percentile_threshold" title="trackpy.find.percentile_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.find.percentile_threshold</span></code></a>(image, …)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.find.percentile_threshold.html#trackpy.find.percentile_threshold" title="trackpy.find.percentile_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.find.percentile_threshold</span></code></a>(image, ...)</p></td>
 <td><p>Find grayscale threshold based on distribution in image.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.bandpass.html#trackpy.preprocessing.bandpass" title="trackpy.preprocessing.bandpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.bandpass</span></code></a>(image, …[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.bandpass.html#trackpy.preprocessing.bandpass" title="trackpy.preprocessing.bandpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.bandpass</span></code></a>(image, ...[, ...])</p></td>
 <td><p>Remove noise and background variation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.lowpass.html#trackpy.preprocessing.lowpass" title="trackpy.preprocessing.lowpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.lowpass</span></code></a>(image[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.lowpass.html#trackpy.preprocessing.lowpass" title="trackpy.preprocessing.lowpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.lowpass</span></code></a>(image[, ...])</p></td>
 <td><p>Remove noise by convolving with a Gaussian.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.scale_to_gamut.html#trackpy.preprocessing.scale_to_gamut" title="trackpy.preprocessing.scale_to_gamut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.scale_to_gamut</span></code></a>(image, …)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.scale_to_gamut.html#trackpy.preprocessing.scale_to_gamut" title="trackpy.preprocessing.scale_to_gamut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.scale_to_gamut</span></code></a>(image, ...)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.invert_image.html#trackpy.preprocessing.invert_image" title="trackpy.preprocessing.invert_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.invert_image</span></code></a>(raw_image)</p></td>
-<td><p>Invert the image.</p></td>
+<td><p>This function has been made lazy.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.preprocessing.convert_to_int.html#trackpy.preprocessing.convert_to_int" title="trackpy.preprocessing.convert_to_int"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.preprocessing.convert_to_int</span></code></a>(image)</p></td>
 <td><p>Convert the image to integer and normalize if applicable.</p></td>
@@ -433,26 +397,22 @@ to executre these steps manually, you can.</p>
 </table>
 </section>
 <section id="framewise-data-storage-retrieval-interface">
-<h2>Framewise Data Storage &amp; Retrieval Interface<a class="headerlink" href="#framewise-data-storage-retrieval-interface" title="Permalink to this headline">¶</a></h2>
+<h2>Framewise Data Storage &amp; Retrieval Interface<a class="headerlink" href="#framewise-data-storage-retrieval-interface" title="Permalink to this heading">¶</a></h2>
 <p>Trackpy implements a generic interface that could be used to store and
 retrieve particle tracking data in any file format. We hope that it can
 make it easier for researchers who use different file formats to exchange data. Any in-house format could be accessed using the same simple interface in trackpy.</p>
 <p>At present, the interface is implemented only for HDF5 files. There are
 several different implementations, each with different performance
-optimizations. <code class="xref py py-class docutils literal notranslate"><span class="pre">PandasHDFStoreBig</span></code> is a good general-purpose choice.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+optimizations. <a class="reference internal" href="generated/trackpy.PandasHDFStoreBig.html#trackpy.PandasHDFStoreBig" title="trackpy.framewise_data.PandasHDFStoreBig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PandasHDFStoreBig</span></code></a> is a good general-purpose choice.</p>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.PandasHDFStore.html#trackpy.PandasHDFStore" title="trackpy.PandasHDFStore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.PandasHDFStore</span></code></a>(filename[, mode, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.PandasHDFStore.html#trackpy.PandasHDFStore" title="trackpy.PandasHDFStore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.PandasHDFStore</span></code></a>(filename[, mode, ...])</p></td>
 <td><p>An interface to an HDF5 file with framewise access, using pandas.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.PandasHDFStoreBig.html#trackpy.PandasHDFStoreBig" title="trackpy.PandasHDFStoreBig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.PandasHDFStoreBig</span></code></a>(filename[, mode, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.PandasHDFStoreBig.html#trackpy.PandasHDFStoreBig" title="trackpy.PandasHDFStoreBig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.PandasHDFStoreBig</span></code></a>(filename[, mode, ...])</p></td>
 <td><p>Like PandasHDFStore, but keeps a cache of frame numbers.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.PandasHDFStoreSingleNode.html#trackpy.PandasHDFStoreSingleNode" title="trackpy.PandasHDFStoreSingleNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.PandasHDFStoreSingleNode</span></code></a>(filename[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.PandasHDFStoreSingleNode.html#trackpy.PandasHDFStoreSingleNode" title="trackpy.PandasHDFStoreSingleNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.PandasHDFStoreSingleNode</span></code></a>(filename[, ...])</p></td>
 <td><p>An interface to an HDF5 file with framewise access, using pandas, that is faster for cross-frame queries.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.FramewiseData.html#trackpy.FramewiseData" title="trackpy.FramewiseData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.FramewiseData</span></code></a>()</p></td>
@@ -465,7 +425,7 @@ to support other formats. See <em>Writing Your Own Interface</em> in the streami
 more.</p>
 </section>
 <section id="logging">
-<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this heading">¶</a></h2>
 <p>Trackpy issues log messages. This functionality is mainly used to report the
 progress of lengthy jobs, but it may be used in the future to report details of
 feature-finding and linking for debugging purposes.</p>
@@ -473,11 +433,7 @@ feature-finding and linking for debugging purposes.</p>
 the logging level and attaches a logging handler that plays nicely with
 IPython notebooks. You can override this by calling <cite>ignore_logging()</cite> and
 configuring the logger however you like.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.quiet.html#trackpy.quiet" title="trackpy.quiet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.quiet</span></code></a>([suppress])</p></td>
 <td><p>Suppress trackpy information log messages.</p></td>
@@ -486,23 +442,19 @@ configuring the logger however you like.</p>
 <td><p>Send INFO-level log messages to stdout.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.ignore_logging.html#trackpy.ignore_logging" title="trackpy.ignore_logging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.ignore_logging</span></code></a>()</p></td>
-<td><p>Reset to factory default logging configuration; remove trackpy’s handler.</p></td>
+<td><p>Reset to factory default logging configuration; remove trackpy's handler.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="utility-functions">
-<h2>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.minmass_v03_change.html#trackpy.minmass_v03_change" title="trackpy.minmass_v03_change"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.minmass_v03_change</span></code></a>(raw_image, …[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.minmass_v03_change.html#trackpy.minmass_v03_change" title="trackpy.minmass_v03_change"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.minmass_v03_change</span></code></a>(raw_image, ...[, ...])</p></td>
 <td><p>Convert minmass value from v0.2.4 to v0.3.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.minmass_v04_change.html#trackpy.minmass_v04_change" title="trackpy.minmass_v04_change"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.minmass_v04_change</span></code></a>(raw_image, …[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.minmass_v04_change.html#trackpy.minmass_v04_change" title="trackpy.minmass_v04_change"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.minmass_v04_change</span></code></a>(raw_image, ...[, ...])</p></td>
 <td><p>Convert minmass value from v0.3 to v0.4.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.utils.fit_powerlaw.html#trackpy.utils.fit_powerlaw" title="trackpy.utils.fit_powerlaw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.utils.fit_powerlaw</span></code></a>(data[, plot])</p></td>
@@ -512,32 +464,24 @@ configuring the logger however you like.</p>
 </table>
 </section>
 <section id="diagnostic-functions">
-<h2>Diagnostic functions<a class="headerlink" href="#diagnostic-functions" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<h2>Diagnostic functions<a class="headerlink" href="#diagnostic-functions" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.diag.performance_report.html#trackpy.diag.performance_report" title="trackpy.diag.performance_report"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.diag.performance_report</span></code></a>()</p></td>
 <td><p>Display summary of which optional speedups are installed/enabled</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.diag.dependencies.html#trackpy.diag.dependencies" title="trackpy.diag.dependencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.diag.dependencies</span></code></a>()</p></td>
-<td><p>Give the version of each of the dependencies – useful for bug reports.</p></td>
+<td><p>Give the version of each of the dependencies -- useful for bug reports.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="low-level-api-advanced">
-<h2>Low-Level API (Advanced)<a class="headerlink" href="#low-level-api-advanced" title="Permalink to this headline">¶</a></h2>
+<h2>Low-Level API (Advanced)<a class="headerlink" href="#low-level-api-advanced" title="Permalink to this heading">¶</a></h2>
 <section id="switching-between-numba-and-pure-python">
-<h3>Switching Between Numba and Pure Python<a class="headerlink" href="#switching-between-numba-and-pure-python" title="Permalink to this headline">¶</a></h3>
+<h3>Switching Between Numba and Pure Python<a class="headerlink" href="#switching-between-numba-and-pure-python" title="Permalink to this heading">¶</a></h3>
 <p>Trackpy implements the most intensive (read: slowest) parts of the core feature-finding and linking algorithm in pure Python (with numpy) and also in <a class="reference external" href="http://numba.pydata.org/">numba</a>, which accelerates Python code. Numba can offer a major performance boost, but it is still relatively new, and it can be challenging to use. If numba is available, trackpy will use the numba implementation by default; otherwise, it will use pure Python. The following functions allow sophisticated users to manually switch between numba and pure-Python modes. This may be used, for example, to measure the performance of these two implementations on your data.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.enable_numba.html#trackpy.enable_numba" title="trackpy.enable_numba"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.enable_numba</span></code></a>()</p></td>
 <td><p>Use numba-accelerated variants of core functions.</p></td>
@@ -549,28 +493,20 @@ configuring the logger however you like.</p>
 </table>
 </section>
 <section id="low-level-linking-api">
-<h3>Low-Level Linking API<a class="headerlink" href="#low-level-linking-api" title="Permalink to this headline">¶</a></h3>
+<h3>Low-Level Linking API<a class="headerlink" href="#low-level-linking-api" title="Permalink to this heading">¶</a></h3>
 <p>All of the linking functions in trackpy provide the same level of control over the linking algorithm itself. For almost all users, the functions above will be sufficient. But <code class="xref py py-func docutils literal notranslate"><span class="pre">link_df()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">link_df_iter()</span></code> above do assume that the data is stored in a pandas DataFrame. For users who want to use some other iterable data structure, the functions below provide direct access to the linking code.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.link_iter.html#trackpy.link_iter" title="trackpy.link_iter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link_iter</span></code></a>(coords_iter, search_range)</p></td>
 <td><p>Link an iterable of per-frame coordinates into trajectories.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.link.html#trackpy.link" title="trackpy.link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link</span></code></a>(f, search_range[, pos_columns, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/trackpy.link.html#trackpy.link" title="trackpy.link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.link</span></code></a>(f, search_range[, pos_columns, ...])</p></td>
 <td><p>Link a DataFrame of coordinates into trajectories.</p></td>
 </tr>
 </tbody>
 </table>
 <p>And the following classes can be subclassed to implement a customized linking procedure.</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.SubnetOversizeException.html#trackpy.SubnetOversizeException" title="trackpy.SubnetOversizeException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.SubnetOversizeException</span></code></a></p></td>
 <td><p>An <code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code> to be raised when the sub-nets are too big to be efficiently linked.</p></td>
@@ -579,13 +515,9 @@ configuring the logger however you like.</p>
 </table>
 </section>
 <section id="masks">
-<h3>Masks<a class="headerlink" href="#masks" title="Permalink to this headline">¶</a></h3>
+<h3>Masks<a class="headerlink" href="#masks" title="Permalink to this heading">¶</a></h3>
 <p>These functions may also be useful for rolling your own algorithms:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.masks.binary_mask.html#trackpy.masks.binary_mask" title="trackpy.masks.binary_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy.masks.binary_mask</span></code></a>(radius, ndim)</p></td>
 <td><p>Elliptical mask in a rectangular array</p></td>
@@ -619,13 +551,9 @@ configuring the logger however you like.</p>
 </section>
 </section>
 <section id="full-api-reference">
-<h2>Full API reference<a class="headerlink" href="#full-api-reference" title="Permalink to this headline">¶</a></h2>
+<h2>Full API reference<a class="headerlink" href="#full-api-reference" title="Permalink to this heading">¶</a></h2>
 <p>A full overview of all modules and functions can be found below:</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/trackpy.html#module-trackpy" title="trackpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trackpy</span></code></a></p></td>
 <td><p></p></td>
@@ -654,8 +582,8 @@ configuring the logger however you like.</p>
       
     </p>
     <p>
-        &copy; Copyright 2010-2021, Trackpy Contributors.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
     </p>
   </div>
 </footer>

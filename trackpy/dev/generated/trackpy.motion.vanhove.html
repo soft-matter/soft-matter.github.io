@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>trackpy.motion.vanhove &#8212; trackpy 0.5.0+3.g3b280ea documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <title>trackpy.motion.vanhove &#8212; trackpy 0.6.0rc1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -20,10 +21,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -38,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.0+3.g3b280ea</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.0rc1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -117,16 +118,16 @@
     <div class="body col-md-12 content" role="main">
       
   <section id="trackpy-motion-vanhove">
-<h1>trackpy.motion.vanhove<a class="headerlink" href="#trackpy-motion-vanhove" title="Permalink to this headline">¶</a></h1>
+<h1>trackpy.motion.vanhove<a class="headerlink" href="#trackpy-motion-vanhove" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt id="trackpy.motion.vanhove">
-<code class="sig-prename descclassname"><span class="pre">trackpy.motion.</span></code><code class="sig-name descname"><span class="pre">vanhove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lagtime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.motion.vanhove" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="trackpy.motion.vanhove">
+<span class="sig-prename descclassname"><span class="pre">trackpy.motion.</span></span><span class="sig-name descname"><span class="pre">vanhove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lagtime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mpp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.motion.vanhove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the van Hove correlation (histogram of displacements).</p>
 <p>The van Hove correlation function is simply a histogram of particle
 displacements. It is useful for detecting physical heterogeneity
 (or tracking errors).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>pos</strong><span class="classifier">DataFrame</span></dt><dd><p>x or (or!) y positions, one column per particle, indexed by frame</p>
 </dd>
@@ -140,7 +141,7 @@ sequence of bin edges. See np.histogram docs.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><strong>vh</strong><span class="classifier">DataFrame or Series</span></dt><dd><p>If ensemble=True, a DataFrame with each particle’s van Hove correlation
 function, indexed by displacement. If ensemble=False, a Series with
@@ -177,8 +178,8 @@ the van Hove correlation function of the whole ensemble.</p>
       
     </p>
     <p>
-        &copy; Copyright 2010-2021, Trackpy Contributors.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
     </p>
   </div>
 </footer>

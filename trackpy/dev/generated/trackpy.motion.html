@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>trackpy.motion &#8212; trackpy 0.5.0+3.g3b280ea documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <title>trackpy.motion &#8212; trackpy 0.6.0rc1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -20,10 +21,10 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
-<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -38,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.0+3.g3b280ea</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.0rc1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -117,27 +118,23 @@
     <div class="body col-md-12 content" role="main">
       
   <section id="module-trackpy.motion">
-<span id="trackpy-motion"></span><h1>trackpy.motion<a class="headerlink" href="#module-trackpy.motion" title="Permalink to this headline">¶</a></h1>
+<span id="trackpy-motion"></span><h1>trackpy.motion<a class="headerlink" href="#module-trackpy.motion" title="Permalink to this heading">¶</a></h1>
 <p class="rubric">Functions</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
+<table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="trackpy.motion.compute_drift.html#trackpy.motion.compute_drift" title="trackpy.motion.compute_drift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_drift</span></code></a>(traj[, smoothing, pos_columns])</p></td>
 <td><p>Return the ensemble drift, xy(t).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.diagonal_size.html#trackpy.motion.diagonal_size" title="trackpy.motion.diagonal_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal_size</span></code></a>(single_trajectory[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.diagonal_size.html#trackpy.motion.diagonal_size" title="trackpy.motion.diagonal_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal_size</span></code></a>(single_trajectory[, ...])</p></td>
 <td><p>Measure the diagonal size of a trajectory.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="trackpy.motion.direction_corr.html#trackpy.motion.direction_corr" title="trackpy.motion.direction_corr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">direction_corr</span></code></a>(t, frame1, frame2)</p></td>
-<td><p>Compute the cosine between every pair of particles’ displacements.</p></td>
+<td><p>Compute the cosine between every pair of particles' displacements.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.emsd.html#trackpy.motion.emsd" title="trackpy.motion.emsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emsd</span></code></a>(traj, mpp, fps[, max_lagtime, detail, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.emsd.html#trackpy.motion.emsd" title="trackpy.motion.emsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emsd</span></code></a>(traj, mpp, fps[, max_lagtime, detail, ...])</p></td>
 <td><p>Compute the ensemble mean squared displacements of many particles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.motion.imsd.html#trackpy.motion.imsd" title="trackpy.motion.imsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imsd</span></code></a>(traj, mpp, fps[, max_lagtime, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.motion.imsd.html#trackpy.motion.imsd" title="trackpy.motion.imsd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imsd</span></code></a>(traj, mpp, fps[, max_lagtime, ...])</p></td>
 <td><p>Compute the mean squared displacement of each particle.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_diffusive</span></code>(traj[, threshold])</p></td>
@@ -147,12 +144,12 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.is_typical.html#trackpy.motion.is_typical" title="trackpy.motion.is_typical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_typical</span></code></a>(msds, frame[, lower, upper])</p></td>
-<td><p>Identify which paritcles’ MSDs are in the central quantile.</p></td>
+<td><p>Identify which paritcles' MSDs are in the central quantile.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="trackpy.motion.min_rolling_theta_entropy.html#trackpy.motion.min_rolling_theta_entropy" title="trackpy.motion.min_rolling_theta_entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">min_rolling_theta_entropy</span></code></a>(pos[, window, bins])</p></td>
 <td><p>Compute the minimum Shannon entropy in any window.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.msd.html#trackpy.motion.msd" title="trackpy.motion.msd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msd</span></code></a>(traj, mpp, fps[, max_lagtime, detail, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.motion.msd.html#trackpy.motion.msd" title="trackpy.motion.msd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msd</span></code></a>(traj, mpp, fps[, max_lagtime, detail, ...])</p></td>
 <td><p>Compute the mean displacement and mean squared displacement of one trajectory over a range of time intervals.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">proximity</span></code>(*args, **kwargs)</p></td>
@@ -174,7 +171,7 @@
 <td><p>Compute the van Hove correlation (histogram of displacements).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="trackpy.motion.velocity_corr.html#trackpy.motion.velocity_corr" title="trackpy.motion.velocity_corr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">velocity_corr</span></code></a>(t, frame1, frame2)</p></td>
-<td><p>Compute the velocity correlation between every pair of particles’ displacements.</p></td>
+<td><p>Compute the velocity correlation between every pair of particles' displacements.</p></td>
 </tr>
 </tbody>
 </table>
@@ -199,8 +196,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2010-2021, Trackpy Contributors.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
     </p>
   </div>
 </footer>

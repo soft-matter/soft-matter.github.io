@@ -1,4 +1,4 @@
-﻿trackpy.find\_link
+trackpy.find\_link
 ==================
 
 .. currentmodule:: trackpy
