@@ -1,0 +1,6 @@
+trackpy.predict.NearestVelocityPredict.predict
+==============================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: NearestVelocityPredict.predict

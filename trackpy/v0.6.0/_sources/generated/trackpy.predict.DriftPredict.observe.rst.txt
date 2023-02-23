@@ -1,0 +1,6 @@
+trackpy.predict.DriftPredict.observe
+====================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: DriftPredict.observe

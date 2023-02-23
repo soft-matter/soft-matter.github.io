@@ -1,0 +1,6 @@
+trackpy.predict.ChannelPredict.observe
+======================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: ChannelPredict.observe

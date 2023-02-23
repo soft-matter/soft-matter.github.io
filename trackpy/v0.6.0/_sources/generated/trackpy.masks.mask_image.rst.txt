@@ -1,0 +1,6 @@
+﻿trackpy.masks.mask\_image
+=========================
+
+.. currentmodule:: trackpy.masks
+
+.. autofunction:: mask_image

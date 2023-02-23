@@ -1,0 +1,52 @@
+﻿trackpy
+=======
+
+.. automodule:: trackpy
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   trackpy.api
+   trackpy.artificial
+   trackpy.diag
+   trackpy.feature
+   trackpy.feature_numba
+   trackpy.filtering
+   trackpy.find
+   trackpy.find_link
+   trackpy.framewise_data
+   trackpy.linking
+   trackpy.locate_functions
+   trackpy.masks
+   trackpy.motion
+   trackpy.plots
+   trackpy.predict
+   trackpy.preprocessing
+   trackpy.refine
+   trackpy.static
+   trackpy.tracking
+   trackpy.try_numba
+   trackpy.uncertainty
+   trackpy.utils
+

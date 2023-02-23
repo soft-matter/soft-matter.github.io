@@ -1,0 +1,6 @@
+﻿trackpy.refine\_com
+===================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: refine_com

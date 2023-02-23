@@ -1,0 +1,6 @@
+﻿trackpy.enable\_numba
+=====================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: enable_numba
