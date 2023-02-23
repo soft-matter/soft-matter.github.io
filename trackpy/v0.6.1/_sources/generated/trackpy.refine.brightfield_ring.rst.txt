@@ -1,0 +1,29 @@
+trackpy.refine.brightfield\_ring
+================================
+
+.. automodule:: trackpy.refine.brightfield_ring
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      refine_brightfield_ring
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

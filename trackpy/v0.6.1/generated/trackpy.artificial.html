@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>trackpy.artificial &#8212; trackpy 0.6.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="trackpy.diag" href="trackpy.diag.html" />
+    <link rel="prev" title="trackpy.api" href="trackpy.api.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          trackpy</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../tutorial.html">Tutorial</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction to Trackpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installing Trackpy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in the package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/walkthrough.html">Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/prediction.html">Prediction (Linking)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tracking-3d.html">Tracking in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/uncertainty.html">Uncertainty Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/subnets.html">Advanced Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/adaptive-search.html">Adaptive Linking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/on-disk.html">Streaming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/parallel-locate.html">Parallelized Feature Finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/custom-feature-detection.html">Tracking Large Features Such As Bubbles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/brightfield.html">Tracking Particles' Rings in Bright-Field Microscopy</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">trackpy.artificial</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section id="module-trackpy.artificial">
+<span id="trackpy-artificial"></span><h1>trackpy.artificial<a class="headerlink" href="#module-trackpy.artificial" title="Permalink to this heading">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_array</span></code>(N, size[, separation, ndim])</p></td>
+<td><p>Generates an image with an array of features.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_cluster</span></code>(image, position, size, cluster_size)</p></td>
+<td><p>Draws a cluster of size <cite>n</cite> at <cite>pos</cite> with angle <cite>angle</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_feature</span></code>(image, position, size[, ...])</p></td>
+<td><p>Draws a radial symmetric feature and adds it to the image at given position.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_features_brightfield</span></code>(shape, positions, ...)</p></td>
+<td><p>Generates an image with features at given positions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_point</span></code>(image, pos, value)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_spots</span></code>(shape, positions, size[, ...])</p></td>
+<td><p>Generates an image with features at given positions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feat_brightfield</span></code>(r, ndim, radius, ...)</p></td>
+<td><p>Brightfield particle with intensity dip in center at r = 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feat_disc</span></code>(r, ndim, disc_size)</p></td>
+<td><p>Solid disc of size disc_size, with Gaussian smoothed borders.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feat_gauss</span></code>(r, ndim)</p></td>
+<td><p>Gaussian at r = 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feat_hat</span></code>(r, ndim, disc_size)</p></td>
+<td><p>Solid disc of size disc_size, with Gaussian smoothed borders.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feat_ring</span></code>(r, ndim, thickness)</p></td>
+<td><p>Ring feature with a gaussian profile with a certain thickness.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feat_step</span></code>(r, ndim)</p></td>
+<td><p>Solid disc.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_connected_locations</span></code>(shape, count, separation)</p></td>
+<td><p>Generates <cite>count</cite> number of positions within <cite>shape</cite> that are touching.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_nonoverlapping_locations</span></code>(shape, count, ...)</p></td>
+<td><p>Generates <cite>count</cite> number of positions within <cite>shape</cite>, that have minimum distance <cite>separation</cite> from each other.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_random_locations</span></code>(shape, count[, margin])</p></td>
+<td><p>Generates <cite>count</cite> number of positions within <cite>shape</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rot_2d</span></code>(angle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rot_3d</span></code>(angles)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatedImage</span></code>(shape, size[, dtype, ...])</p></td>
+<td><p>This class makes it easy to generate artificial pictures.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/trackpy.artificial.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
