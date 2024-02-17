@@ -1,4 +1,4 @@
-trackpy.utils
+﻿trackpy.utils
 =============
 
 .. automodule:: trackpy.utils
@@ -31,6 +31,7 @@ trackpy.utils
       random_walk
       record_meta
       safe_exp
+      stats_mode_scalar
       suppress_plotting
       time_interval
       timedelta_to_frame

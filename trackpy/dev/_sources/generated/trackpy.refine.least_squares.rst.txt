@@ -1,4 +1,4 @@
-trackpy.refine.least\_squares
+﻿trackpy.refine.least\_squares
 =============================
 
 .. automodule:: trackpy.refine.least_squares
@@ -22,6 +22,7 @@ trackpy.refine.least\_squares
       dr2_isotropic_3d
       gauss_dfun
       gauss_fun
+      ignore_clip_warnings
       inv_series_fun
       prepare_subimage
       prepare_subimages

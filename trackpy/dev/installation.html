@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Installing Trackpy &#8212; trackpy 0.6.0rc1 documentation</title>
+    <title>Installing Trackpy &#8212; trackpy 0.6.2rc1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bootstrap-sphinx.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -39,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.6.0rc1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.2rc1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -154,9 +154,9 @@ common scientific Python packages built in.</p>
 <p>Open a command prompt. On Windows, you can use the “Anaconda Command Prompt”
 installed by Anaconda or Start &gt; Applications &gt; Command Prompt. On a Mac, look
 for Applications &gt; Utilities &gt; Terminal. Type these commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update conda
-conda install -c conda-forge trackpy
-conda install -c conda-forge pims
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>update<span class="w"> </span>conda
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>trackpy
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>pims
 </pre></div>
 </div>
 <p>The above installs trackpy and all its requirements, plus the recommended
@@ -166,7 +166,7 @@ and that is used in the trackpy tutorials.</p>
 <section id="try-it-out">
 <h3>3. Try it out!<a class="headerlink" href="#try-it-out" title="Permalink to this heading">¶</a></h3>
 <p>Finally, to try it out, type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>notebook
 </pre></div>
 </div>
 <div class="admonition note">
@@ -187,7 +187,7 @@ that may affect your existing analysis code.</p>
 <h2>Latest Stable Release<a class="headerlink" href="#latest-stable-release" title="Permalink to this heading">¶</a></h2>
 <p>The code is under active development. To update to the latest stable release,
 run this in the command prompt:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update -c conda-forge trackpy
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>update<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>trackpy
 </pre></div>
 </div>
 </section>
@@ -199,7 +199,7 @@ latest features it should be safe to rely on the master branch.
 (The primary contributors do.)</p>
 <p>You can easily install a recent build by downloading the source from
 <a class="reference external" href="https://github.com/soft-matter/trackpy">Github</a>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install https://github.com/soft-matter/trackpy/archive/master.zip
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>https://github.com/soft-matter/trackpy/archive/master.zip
 </pre></div>
 </div>
 <p>If you plan to edit the code yourself, you should use git and pip as
@@ -209,14 +209,14 @@ explained below.</p>
 <p>Some users often like to separate Python instances into environments, so that
 each project can have its own set of packages. Create a trackpy-dedicated
 environment with the name softmatter as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create --name softmatter <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7 trackpy nb_conda
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>softmatter<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7<span class="w"> </span>trackpy<span class="w"> </span>nb_conda
 </pre></div>
 </div>
 <p>The <cite>nb_conda</cite> is optional, but we added it to ensure that Jupyter sees this
 environment as well. You can switch to the environment from within Jupyter in
 the Kernels menu. To access the environment on the commandline, type the
 following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> activate softmatter
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>softmatter
 </pre></div>
 </div>
 <p>On Windows systems, leave out the <cite>source</cite>. You can go back to the root conda
@@ -256,16 +256,16 @@ use <a class="reference external" href="https://www.anaconda.com/distribution/">
 manually. First, make sure you have <a class="reference external" href="https://git-scm.com/">git</a> version
 management software installed. Go to a folder where you want to have your
 source code, then:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/soft-matter/trackpy
-<span class="nb">cd</span> trackpy
-python setup.py develop
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/soft-matter/trackpy
+<span class="nb">cd</span><span class="w"> </span>trackpy
+python<span class="w"> </span>setup.py<span class="w"> </span>develop
 </pre></div>
 </div>
 <p>We welcome any contribution to the trackpy source code, so feel free to send
 in your contributions on Github! To do so, make an account, fork
 <a class="reference external" href="https://github.com/soft-matter/trackpy">trackpy</a> and create a local copy
 using:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/&lt;your_account&gt;/trackpy
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your_account&gt;/trackpy
 </pre></div>
 </div>
 <p>Now you have a local copy of the code which you can edit, but don’t start
@@ -273,8 +273,8 @@ editing right away as you are currently on the <code class="docutils literal not
 is good practice to keep your <code class="docutils literal notranslate"><span class="pre">master</span></code> branch mirroring the upstream
 trackpy version, so first create a new branch and push it to the remote as
 follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch fix-something
-git push --set-upstream origin fix-something
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>fix-something
+git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>fix-something
 </pre></div>
 </div>
 <p>Now you can edit your code in any way you like, commit your changes, and push
@@ -336,7 +336,7 @@ can read what you need for each format
       
     </p>
     <p>
-        &copy; Copyright 2010-2023, Trackpy Contributors.<br/>
+        &copy; Copyright 2010-2024, Trackpy Contributors.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.0.2.<br/>
     </p>
   </div>
