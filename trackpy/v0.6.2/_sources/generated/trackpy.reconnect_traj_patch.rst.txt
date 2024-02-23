@@ -1,0 +1,6 @@
+﻿trackpy.reconnect\_traj\_patch
+==============================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: reconnect_traj_patch

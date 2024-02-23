@@ -1,0 +1,6 @@
+﻿trackpy.diag.dependencies
+=========================
+
+.. currentmodule:: trackpy.diag
+
+.. autofunction:: dependencies

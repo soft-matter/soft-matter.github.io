@@ -1,0 +1,6 @@
+﻿trackpy.preprocessing.convert\_to\_int
+======================================
+
+.. currentmodule:: trackpy.preprocessing
+
+.. autofunction:: convert_to_int

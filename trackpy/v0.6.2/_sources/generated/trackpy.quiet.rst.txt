@@ -1,0 +1,6 @@
+﻿trackpy.quiet
+=============
+
+.. currentmodule:: trackpy
+
+.. autofunction:: quiet
