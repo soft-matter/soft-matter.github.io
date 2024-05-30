@@ -1,4 +1,4 @@
-﻿trackpy.utils
+trackpy.utils
 =============
 
 .. automodule:: trackpy.utils

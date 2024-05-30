@@ -1,4 +1,4 @@
-﻿trackpy.preprocessing
+trackpy.preprocessing
 =====================
 
 .. automodule:: trackpy.preprocessing
@@ -20,6 +20,7 @@
       legacy_bandpass
       legacy_bandpass_fftw
       lowpass
+      pipeline
       scale_to_gamut
       scalefactor_to_gamut
    

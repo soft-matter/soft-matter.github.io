@@ -31,10 +31,8 @@
    trackpy.artificial
    trackpy.diag
    trackpy.feature
-   trackpy.feature_numba
    trackpy.filtering
    trackpy.find
-   trackpy.find_link
    trackpy.framewise_data
    trackpy.linking
    trackpy.locate_functions

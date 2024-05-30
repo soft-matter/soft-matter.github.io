@@ -1,4 +1,4 @@
-﻿trackpy.refine.least\_squares
+trackpy.refine.least\_squares
 =============================
 
 .. automodule:: trackpy.refine.least_squares
