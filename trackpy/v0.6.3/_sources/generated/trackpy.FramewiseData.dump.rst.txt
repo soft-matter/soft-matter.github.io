@@ -1,0 +1,6 @@
+trackpy.FramewiseData.dump
+==========================
+
+.. currentmodule:: trackpy
+
+.. automethod:: FramewiseData.dump

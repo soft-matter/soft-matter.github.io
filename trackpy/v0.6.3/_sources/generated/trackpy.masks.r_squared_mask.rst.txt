@@ -1,0 +1,6 @@
+﻿trackpy.masks.r\_squared\_mask
+==============================
+
+.. currentmodule:: trackpy.masks
+
+.. autofunction:: r_squared_mask

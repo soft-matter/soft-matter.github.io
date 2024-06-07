@@ -1,0 +1,69 @@
+trackpy.refine.least\_squares
+=============================
+
+.. automodule:: trackpy.refine.least_squares
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      dimer
+      dimer_global
+      disc_fun
+      dr2_anisotropic_2d
+      dr2_anisotropic_3d
+      dr2_isotropic_2d
+      dr2_isotropic_3d
+      gauss_dfun
+      gauss_fun
+      ignore_clip_warnings
+      inv_series_fun
+      prepare_subimage
+      prepare_subimages
+      r2_anisotropic_2d
+      r2_anisotropic_2d_safe
+      r2_anisotropic_3d
+      r2_anisotropic_3d_safe
+      r2_isotropic_2d
+      r2_isotropic_2d_safe
+      r2_isotropic_3d
+      r2_isotropic_3d_safe
+      refine_leastsq
+      ring_dfun
+      ring_fun
+      tetramer
+      train_leastsq
+      trimer
+      vect_from_params
+      vect_to_params
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FitFunctions
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      RefineException
+   
+   
+
+
+

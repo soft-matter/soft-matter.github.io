@@ -1,0 +1,6 @@
+﻿trackpy.link
+============
+
+.. currentmodule:: trackpy
+
+.. autofunction:: link

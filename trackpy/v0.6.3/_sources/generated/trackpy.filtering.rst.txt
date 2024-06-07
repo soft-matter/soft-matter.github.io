@@ -1,0 +1,33 @@
+trackpy.filtering
+=================
+
+.. automodule:: trackpy.filtering
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bust_clusters
+      bust_ghosts
+      filter
+      filter_clusters
+      filter_stubs
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

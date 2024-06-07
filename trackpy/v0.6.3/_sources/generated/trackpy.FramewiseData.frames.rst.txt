@@ -1,0 +1,6 @@
+trackpy.FramewiseData.frames
+============================
+
+.. currentmodule:: trackpy
+
+.. autoproperty:: FramewiseData.frames

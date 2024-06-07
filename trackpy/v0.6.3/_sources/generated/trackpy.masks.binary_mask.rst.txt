@@ -1,0 +1,6 @@
+﻿trackpy.masks.binary\_mask
+==========================
+
+.. currentmodule:: trackpy.masks
+
+.. autofunction:: binary_mask

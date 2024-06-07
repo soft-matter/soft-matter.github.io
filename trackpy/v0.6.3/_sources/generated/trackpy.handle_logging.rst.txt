@@ -1,0 +1,6 @@
+﻿trackpy.handle\_logging
+=======================
+
+.. currentmodule:: trackpy
+
+.. autofunction:: handle_logging
