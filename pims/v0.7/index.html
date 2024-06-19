@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIMS: Python Image Sequence &mdash; pims 0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            pims
+          </a>
+              <div class="version">
+                0.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pims</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PIMS: Python Image Sequence</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/soft-matter/pims/blob/main/doc/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pims-python-image-sequence">
+<h1>PIMS: Python Image Sequence<a class="headerlink" href="#pims-python-image-sequence" title="Permalink to this heading">¶</a></h1>
+<p>PIMS is a lazy-loading interface to sequential data with numpy-like slicing.</p>
+<p>Key features:</p>
+<ul class="simple">
+<li><p>One consistent interface to many file formats</p></li>
+<li><p>Numpy-like slicing returns lazy-loading, iterable, sliceable objects</p></li>
+</ul>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_readers.html">Custom Readers</a></li>
+</ul>
+</div>
+</section>
+<section id="built-in-readers">
+<h2>Built-in Readers<a class="headerlink" href="#built-in-readers" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bioformats.html">Bioformats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+</ul>
+</div>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h2>
+<p>Everything is demonstrated in <a class="reference external" href="http://nbviewer.ipython.org/github/soft-matter/pims/blob/master/examples/loading%20video%20frames.ipynb">this IPython
+notebook</a>.</p>
+<p>Load a sequence of images from a directory, where the images are named
+<code class="file docutils literal notranslate"><span class="pre">img-0.png</span></code>, <code class="file docutils literal notranslate"><span class="pre">img-1.png</span></code>, etc.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">pims</span> <span class="kn">import</span> <span class="n">ImageSequence</span>
+
+<span class="gp">In [2]: </span><span class="n">images</span> <span class="o">=</span> <span class="n">ImageSequence</span><span class="p">(</span><span class="s1">&#39;img-*.png&#39;</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">images</span>
+<span class="gh">Out[3]: </span>
+<span class="go">&lt;Frames&gt;</span>
+<span class="go">Source: /Users/nxk913/projects/trackpy/pims/doc/img-*.png</span>
+<span class="go">Length: 9 frames</span>
+<span class="go">Frame Shape: (256, 256)</span>
+<span class="go">Pixel Datatype: uint8</span>
+</pre></div>
+</div>
+<p>Images can be randomly accessed with standard Python slicing syntax.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># first image</span>
+<span class="gh">Out[4]: </span>
+<span class="go">Frame([[102,  30, 175, ..., 224, 114,  91],</span>
+<span class="go">       [ 35, 252,  39, ..., 143, 197,   5],</span>
+<span class="go">       [171, 151, 195, ..., 152, 215,  80],</span>
+<span class="go">       ...,</span>
+<span class="go">       [193,  36,  99, ..., 172, 239, 148],</span>
+<span class="go">       [ 91, 234, 228, ..., 165, 233, 118],</span>
+<span class="go">       [158, 228, 195, ...,  23, 174, 137]], dtype=uint8)</span>
+
+<span class="gp">In [5]: </span><span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># fifth from the end</span>
+<span class="gh">Out[5]: </span>
+<span class="go">Frame([[142, 165, 101, ..., 192, 223, 188],</span>
+<span class="go">       [159,   7, 212, ..., 190, 219,  23],</span>
+<span class="go">       [119, 135,  85, ..., 125, 232,  75],</span>
+<span class="go">       ...,</span>
+<span class="go">       [111,  33,  19, ..., 126, 175,  43],</span>
+<span class="go">       [126, 127,  45, ...,  56, 173,  64],</span>
+<span class="go">       [166, 127,  68, ...,  15,  74, 221]], dtype=uint8)</span>
+</pre></div>
+</div>
+<p>The images are iterable. Data is loaded one image at a time, conserving
+memory.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="gp">In [7]: </span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># do something</span>
+<span class="gp">   ...: </span>
+</pre></div>
+</div>
+<p>Slicing <code class="docutils literal notranslate"><span class="pre">images</span></code> returns another lazy-loading object that is also iterable
+and sliceable.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">subsection</span> <span class="o">=</span> <span class="n">images</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># the first five images</span>
+
+<span class="gp">In [9]: </span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+<span class="gh">Out[9]: </span><span class="go">9</span>
+
+<span class="gp">In [10]: </span><span class="nb">len</span><span class="p">(</span><span class="n">subsection</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">5</span>
+
+<span class="gp">In [11]: </span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">subsection</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># do something</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [12]: </span><span class="n">subsubsection</span> <span class="o">=</span> <span class="n">subsection</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># every other of the first five images</span>
+</pre></div>
+</div>
+<p>Fancy numpy-like slicing is supported.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">subsection2</span> <span class="o">=</span> <span class="n">images</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+
+<span class="gp">In [14]: </span><span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+
+<span class="gp">In [15]: </span><span class="n">subsection3</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="core-contributors">
+<h2>Core Contributors<a class="headerlink" href="#core-contributors" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Daniel Allan</strong> founding contributor, slicing and iteration logic,
+basic readers, display tools</p></li>
+<li><p><strong>Thomas Caswell</strong> major refactor, abstract base class</p></li>
+<li><p><strong>Casper van der Wel</strong> bioformats readers, display tools</p></li>
+<li><p><strong>Thomas Dimiduk</strong> filetype-detecting dispatch logic</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this heading">¶</a></h2>
+<p>This package was developed in part by Daniel Allan, as part of his
+PhD thesis work on microrheology in Robert L. Leheny’s group at Johns Hopkins
+University in Baltimore, MD. The work was supported by the National Science Foundation
+under grant number CBET-1033985. Later work was supported by Brookhaven
+National Lab. Dan can be reached at <a class="reference external" href="mailto:dallan&#37;&#52;&#48;bnl&#46;gov">dallan<span>&#64;</span>bnl<span>&#46;</span>gov</a>.</p>
+<p>This package was developed in part by Thomas A Caswell as part of his
+PhD thesis work in Sidney R Nagel’s and Margaret L Gardel’s groups at
+the University of Chicago, Chicago IL.  This work was supported in
+part by NSF Grant DMR-1105145 and NSF-MRSEC DMR-0820054. Later work was
+supported by Brookhaven National Lab. Tom can be
+reached at <a class="reference external" href="mailto:tcaswell&#37;&#52;&#48;gmail&#46;com">tcaswell<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
+<p>This package was developed in part by Casper van der Wel, as part of his
+PhD thesis work in Daniela Kraft’s group at the Huygens-Kamerlingh-Onnes laboratory,
+Institute of Physics, Leiden University, The Netherlands. This work was
+supported by the Netherlands Organisation for Scientific Research (NWO/OCW).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015-2024, PIMS Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

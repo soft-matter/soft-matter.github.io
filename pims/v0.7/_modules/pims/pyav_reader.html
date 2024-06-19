@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pims.pyav_reader &mdash; pims 0.6.2rc1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pims
+          </a>
+              <div class="version">
+                0.6.2rc1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../opening_files.html">Opening Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../slicing.html">Slicing and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../multidimensional.html">Multidimensional Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom_readers.html">Custom Readers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../image_sequence.html">ImageSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tiff_stack.html">TiffStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bioformats.html">Bioformats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../video.html">Video</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pims</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pims.pyav_reader</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pims.pyav_reader</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">pims.base_frames</span> <span class="kn">import</span> <span class="n">FramesSequence</span>
+<span class="kn">from</span> <span class="nn">pims.frame</span> <span class="kn">import</span> <span class="n">Frame</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">av</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">av</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">available</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">av</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_next_video_packet</span><span class="p">(</span><span class="n">container_iter</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">container_iter</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">packet</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;video&#39;</span><span class="p">:</span>
+            <span class="n">decoded</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">decoded</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Could not find any video packets.&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">WrapPyAvFrame</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">frame_no</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">=</span> <span class="n">frame_no</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span>
+
+        <span class="c1"># makes a copy of the frame so that ffmpeg does not reuse the buffer</span>
+        <span class="c1"># by converting already to rgb24. rgb24 movies actually are converted</span>
+        <span class="c1"># twice. don&#39;t know how to just copy! But the operations are fast.</span>
+        <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;rgb24&#39;</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">reformat</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bgr24&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">reformat</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;rgb24&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arr</span> <span class="o">=</span> <span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">to_ndarray</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;rgb24&#39;</span><span class="p">),</span>
+                             <span class="n">frame_no</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_no</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arr</span>
+
+
+<span class="k">def</span> <span class="nf">_gen_frames</span><span class="p">(</span><span class="n">demuxer</span><span class="p">,</span> <span class="n">time_base</span><span class="p">,</span> <span class="n">frame_rate</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">first_pts</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">demuxer</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">packet</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span>
+            <span class="c1"># learn timestamp</span>
+            <span class="k">for</span> <span class="n">timestamp</span> <span class="ow">in</span> <span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">pts</span><span class="p">,</span> <span class="n">packet</span><span class="o">.</span><span class="n">pts</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">dts</span><span class="p">,</span> <span class="n">packet</span><span class="o">.</span><span class="n">dts</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span>
+                    <span class="s2">&quot;Unable to read video: frames contain no timestamps. &quot;</span>
+                    <span class="s2">&quot;Please use PyAVReaderIndexed.&quot;</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">first_pts</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_base</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">frame_rate</span><span class="p">))</span>
+            <span class="k">yield</span> <span class="n">WrapPyAvFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frame_no</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                                <span class="n">metadata</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+
+
+<div class="viewcode-block" id="PyAVReaderTimed"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderTimed">[docs]</a><span class="k">class</span> <span class="nc">PyAVReaderTimed</span><span class="p">(</span><span class="n">FramesSequence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read images from a video file via a direct FFmpeg/AVbin interface.</span>
+
+<span class="sd">    The frames are indexed according to their &#39;timestamp&#39;, starting at 0 at the</span>
+<span class="sd">    timestamp of the first non-empty frame. Missing frames are filled in with</span>
+<span class="sd">    empty frames. The number of frames in the video is estimated from the</span>
+<span class="sd">    movie duration and the average frame rate.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : string</span>
+<span class="sd">    cache_size : integer, optional</span>
+<span class="sd">        the number of frames that are kept in memory. Default 16.</span>
+<span class="sd">    fast_forward_thresh : integer, optional</span>
+<span class="sd">        the reader will proceed through the frames if forwarding below this</span>
+<span class="sd">        number. If forwarding above this number, it will use seek(). Default 32.</span>
+<span class="sd">    stream_index : integer, optional</span>
+<span class="sd">        the index of the video stream inside the file. rarely other than 0.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; video = PyAVVideoReader(&#39;video.avi&#39;)  # or .mov, etc.</span>
+<span class="sd">    &gt;&gt;&gt; video[0] # Show the first frame.</span>
+<span class="sd">    &gt;&gt;&gt; video[-1] # Show the last frame.</span>
+<span class="sd">    &gt;&gt;&gt; video[1][0:10, 0:10] # Show one corner of the second frame.</span>
+
+<span class="sd">    &gt;&gt;&gt; for frame in video[:]:</span>
+<span class="sd">    ...    # Do something with every frame.</span>
+
+<span class="sd">    &gt;&gt;&gt; for frame in video[10:20]:</span>
+<span class="sd">    ...    # Do something with frames 10-20.</span>
+
+<span class="sd">    &gt;&gt;&gt; for frame in video[[5, 7, 13]]:</span>
+<span class="sd">    ...    # Do something with frames 5, 7, and 13.</span>
+
+<span class="sd">    &gt;&gt;&gt; frame_count = len(video) # Number of frames in video</span>
+<span class="sd">    &gt;&gt;&gt; frame_shape = video.frame_shape # Pixel dimensions of video</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">class_priority</span> <span class="o">=</span> <span class="mi">9</span>
+<div class="viewcode-block" id="PyAVReaderTimed.class_exts"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderTimed.class_exts">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">class_exts</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;mov&#39;</span><span class="p">,</span> <span class="s1">&#39;avi&#39;</span><span class="p">,</span> <span class="s1">&#39;mp4&#39;</span><span class="p">}</span> <span class="o">|</span> <span class="nb">super</span><span class="p">(</span><span class="n">PyAVReaderTimed</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">class_exts</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">cache_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fast_forward_thresh</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+                 <span class="n">stream_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">):</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="nb">format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="o">=</span> <span class="n">av</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">streams</span><span class="o">.</span><span class="n">video</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;No valid video stream found in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">streams</span><span class="o">.</span><span class="n">video</span><span class="p">[</span><span class="n">stream_index</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">time_base</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="n">av</span><span class="o">.</span><span class="n">time_base</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">average_rate</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Video stream </span><span class="si">{}</span><span class="s2"> in </span><span class="si">{}</span><span class="s2"> has zero length.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stream_index</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">cache_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fast_forward_thresh</span> <span class="o">=</span> <span class="n">fast_forward_thresh</span>
+
+        <span class="n">demuxer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">demux</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="p">)</span>
+
+        <span class="c1"># obtain first frame to get first time point</span>
+        <span class="c1"># also tests for the presence of timestamps</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">_gen_frames</span><span class="p">(</span><span class="n">demuxer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">time_base</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_first_pts</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span>
+
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">WrapPyAvFrame</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame_shape</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_frame</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reset_demuxer</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_rate</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_reset_demuxer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">demuxer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">demux</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_frame_generator</span> <span class="o">=</span> <span class="n">_gen_frames</span><span class="p">(</span><span class="n">demuxer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">time_base</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">_frame_rate</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_pts</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The video duration in seconds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_duration</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frame_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_shape</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frame_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_rate</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PyAVReaderTimed.get_frame"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderTimed.get_frame">[docs]</a>    <span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">cached_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">cached_frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cached_i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cached_i</span> <span class="o">=</span> <span class="n">cached_frame</span><span class="o">.</span><span class="n">frame_no</span>
+
+        <span class="c1"># return directly if the frame is in cache</span>
+        <span class="k">if</span> <span class="n">cached_i</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cached_frame</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+        <span class="c1"># check if we will have to seek to the frame</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_frame</span> <span class="o">&gt;=</span> <span class="n">i</span> <span class="ow">or</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_frame</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fast_forward_thresh</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+            <span class="c1"># return directly if the seek was perfect (happens rarely)</span>
+            <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+        <span class="c1"># proceed through the frames</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frame_generator</span><span class="p">:</span>
+            <span class="c1"># first cache the frame</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)]</span> <span class="o">=</span> <span class="n">frame</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span>
+
+            <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># go on towards the frame</span>
+            <span class="k">elif</span> <span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">frame</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># the frame was not inside the reader</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># always restart the frame generator when it ends</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reset_demuxer</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># the requested frame actually does not exist. Can occur due to</span>
+            <span class="c1"># a bad file, or due to inaccuracy of reader length __len__.</span>
+            <span class="c1"># find it in the cache</span>
+            <span class="k">for</span> <span class="n">other_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">other_i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># cache is empty: return an empty frame</span>
+                <span class="k">return</span> <span class="n">Frame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pixel_type</span><span class="p">),</span>
+                             <span class="n">frame_no</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PyAVReaderTimed.seek"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderTimed.seek">[docs]</a>    <span class="k">def</span> <span class="nf">seek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Seek to a frame before i and return the first frame.&quot;&quot;&quot;</span>
+        <span class="c1"># flush the cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+        <span class="c1"># the ffmpeg decode cache is flushed automatically</span>
+
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_rate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">time_base</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">timestamp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_pts</span><span class="p">)</span>
+
+        <span class="c1"># check the first frame</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_generator</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reset_demuxer</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_generator</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># security measure to avoid infinite recursion</span>
+            <span class="k">return</span> <span class="n">frame</span>
+
+        <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">:</span>
+            <span class="c1"># recurse with an additional offset of 16 frames</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="c1"># add the frame to the cache if succesful</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)]</span> <span class="o">=</span> <span class="n">frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">frame_no</span>
+        <span class="k">return</span> <span class="n">frame</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pixel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># May be overwritten by subclasses</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;Frames&gt;</span>
+<span class="s2">Format: </span><span class="si">{format}</span>
+<span class="s2">Source: </span><span class="si">{filename}</span>
+<span class="s2">Duration: </span><span class="si">{duration:.3f}</span><span class="s2"> seconds</span>
+<span class="s2">Frame rate: </span><span class="si">{frame_rate:.3f}</span><span class="s2"> fps</span>
+<span class="s2">Length: </span><span class="si">{count}</span><span class="s2"> frames</span>
+<span class="s2">Frame Shape: </span><span class="si">{frame_shape!r}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frame_shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_shape</span><span class="p">,</span>
+           <span class="nb">format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">long_name</span><span class="p">,</span>
+           <span class="n">duration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span>
+           <span class="n">frame_rate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_rate</span><span class="p">,</span>
+           <span class="n">count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+           <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PyAVReaderIndexed"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderIndexed">[docs]</a><span class="k">class</span> <span class="nc">PyAVReaderIndexed</span><span class="p">(</span><span class="n">FramesSequence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read images from the frames of a standard video file into an</span>
+<span class="sd">    iterable object that returns images as numpy arrays.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : string</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; video = Video(&#39;video.avi&#39;)  # or .mov, etc.</span>
+<span class="sd">    &gt;&gt;&gt; imshow(video[0]) # Show the first frame.</span>
+<span class="sd">    &gt;&gt;&gt; imshow(video[-1]) # Show the last frame.</span>
+<span class="sd">    &gt;&gt;&gt; imshow(video[1][0:10, 0:10]) # Show one corner of the second frame.</span>
+
+<span class="sd">    &gt;&gt;&gt; for frame in video[:]:</span>
+<span class="sd">    ...    # Do something with every frame.</span>
+
+<span class="sd">    &gt;&gt;&gt; for frame in video[10:20]:</span>
+<span class="sd">    ...    # Do something with frames 10-20.</span>
+
+<span class="sd">    &gt;&gt;&gt; for frame in video[[5, 7, 13]]:</span>
+<span class="sd">    ...    # Do something with frames 5, 7, and 13.</span>
+
+<span class="sd">    &gt;&gt;&gt; frame_count = len(video) # Number of frames in video</span>
+<span class="sd">    &gt;&gt;&gt; frame_shape = video.frame_shape # Pixel dimensions of video</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">class_priority</span> <span class="o">=</span> <span class="mi">8</span>
+
+<div class="viewcode-block" id="PyAVReaderIndexed.class_exts"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderIndexed.class_exts">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">class_exts</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;mov&#39;</span><span class="p">,</span> <span class="s1">&#39;avi&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;mp4&#39;</span><span class="p">}</span> <span class="o">|</span> <span class="nb">super</span><span class="p">(</span><span class="n">PyAVReaderIndexed</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">class_exts</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">toc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">):</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="nb">format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">with</span> <span class="n">av</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span> <span class="k">as</span> <span class="n">container</span><span class="p">:</span>
+            <span class="n">stream</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">streams</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;video&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Build a toc</span>
+            <span class="k">if</span> <span class="n">toc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">packet_lengths</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">packet_ts</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">demux</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">packet</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;video&#39;</span><span class="p">:</span>
+                        <span class="n">decoded</span> <span class="o">=</span> <span class="n">packet</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">packet_lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">decoded</span><span class="p">))</span>
+                            <span class="n">packet_ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decoded</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pts</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_toc</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;lengths&#39;</span><span class="p">:</span> <span class="n">packet_lengths</span><span class="p">,</span>
+                    <span class="s1">&#39;ts&#39;</span><span class="p">:</span> <span class="n">packet_ts</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_toc</span> <span class="o">=</span> <span class="n">toc</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_toc_cumsum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toc</span><span class="p">[</span><span class="s1">&#39;lengths&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_toc_cumsum</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># PyAV always returns frames in color, and we make that</span>
+            <span class="c1"># assumption in get_frame() later below, so 3 is hardcoded here:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_im_sz</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">stream</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_time_base</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">time_base</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_fresh_file</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_load_fresh_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;seek&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="o">=</span> <span class="n">av</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+        <span class="n">demux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">demux</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_video_stream</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet</span> <span class="o">=</span> <span class="n">_next_video_packet</span><span class="p">(</span><span class="n">demux</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet_no</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_video_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">streams</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;video&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_len</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frame_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_im_sz</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">toc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_toc</span>
+
+<div class="viewcode-block" id="PyAVReaderIndexed.get_frame"><a class="viewcode-back" href="../../video.html#pims.PyAVReaderIndexed.get_frame">[docs]</a>    <span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="c1"># Find the packet this frame is in.</span>
+        <span class="n">packet_no</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_toc_cumsum</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_seek_packet</span><span class="p">(</span><span class="n">packet_no</span><span class="p">)</span>
+        <span class="c1"># Find the location of the frame within the packet.</span>
+        <span class="k">if</span> <span class="n">packet_no</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">loc</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loc</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_toc_cumsum</span><span class="p">[</span><span class="n">packet_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span>  <span class="c1"># av.VideoFrame</span>
+
+        <span class="k">return</span> <span class="n">Frame</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">to_ndarray</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;rgb24&#39;</span><span class="p">),</span> <span class="n">frame_no</span><span class="o">=</span><span class="n">j</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_seek_packet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packet_no</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance through the container generator until we get the packet</span>
+<span class="sd">        we want. Store that packet in selfpp._current_packet.&quot;&quot;&quot;</span>
+        <span class="n">packet_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toc</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">][</span><span class="n">packet_no</span><span class="p">]</span>
+        <span class="c1"># Only seek when needed.</span>
+        <span class="k">if</span> <span class="n">packet_no</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet_no</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">packet_no</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet_no</span>
+                <span class="ow">or</span> <span class="n">packet_no</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet_no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">packet_ts</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_video_stream</span><span class="p">)</span>
+
+        <span class="n">demux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="o">.</span><span class="n">demux</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_video_stream</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet</span> <span class="o">=</span> <span class="n">_next_video_packet</span><span class="p">(</span><span class="n">demux</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pts</span> <span class="o">&lt;</span> <span class="n">packet_ts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet</span> <span class="o">=</span> <span class="n">_next_video_packet</span><span class="p">(</span><span class="n">demux</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_packet_no</span> <span class="o">=</span> <span class="n">packet_no</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pixel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># No need to detect dtype: PyAV always returns uint8.</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># May be overwritten by subclasses</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;Frames&gt;</span>
+<span class="s2">Source: </span><span class="si">{filename}</span>
+<span class="s2">Length: </span><span class="si">{count}</span><span class="s2"> frames</span>
+<span class="s2">Frame Shape: </span><span class="si">{frame_shape!r}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frame_shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_shape</span><span class="p">,</span>
+           <span class="n">count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+           <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2015-2024, PIMS Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
