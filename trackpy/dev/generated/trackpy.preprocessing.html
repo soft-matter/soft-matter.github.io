@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>trackpy.preprocessing &#8212; trackpy 0.6.3 documentation</title>
+    <title>trackpy.preprocessing &#8212; trackpy 0.6.3+2.ga65a2a6 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -39,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           trackpy</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.6.3</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.3+2.ga65a2a6</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -132,7 +132,7 @@
 <td><p>Convert the image to integer and normalize if applicable.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="trackpy.preprocessing.invert_image.html#trackpy.preprocessing.invert_image" title="trackpy.preprocessing.invert_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">invert_image</span></code></a>(raw_image[, max_value])</p></td>
-<td><p>Invert the image.</p></td>
+<td><p>This function has been made lazy.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">legacy_bandpass</span></code>(image, lshort, llong[, ...])</p></td>
 <td><p>Remove noise and background variation.</p></td>
@@ -143,13 +143,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="trackpy.preprocessing.lowpass.html#trackpy.preprocessing.lowpass" title="trackpy.preprocessing.lowpass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lowpass</span></code></a>(image[, sigma, truncate])</p></td>
 <td><p>Remove noise by convolving with a Gaussian.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pipeline</span></code>(x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.preprocessing.scale_to_gamut.html#trackpy.preprocessing.scale_to_gamut" title="trackpy.preprocessing.scale_to_gamut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_to_gamut</span></code></a>(image, original_dtype[, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.preprocessing.scale_to_gamut.html#trackpy.preprocessing.scale_to_gamut" title="trackpy.preprocessing.scale_to_gamut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_to_gamut</span></code></a>(image, original_dtype[, ...])</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalefactor_to_gamut</span></code>(image, original_dtype)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalefactor_to_gamut</span></code>(image, original_dtype)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
