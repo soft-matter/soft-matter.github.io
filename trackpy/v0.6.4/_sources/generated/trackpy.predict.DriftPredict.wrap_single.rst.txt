@@ -1,0 +1,6 @@
+trackpy.predict.DriftPredict.wrap\_single
+=========================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: DriftPredict.wrap_single

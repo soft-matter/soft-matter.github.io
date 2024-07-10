@@ -1,0 +1,6 @@
+﻿trackpy.static.cluster
+======================
+
+.. currentmodule:: trackpy.static
+
+.. autofunction:: cluster

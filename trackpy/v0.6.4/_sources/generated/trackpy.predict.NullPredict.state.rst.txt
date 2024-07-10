@@ -1,0 +1,6 @@
+trackpy.predict.NullPredict.state
+=================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: NullPredict.state

@@ -1,0 +1,6 @@
+﻿trackpy.batch
+=============
+
+.. currentmodule:: trackpy
+
+.. autofunction:: batch

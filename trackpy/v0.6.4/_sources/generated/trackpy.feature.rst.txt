@@ -1,0 +1,37 @@
+trackpy.feature
+===============
+
+.. automodule:: trackpy.feature
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      batch
+      characterize
+      estimate_mass
+      estimate_size
+      local_maxima
+      locate
+      minmass_v03_change
+      minmass_v04_change
+      refine
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

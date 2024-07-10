@@ -1,0 +1,6 @@
+﻿trackpy.motion.theta\_entropy
+=============================
+
+.. currentmodule:: trackpy.motion
+
+.. autofunction:: theta_entropy
