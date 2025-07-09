@@ -4,11 +4,6 @@ trackpy.artificial
 .. automodule:: trackpy.artificial
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -31,21 +26,9 @@ trackpy.artificial
       rot_2d
       rot_3d
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       SimulatedImage
    
-   
-
-   
-   
-   
-
-
-

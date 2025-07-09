@@ -4,11 +4,6 @@ trackpy.diag
 .. automodule:: trackpy.diag
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -16,15 +11,3 @@ trackpy.diag
       dependencies
       performance_report
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

@@ -4,11 +4,6 @@ trackpy.refine.least\_squares
 .. automodule:: trackpy.refine.least_squares
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -43,19 +38,11 @@ trackpy.refine.least\_squares
       vect_from_params
       vect_to_params
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       FitFunctions
-   
-   
-
-   
    
    .. rubric:: Exceptions
 
@@ -63,7 +50,3 @@ trackpy.refine.least\_squares
    
       RefineException
    
-   
-
-
-

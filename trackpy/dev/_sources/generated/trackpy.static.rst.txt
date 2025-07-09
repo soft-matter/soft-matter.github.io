@@ -4,11 +4,6 @@ trackpy.static
 .. automodule:: trackpy.static
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -26,21 +21,9 @@ trackpy.static
       sphere_corner_area
       sphere_edge_area
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       Clusters
    
-   
-
-   
-   
-   
-
-
-

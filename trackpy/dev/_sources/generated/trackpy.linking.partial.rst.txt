@@ -4,11 +4,6 @@ trackpy.linking.partial
 .. automodule:: trackpy.linking.partial
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -17,15 +12,3 @@ trackpy.linking.partial
       link_partial
       reconnect_traj_patch
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

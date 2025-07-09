@@ -4,11 +4,6 @@ trackpy.feature
 .. automodule:: trackpy.feature
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -23,15 +18,3 @@ trackpy.feature
       minmass_v04_change
       refine
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

@@ -4,11 +4,6 @@ trackpy.filtering
 .. automodule:: trackpy.filtering
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -19,15 +14,3 @@ trackpy.filtering
       filter_clusters
       filter_stubs
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

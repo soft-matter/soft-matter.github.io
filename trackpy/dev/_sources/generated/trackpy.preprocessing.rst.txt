@@ -1,13 +1,8 @@
-﻿trackpy.preprocessing
+trackpy.preprocessing
 =====================
 
 .. automodule:: trackpy.preprocessing
 
-   
-   
-   
-
-   
    
    .. rubric:: Functions
 
@@ -23,15 +18,3 @@
       scale_to_gamut
       scalefactor_to_gamut
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

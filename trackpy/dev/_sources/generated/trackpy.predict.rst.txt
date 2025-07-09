@@ -4,11 +4,6 @@ trackpy.predict
 .. automodule:: trackpy.predict
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -16,10 +11,6 @@ trackpy.predict
       instrumented
       null_predict
       predictor
-   
-   
-
-   
    
    .. rubric:: Classes
 
@@ -30,11 +21,3 @@ trackpy.predict
       NearestVelocityPredict
       NullPredict
    
-   
-
-   
-   
-   
-
-
-

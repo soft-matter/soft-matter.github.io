@@ -4,11 +4,6 @@ trackpy.linking.linking
 .. automodule:: trackpy.linking.linking
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -19,21 +14,9 @@ trackpy.linking.linking
       link_df_iter
       link_iter
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       Linker
    
-   
-
-   
-   
-   
-
-
-

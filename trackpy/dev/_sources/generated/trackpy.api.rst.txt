@@ -4,20 +4,3 @@ trackpy.api
 .. automodule:: trackpy.api
 
    
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

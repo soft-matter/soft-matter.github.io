@@ -4,34 +4,16 @@ trackpy.linking
 .. automodule:: trackpy.linking
 
    
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-
 .. rubric:: Modules
 
 .. autosummary::
    :toctree:
    :recursive:
 
-   trackpy.linking.find_link
-   trackpy.linking.legacy
-   trackpy.linking.linking
-   trackpy.linking.partial
-   trackpy.linking.subnet
-   trackpy.linking.subnetlinker
-   trackpy.linking.utils
-
+   find_link
+   legacy
+   linking
+   partial
+   subnet
+   subnetlinker
+   utils

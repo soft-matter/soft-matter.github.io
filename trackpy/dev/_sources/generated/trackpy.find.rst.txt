@@ -4,11 +4,6 @@ trackpy.find
 .. automodule:: trackpy.find
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -19,15 +14,3 @@ trackpy.find
       percentile_threshold
       where_close
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

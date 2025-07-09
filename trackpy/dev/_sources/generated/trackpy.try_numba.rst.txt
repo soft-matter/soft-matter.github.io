@@ -4,11 +4,6 @@ trackpy.try\_numba
 .. automodule:: trackpy.try_numba
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -17,21 +12,9 @@ trackpy.try\_numba
       enable_numba
       try_numba_jit
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       RegisteredFunction
    
-   
-
-   
-   
-   
-
-
-

@@ -4,11 +4,6 @@ trackpy.uncertainty
 .. automodule:: trackpy.uncertainty
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -16,15 +11,3 @@ trackpy.uncertainty
       measure_noise
       static_error
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

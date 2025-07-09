@@ -4,11 +4,6 @@ trackpy.refine.center\_of\_mass
 .. automodule:: trackpy.refine.center_of_mass
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -16,15 +11,3 @@ trackpy.refine.center\_of\_mass
       refine_com
       refine_com_arr
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

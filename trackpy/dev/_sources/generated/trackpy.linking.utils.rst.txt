@@ -4,11 +4,6 @@ trackpy.linking.utils
 .. automodule:: trackpy.linking.utils
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -19,20 +14,12 @@ trackpy.linking.utils
       points_to_arr
       verify_integrity
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       Point
       TrackUnstored
-   
-   
-
-   
    
    .. rubric:: Exceptions
 
@@ -41,7 +28,3 @@ trackpy.linking.utils
       SubnetOversizeException
       UnknownLinkingError
    
-   
-
-
-

@@ -4,11 +4,6 @@ trackpy.masks
 .. automodule:: trackpy.masks
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -26,15 +21,3 @@ trackpy.masks
       theta_mask
       x_squared_masks
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

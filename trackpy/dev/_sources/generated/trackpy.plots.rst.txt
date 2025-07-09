@@ -4,11 +4,6 @@ trackpy.plots
 .. automodule:: trackpy.plots
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -34,15 +29,3 @@ trackpy.plots
       scatter3d
       subpx_bias
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

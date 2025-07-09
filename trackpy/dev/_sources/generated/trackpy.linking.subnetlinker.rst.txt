@@ -4,11 +4,6 @@ trackpy.linking.subnetlinker
 .. automodule:: trackpy.linking.subnetlinker
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -22,21 +17,9 @@ trackpy.linking.subnetlinker
       subnet_linker_numba
       subnet_linker_recursive
    
-   
-
-   
-   
    .. rubric:: Classes
 
    .. autosummary::
    
       SubnetLinker
    
-   
-
-   
-   
-   
-
-
-

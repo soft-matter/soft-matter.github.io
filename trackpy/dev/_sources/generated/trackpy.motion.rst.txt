@@ -4,11 +4,6 @@ trackpy.motion
 .. automodule:: trackpy.motion
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -31,15 +26,3 @@ trackpy.motion
       vanhove
       velocity_corr
    
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

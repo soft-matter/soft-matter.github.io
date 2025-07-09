@@ -4,11 +4,6 @@ trackpy.linking.legacy
 .. automodule:: trackpy.linking.legacy
 
    
-   
-   
-
-   
-   
    .. rubric:: Functions
 
    .. autosummary::
@@ -19,10 +14,6 @@ trackpy.linking.legacy
       link_df_iter
       link_iter
       strip_diagnostics
-   
-   
-
-   
    
    .. rubric:: Classes
 
@@ -38,11 +29,3 @@ trackpy.linking.legacy
       Track
       TreeFinder
    
-   
-
-   
-   
-   
-
-
-
