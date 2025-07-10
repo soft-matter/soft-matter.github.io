@@ -62,7 +62,7 @@ See the
 release or the version in development.
 
 To check out the code, report a bug, or contribute a new feature, please visit
-the `github repository <https://github.com/soft-matter/trackpy>`_.
+the `GitHub repository <https://github.com/soft-matter/trackpy>`_.
 
 Different versions of the documentations are available: consult the documentation
 of the current `stable <https://soft-matter.github.io/trackpy/stable/>`_

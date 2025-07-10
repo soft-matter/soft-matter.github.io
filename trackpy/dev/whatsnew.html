@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>What’s new in the package &#8212; trackpy 0.6.4+30.g2cd4b3f</title>
+    <title>What’s new in the package &#8212; trackpy 0.7rc1</title>
   
   
   
@@ -38,7 +38,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=1512d386"></script>
+    <script src="_static/documentation_options.js?v=51cc3084"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'whatsnew';</script>
@@ -48,7 +48,7 @@
     <link rel="prev" title="trackpy.utils" href="generated/trackpy.utils.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.6.4+30.g2cd4b3f" />
+  <meta name="docsearch:version" content="0.7rc1" />
   </head>
   
   
@@ -110,7 +110,7 @@
   
   
   
-    <p class="title logo__title">trackpy 0.6.4+30.g2cd4b3f</p>
+    <p class="title logo__title">trackpy 0.7rc1</p>
   
 </a></div>
     
@@ -492,6 +492,29 @@
   <section id="what-s-new-in-the-package">
 <span id="whatsnew"></span><h1>What’s new in the package<a class="headerlink" href="#what-s-new-in-the-package" title="Link to this heading">#</a></h1>
 <p>A catalog of new features, improvements, and bug-fixes in each release. Follow links to the relevant GitHub issue or pull request for specific code changes and any related discussion.</p>
+<section id="v0-7">
+<h2>v0.7<a class="headerlink" href="#v0-7" title="Link to this heading">#</a></h2>
+<p>trackpy v0.7 includes an enhancement/bug fix to how MSD calculations handle gaps
+in trajectories. The msd() and imsd() functions now output NaN values (instead
+of zeros) for portions of their output that could not be measured. The emsd()
+function now properly de-weights missing data, and so its output may be
+significantly different (and more accurate) when gaps are numerous and large.</p>
+<section id="bug-fixes">
+<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MSD properly handles gaps in trajectories (&#64;vivarose, #773)</p></li>
+<li><p>Fix plot_traj(colorby=’frame’) for intermittent particles. (&#64;T0T0R, #777)</p></li>
+<li><p>Let imsd() use output of subtract_drift() (&#64;nkeim, #785)</p></li>
+</ul>
+</section>
+<section id="enhancements">
+<h3>Enhancements<a class="headerlink" href="#enhancements" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Clarify what parameters are keyword-only in documentation of link functions
+(&#64;anntzer, #789)</p></li>
+</ul>
+</section>
+</section>
 <section id="v0-6-4">
 <h2>v0.6.4<a class="headerlink" href="#v0-6-4" title="Link to this heading">#</a></h2>
 <p>trackpy v0.6.4 is a minor compatibility update for numpy v2.0</p>
@@ -521,16 +544,16 @@ numpy 2.0 (see <a class="github reference external" href="https://github.com/PyT
 <p>trackpy v0.6.2 includes bug fixes, and compatibility fixes with newer
 dependency versions.</p>
 <p>A special thanks to everyone who reported the issues fixed in this release!</p>
-<section id="bug-fixes">
-<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h3>Bug fixes<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Fixed an issue with feature-finding in 4D image sequences (&#64;VeraMTitze, #739)</p></li>
 <li><p>Fixed a rare issue in which subtract_drift() with multiple particles
 resulted in a Pandas indexing error. (&#64;kevin-duclos, #735)</p></li>
 </ul>
 </section>
-<section id="id2">
-<h3>Dependencies<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3>Dependencies<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Adds official support for Python 3.12. (&#64;caspervdw, #747)</p></li>
 <li><p>Adds support for latest Pandas, NumPy, and SciPy (&#64;marcocaggioni, #740;
@@ -553,8 +576,8 @@ capabilities. Some existing code that used prediction may now fail to run until
 a (minor) update is made.</p>
 <p>This release includes contributions by &#64;magnunor, &#64;freemansw1, &#64;crisp-snakey,
 &#64;rbnvrw, &#64;caspervdw, &#64;tacaswell, and &#64;nkeim.</p>
-<section id="enhancements">
-<h3>Enhancements<a class="headerlink" href="#enhancements" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>Enhancements<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Linking can now use any <code class="docutils literal notranslate"><span class="pre">DistanceMetric</span></code> class from sklearn to compute
 distances (#692 by &#64;freemansw1)</p></li>
@@ -576,8 +599,8 @@ using the link_df() or link_df_iter() methods to link your features.
 and is described in the API documentation. (&#64;nkeim, #648)</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Bug Fixes<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>Bug Fixes<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>When linking with prediction, the predictor now correctly uses the same
 position columns as the linker, and correctly handles the pos_columns
@@ -586,8 +609,8 @@ argument if specified. (&#64;nkeim, #710)</p></li>
 reflected in the updated prediction tutorial. (&#64;nkeim, #710)</p></li>
 </ul>
 </section>
-<section id="id4">
-<h3>Dependencies<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3>Dependencies<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>trackpy is now being tested in conda environments with Python 3.10.</p></li>
 <li><p>trackpy is no longer tested with Python 3.6.</p></li>
@@ -608,8 +631,8 @@ workflows (see “API Changes” below).</p>
 <p>Note that Python 2 reached end-of-life in 2020, and it is no longer officially
 supported by trackpy. Also, trackpy dropped support for older NumPy, Scipy and Pandas.
 The current minimum requirements are: <code class="docutils literal notranslate"><span class="pre">python&gt;=3.6</span> <span class="pre">numpy&gt;=1.14</span> <span class="pre">scipy&gt;=1.1</span> <span class="pre">pandas&gt;=0.22</span></code>.</p>
-<section id="id5">
-<h3>Enhancements<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3>Enhancements<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>“compute_drift()” now accepts list-like “pos_columns” (e.g. tuples). (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/579">GH #579</a>)</p></li>
 <li><p>“trackpy.locate_brightfield_ring” now defaults to parallel execution with all
@@ -619,8 +642,8 @@ instead of the minimum, resulting in a more robust tracking for low contrast
 images. (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/602">GH #602</a>)</p></li>
 </ul>
 </section>
-<section id="id6">
-<h3>API Changes<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="id8">
+<h3>API Changes<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>“trackpy.batch” now defaults to parallel execution with all available CPUs
 (“processes=’auto’”). For most users this should be a noticeable speedup.
@@ -643,14 +666,14 @@ variable before starting Python.
 speed up feature-finding, and a new method for locating features in
 bright-field microscopy. There is also an overhaul of the walkthrough and other
 tutorials, and compatibility with the latest version of Pandas (0.25.1).</p>
-<section id="id7">
-<h3>API Changes<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h3>API Changes<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>“trackpy.locate” and associated functions now report “ep” to be NaN when
 there is only one usable background pixel to sample. (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/519">GH #519</a>)</p></li>
 <li><p>“trackpy.legacy.linking.link_df” does not copy a DataFrame automatically
 anymore if the provided DataFrame is a view. (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/503">GH #503</a>)</p></li>
-<li><p>The “locate” options in “trackpy.batch” are now collected in “<a href="#id8"><span class="problematic" id="id9">**</span></a>kwargs”
+<li><p>The “locate” options in “trackpy.batch” are now collected in “<a href="#id10"><span class="problematic" id="id11">**</span></a>kwargs”
 (except for “diameter”) and passed to the wrapped “trackpy.locate” function.
 This means when using the “meta” option of “trackpy.batch” only explicitly
 given options for the wrapped “trackpy.locate” are saved to the file;
@@ -658,8 +681,8 @@ unspecified options using default values from “locate” aren’t saved.
 (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/499">GH #499</a>)</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>Enhancements<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h3>Enhancements<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Added support for multiprocessing to “trackpy.batch”. (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/499">GH #499</a>)</p></li>
 <li><p>“trackpy.locate_brightfield_ring” enables precise tracking of large
@@ -678,8 +701,8 @@ feature-finding APIs. (<a class="extlink-issue reference external" href="https:/
 <a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/522">GH #522</a>, <a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/540">GH #540</a>, <a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/542">GH #542</a>)</p></li>
 </ul>
 </section>
-<section id="id11">
-<h3>Bug fixes<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id13">
+<h3>Bug fixes<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Fixed incompatibility with recent Pandas (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/529">GH #529</a>, <a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/538">GH #538</a>)</p></li>
 <li><p>Removed warnings in case Pandas 0.23 is used (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/503">GH #503</a>)</p></li>
@@ -693,21 +716,21 @@ of packages.</p></li>
 <h2>v0.4.1<a class="headerlink" href="#v0-4-1" title="Link to this heading">#</a></h2>
 <p>This is a minor release with some important fixes. Additionally, PIMS is no
 longer a required dependency, which makes installation easier.</p>
-<section id="id12">
-<h3>API Changes<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="id14">
+<h3>API Changes<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>PIMS (Python IMage Sequence) is no longer a required dependency (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/492">GH #492</a>)</p></li>
 </ul>
 </section>
-<section id="id13">
-<h3>Enhancements<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<section id="id15">
+<h3>Enhancements<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Improved performance of adaptive search (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/489">GH #489</a>)</p></li>
 <li><p>Reduced memory usage during linking (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/489">GH #489</a>)</p></li>
 </ul>
 </section>
-<section id="id14">
-<h3>Bug fixes<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<section id="id16">
+<h3>Bug fixes<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Fix enable_numba on Py3.6 and MS Windows systems (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/486">GH #486</a>)</p></li>
 </ul>
@@ -718,8 +741,8 @@ longer a required dependency, which makes installation easier.</p>
 <p>This is a major release that includes new choices for linking and feature-finding algorithms, as well as many
 performance increases and clean-ups. It is recommended for all trackpy users, but may require
 minor changes to existing code, as detailed below.</p>
-<section id="id15">
-<h3>API Changes<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<section id="id17">
+<h3>API Changes<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>locate has a more modular structure that makes it easier to customize feature-finding (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/400">GH #400</a>, <a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/406">GH #406</a>)</p></li>
 <li><p>The default value of smoothing_size is smaller, and more consistent with
@@ -733,8 +756,8 @@ update minmass values in existing code (<a class="extlink-issue reference extern
 <li><p>link_df always creates a copy of the data; it can no longer work in-place (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/414">GH #414</a>)</p></li>
 </ul>
 </section>
-<section id="id16">
-<h3>Enhancements<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<section id="id18">
+<h3>Enhancements<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Improved performance of feature finding (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/361">GH #361</a>)</p></li>
 <li><p>Improved performance of linking (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/400">GH #400</a>, <a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/406">GH #406</a>)</p></li>
@@ -743,8 +766,8 @@ update minmass values in existing code (<a class="extlink-issue reference extern
 <li><p>Linking in non-Euclidean coordinate systems and curved metrics (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/448">GH #448</a>)</p></li>
 </ul>
 </section>
-<section id="id17">
-<h3>Bug fixes<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<section id="id19">
+<h3>Bug fixes<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Fix compute_drift if dataframes are not sorted (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/409">GH #409</a>)</p></li>
 <li><p>Fix double counting of non-linking penalty in non-numba linkers (<a class="extlink-issue reference external" href="https://github.com/soft-matter/trackpy/issues/430">GH #430</a>)</p></li>
@@ -801,6 +824,11 @@ update minmass values in existing code (<a class="extlink-issue reference extern
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-7">v0.7</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-fixes">Bug fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enhancements">Enhancements</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-6-4">v0.6.4</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 </ul>
@@ -810,39 +838,39 @@ update minmass values in existing code (<a class="extlink-issue reference extern
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-6-2">v0.6.2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-fixes">Bug fixes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Bug fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Dependencies</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-6-1">v0.6.1</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-6-0">v0.6.0</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enhancements">Enhancements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Enhancements</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-changes">API Changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Bug Fixes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Bug Fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Dependencies</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-5">v0.5</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Enhancements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">API Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Enhancements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">API Changes</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-4-2">v0.4.2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">API Changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Enhancements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Bug fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">API Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Enhancements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Bug fixes</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-4-1">v0.4.1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">API Changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Enhancements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Bug fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">API Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Enhancements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Bug fixes</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v0-4-0">v0.4.0</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">API Changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Enhancements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Bug fixes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">API Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Enhancements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Bug fixes</a></li>
 </ul>
 </li>
 </ul>
