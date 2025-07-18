@@ -1,0 +1,31 @@
+trackpy.plots
+=============
+
+.. automodule:: trackpy.plots
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      annotate
+      annotate3d
+      examine_jumps
+      fit
+      invert_yaxis
+      make_axes
+      make_axes3d
+      make_fig
+      mass_ecc
+      mass_size
+      plot_density_profile
+      plot_displacements
+      plot_principal_axes
+      plot_traj
+      plot_traj3d
+      ptraj
+      ptraj3d
+      scatter
+      scatter3d
+      subpx_bias
+   

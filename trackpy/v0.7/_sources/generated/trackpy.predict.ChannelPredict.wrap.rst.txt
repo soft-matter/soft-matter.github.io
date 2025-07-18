@@ -1,0 +1,6 @@
+trackpy.predict.ChannelPredict.wrap
+===================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: ChannelPredict.wrap

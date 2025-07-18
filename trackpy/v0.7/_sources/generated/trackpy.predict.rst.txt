@@ -1,0 +1,23 @@
+trackpy.predict
+===============
+
+.. automodule:: trackpy.predict
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      instrumented
+      null_predict
+      predictor
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ChannelPredict
+      DriftPredict
+      NearestVelocityPredict
+      NullPredict
+   

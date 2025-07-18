@@ -1,0 +1,13 @@
+trackpy.locate\_functions
+=========================
+
+.. automodule:: trackpy.locate_functions
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   brightfield_ring

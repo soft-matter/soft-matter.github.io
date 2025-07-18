@@ -1,0 +1,19 @@
+trackpy.linking
+===============
+
+.. automodule:: trackpy.linking
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   find_link
+   legacy
+   linking
+   partial
+   subnet
+   subnetlinker
+   utils

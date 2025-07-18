@@ -1,0 +1,20 @@
+trackpy.try\_numba
+==================
+
+.. automodule:: trackpy.try_numba
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      disable_numba
+      enable_numba
+      try_numba_jit
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RegisteredFunction
+   

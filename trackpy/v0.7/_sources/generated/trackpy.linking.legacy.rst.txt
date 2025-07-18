@@ -1,0 +1,31 @@
+trackpy.linking.legacy
+======================
+
+.. automodule:: trackpy.linking.legacy
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      assign_candidates
+      link
+      link_df
+      link_df_iter
+      link_iter
+      strip_diagnostics
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      HashTable
+      Hash_table
+      Linker
+      Point
+      PointDiagnostics
+      PointND
+      PointNDDiagnostics
+      Track
+      TreeFinder
+   

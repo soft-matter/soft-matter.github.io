@@ -12,6 +12,7 @@ Disallow: /trackpy/v0.6.0/
 Disallow: /trackpy/v0.6.1/
 Disallow: /trackpy/v0.6.2/
 Disallow: /trackpy/v0.6.3/
+Disallow: /trackpy/v0.6.4/
 
 Disallow: /pims/0.3.2/
 Disallow: /pims/v0.3.2/

@@ -1,0 +1,20 @@
+trackpy.preprocessing
+=====================
+
+.. automodule:: trackpy.preprocessing
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bandpass
+      boxcar
+      convert_to_int
+      invert_image
+      legacy_bandpass
+      legacy_bandpass_fftw
+      lowpass
+      scale_to_gamut
+      scalefactor_to_gamut
+   

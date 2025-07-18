@@ -1,0 +1,6 @@
+﻿trackpy.utils.fit\_powerlaw
+===========================
+
+.. currentmodule:: trackpy.utils
+
+.. autofunction:: fit_powerlaw

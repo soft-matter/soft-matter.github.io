@@ -1,0 +1,25 @@
+trackpy.linking.subnetlinker
+============================
+
+.. automodule:: trackpy.linking.subnetlinker
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      drop_link
+      nonrecursive_link
+      numba_link
+      recursive_linker_obj
+      subnet_linker_drop
+      subnet_linker_nonrecursive
+      subnet_linker_numba
+      subnet_linker_recursive
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SubnetLinker
+   

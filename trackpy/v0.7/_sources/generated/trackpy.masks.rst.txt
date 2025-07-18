@@ -1,0 +1,23 @@
+trackpy.masks
+=============
+
+.. automodule:: trackpy.masks
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      N_binary_mask
+      binary_mask
+      cosmask
+      gaussian_kernel
+      get_mask
+      get_slice
+      mask_image
+      r_squared_mask
+      sinmask
+      slice_image
+      theta_mask
+      x_squared_masks
+   

@@ -1,0 +1,29 @@
+trackpy.static
+==============
+
+.. automodule:: trackpy.static
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      arclen_2d_bounded
+      area_3d_bounded
+      circle_cap_arclen
+      circle_corner_arclen
+      cluster
+      cluster_iter
+      pair_correlation_2d
+      pair_correlation_3d
+      proximity
+      sphere_cap_area
+      sphere_corner_area
+      sphere_edge_area
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Clusters
+   

@@ -1,0 +1,15 @@
+trackpy.refine
+==============
+
+.. automodule:: trackpy.refine
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   brightfield_ring
+   center_of_mass
+   least_squares

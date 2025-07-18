@@ -1,0 +1,12 @@
+trackpy.locate\_functions.brightfield\_ring
+===========================================
+
+.. automodule:: trackpy.locate_functions.brightfield_ring
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      locate_brightfield_ring
+   

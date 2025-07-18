@@ -1,0 +1,34 @@
+trackpy.artificial
+==================
+
+.. automodule:: trackpy.artificial
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      draw_array
+      draw_cluster
+      draw_feature
+      draw_features_brightfield
+      draw_point
+      draw_spots
+      feat_brightfield
+      feat_disc
+      feat_gauss
+      feat_hat
+      feat_ring
+      feat_step
+      gen_connected_locations
+      gen_nonoverlapping_locations
+      gen_random_locations
+      rot_2d
+      rot_3d
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SimulatedImage
+   

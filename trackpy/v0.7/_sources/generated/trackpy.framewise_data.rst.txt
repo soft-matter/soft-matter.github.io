@@ -1,0 +1,22 @@
+trackpy.framewise\_data
+=======================
+
+.. automodule:: trackpy.framewise_data
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      code_key
+      decode_key
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FramewiseData
+      PandasHDFStore
+      PandasHDFStoreBig
+      PandasHDFStoreSingleNode
+   

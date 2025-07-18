@@ -1,0 +1,999 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>trackpy.refine_leastsq &#8212; trackpy 0.7</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=48f8e935"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/trackpy.refine_leastsq';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="trackpy.link_iter" href="trackpy.link_iter.html" />
+    <link rel="prev" title="trackpy.refine_com" href="trackpy.refine_com.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">trackpy 0.7</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="ms-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../introduction.html">
+    Introduction to Trackpy
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installing Trackpy
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whatsnew.html">
+    What’s new in the package
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/walkthrough.html">
+    Walkthrough
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/prediction.html">
+    Prediction (Linking)
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/tracking-3d.html">
+    Tracking in 3D
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/uncertainty.html">
+    Uncertainty Estimation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/subnets.html">
+    Advanced Linking
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/adaptive-search.html">
+    Adaptive Linking
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/on-disk.html">
+    Streaming
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/performance.html">
+    Performance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/parallel-locate.html">
+    Parallelized Feature Finding
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/custom-feature-detection.html">
+    Tracking Large Features Such As Bubbles
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/brightfield.html">
+    Tracking Particles' Rings in Bright-Field Microscopy
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../introduction.html">
+    Introduction to Trackpy
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installing Trackpy
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whatsnew.html">
+    What’s new in the package
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/walkthrough.html">
+    Walkthrough
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/prediction.html">
+    Prediction (Linking)
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/tracking-3d.html">
+    Tracking in 3D
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/uncertainty.html">
+    Uncertainty Estimation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/subnets.html">
+    Advanced Linking
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/adaptive-search.html">
+    Adaptive Linking
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/on-disk.html">
+    Streaming
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/performance.html">
+    Performance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/parallel-locate.html">
+    Parallelized Feature Finding
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/custom-feature-detection.html">
+    Tracking Large Features Such As Bubbles
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/brightfield.html">
+    Tracking Particles' Rings in Bright-Field Microscopy
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.locate.html">trackpy.locate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.batch.html">trackpy.batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link.html">trackpy.link</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.grey_dilation.html">trackpy.grey_dilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.find_link.html">trackpy.find_link</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.refine_com.html">trackpy.refine_com</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">trackpy.refine_leastsq</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link.html">trackpy.link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_iter.html">trackpy.link_iter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_df_iter.html">trackpy.link_df_iter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_partial.html">trackpy.link_partial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.reconnect_traj_patch.html">trackpy.reconnect_traj_patch</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.proximity.html">trackpy.static.proximity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.pair_correlation_2d.html">trackpy.static.pair_correlation_2d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.pair_correlation_3d.html">trackpy.static.pair_correlation_3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.cluster.html">trackpy.static.cluster</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.msd.html">trackpy.motion.msd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.imsd.html">trackpy.motion.imsd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.emsd.html">trackpy.motion.emsd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.compute_drift.html">trackpy.motion.compute_drift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.subtract_drift.html">trackpy.motion.subtract_drift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.vanhove.html">trackpy.motion.vanhove</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.relate_frames.html">trackpy.motion.relate_frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.velocity_corr.html">trackpy.motion.velocity_corr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.direction_corr.html">trackpy.motion.direction_corr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.is_typical.html">trackpy.motion.is_typical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.diagonal_size.html">trackpy.motion.diagonal_size</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.theta_entropy.html">trackpy.motion.theta_entropy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.min_rolling_theta_entropy.html">trackpy.motion.min_rolling_theta_entropy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.filtering.filter_stubs.html">trackpy.filtering.filter_stubs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.filtering.filter_clusters.html">trackpy.filtering.filter_clusters</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.NullPredict.html">trackpy.predict.NullPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.ChannelPredict.html">trackpy.predict.ChannelPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.DriftPredict.html">trackpy.predict.DriftPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.NearestVelocityPredict.html">trackpy.predict.NearestVelocityPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.predictor.html">trackpy.predict.predictor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.instrumented.html">trackpy.predict.instrumented</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.annotate.html">trackpy.annotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.scatter.html">trackpy.scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_traj.html">trackpy.plot_traj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.annotate3d.html">trackpy.annotate3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.scatter3d.html">trackpy.scatter3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_traj3d.html">trackpy.plot_traj3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_displacements.html">trackpy.plot_displacements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.subpx_bias.html">trackpy.subpx_bias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_density_profile.html">trackpy.plot_density_profile</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.mass_ecc.html">trackpy.mass_ecc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.mass_size.html">trackpy.mass_size</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.find.percentile_threshold.html">trackpy.find.percentile_threshold</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.bandpass.html">trackpy.preprocessing.bandpass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.lowpass.html">trackpy.preprocessing.lowpass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.scale_to_gamut.html">trackpy.preprocessing.scale_to_gamut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.invert_image.html">trackpy.preprocessing.invert_image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.convert_to_int.html">trackpy.preprocessing.convert_to_int</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.PandasHDFStore.html">trackpy.PandasHDFStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.PandasHDFStoreBig.html">trackpy.PandasHDFStoreBig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.PandasHDFStoreSingleNode.html">trackpy.PandasHDFStoreSingleNode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.FramewiseData.html">trackpy.FramewiseData</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.quiet.html">trackpy.quiet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.handle_logging.html">trackpy.handle_logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.ignore_logging.html">trackpy.ignore_logging</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.minmass_v03_change.html">trackpy.minmass_v03_change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.minmass_v04_change.html">trackpy.minmass_v04_change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.utils.fit_powerlaw.html">trackpy.utils.fit_powerlaw</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.diag.performance_report.html">trackpy.diag.performance_report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.diag.dependencies.html">trackpy.diag.dependencies</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.enable_numba.html">trackpy.enable_numba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.disable_numba.html">trackpy.disable_numba</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_iter.html">trackpy.link_iter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link.html">trackpy.link</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.SubnetOversizeException.html">trackpy.SubnetOversizeException</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.binary_mask.html">trackpy.masks.binary_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.r_squared_mask.html">trackpy.masks.r_squared_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.x_squared_masks.html">trackpy.masks.x_squared_masks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.cosmask.html">trackpy.masks.cosmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.sinmask.html">trackpy.masks.sinmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.theta_mask.html">trackpy.masks.theta_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.gaussian_kernel.html">trackpy.masks.gaussian_kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.mask_image.html">trackpy.masks.mask_image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.slice_image.html">trackpy.masks.slice_image</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="trackpy.html">trackpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.api.html">trackpy.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.artificial.html">trackpy.artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.diag.html">trackpy.diag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.feature.html">trackpy.feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.filtering.html">trackpy.filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.find.html">trackpy.find</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.framewise_data.html">trackpy.framewise_data</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="trackpy.linking.html">trackpy.linking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.find_link.html">trackpy.linking.find_link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.legacy.html">trackpy.linking.legacy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.linking.html">trackpy.linking.linking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.partial.html">trackpy.linking.partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.subnet.html">trackpy.linking.subnet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.subnetlinker.html">trackpy.linking.subnetlinker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.utils.html">trackpy.linking.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="trackpy.locate_functions.html">trackpy.locate_functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.locate_functions.brightfield_ring.html">trackpy.locate_functions.brightfield_ring</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.masks.html">trackpy.masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.motion.html">trackpy.motion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.plots.html">trackpy.plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.predict.html">trackpy.predict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.preprocessing.html">trackpy.preprocessing</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="trackpy.refine.html">trackpy.refine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.refine.brightfield_ring.html">trackpy.refine.brightfield_ring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.refine.center_of_mass.html">trackpy.refine.center_of_mass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.refine.least_squares.html">trackpy.refine.least_squares</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.static.html">trackpy.static</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.tracking.html">trackpy.tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.try_numba.html">trackpy.try_numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.uncertainty.html">trackpy.uncertainty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.utils.html">trackpy.utils</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">trackpy.refine_leastsq</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="trackpy-refine-leastsq">
+<h1>trackpy.refine_leastsq<a class="headerlink" href="#trackpy-refine-leastsq" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="trackpy.refine_leastsq">
+<span class="sig-prename descclassname"><span class="pre">trackpy.</span></span><span class="sig-name descname"><span class="pre">refine_leastsq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gauss'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frame'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rms_dev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trackpy.refine_leastsq" title="Link to this definition">#</a></dt>
+<dd><p>Refines overlapping feature coordinates by least-squares fitting to
+radial model functions.</p>
+<p>This does not raise an error if minimization fails. Instead, coordinates
+are unchanged and the added column <code class="docutils literal notranslate"><span class="pre">cost</span></code> will contain <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>f</strong><span class="classifier">DataFrame</span></dt><dd><p>pandas DataFrame containing coordinates of features.
+Required columns are the position columns (see <code class="docutils literal notranslate"><span class="pre">pos_columns</span></code>)</p>
+<p>Any fit parameter (which are at least ‘background’, ‘signal’ and ‘size’)
+that is not present should be either given as a standard value in the
+<code class="docutils literal notranslate"><span class="pre">param_val</span></code> argument, or be present as a <code class="docutils literal notranslate"><span class="pre">default</span></code> value in the used
+fit function.</p>
+<p>If a FramesSequence is supplied as a reader, the time column (see
+<code class="docutils literal notranslate"><span class="pre">t_column</span></code> is also required.</p>
+</dd>
+<dt><strong>reader</strong><span class="classifier">pims.FramesSequence, pims.Frame, or ndarray</span></dt><dd><p>A pims.FrameSequence is an object that returns an image when indexed. It
+also provides the <code class="docutils literal notranslate"><span class="pre">frame_shape</span></code> attribute. If not a FrameSequence is
+given a single image is assumed and all features that are present in
+<code class="docutils literal notranslate"><span class="pre">f</span></code> are assumed to be in that image.</p>
+</dd>
+<dt><strong>diameter</strong><span class="classifier">number or tuple</span></dt><dd><p>Determines the feature mask diameter that is used for the refinement.
+Use a tuple to account for anisotropic pixel sizes (e.g. <code class="docutils literal notranslate"><span class="pre">(7,</span> <span class="pre">11)</span></code>).</p>
+</dd>
+<dt><strong>separation</strong><span class="classifier">number or tuple, optional</span></dt><dd><p>Determines the distance below which features are considered in the same
+cluster. By default, equals <code class="docutils literal notranslate"><span class="pre">diameter</span></code>. As the model feature function
+is only defined up to <code class="docutils literal notranslate"><span class="pre">diameter</span></code>, it does not effect the refine
+results if this value is increased above <code class="docutils literal notranslate"><span class="pre">diameter</span></code>.</p>
+</dd>
+<dt><strong>fit_function</strong><span class="classifier">string or or dict, optional</span></dt><dd><p>The type of fit function. Either one of the default functions
+<code class="docutils literal notranslate"><span class="pre">{'gauss',</span> <span class="pre">'hat',</span> <span class="pre">'ring',</span> <span class="pre">'inv_series_&lt;number&gt;'}</span></code>, or a custom
+function defined using a dictionary. Defaults to <code class="docutils literal notranslate"><span class="pre">'gauss'</span></code>.</p>
+<p>The fit function is loosely defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}F(r, A, \sigma, \vec{p}) = B + A f(r, \vec{p})\\r^2 = \frac{x - c_x}{\sigma_x}^2 + \frac{y - c_y}{\sigma_y}^2\end{aligned}\end{align} \]</div>
+<p>In which <span class="math notranslate nohighlight">\(r\)</span> denotes the reduced distance to the feature center,
+<span class="math notranslate nohighlight">\(B\)</span> the background intensity of the image, <span class="math notranslate nohighlight">\(A\)</span> (‘signal’)
+the maximum value of the feature, <span class="math notranslate nohighlight">\(\vec{p}\)</span> a list of extra model
+parameters, <span class="math notranslate nohighlight">\(\sigma\)</span> (‘size’) the radial distance from the feature
+center at which the value of <span class="math notranslate nohighlight">\(f(r)\)</span> has decayed to
+<span class="math notranslate nohighlight">\(1/e \approx 0.37\)</span>, and <span class="math notranslate nohighlight">\(\vec{c}\)</span> the coordinate of the
+feature center.</p>
+<p>So <code class="docutils literal notranslate"><span class="pre">size</span></code> is smaller than the apparent radius of the feature.
+Typically, it is three to four times lower than the <code class="docutils literal notranslate"><span class="pre">diameter</span></code>.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">'gauss'</span></code> function is a Gaussian, without any extra parameter</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">'hat'</span></code> function is solid disc of relative size <code class="docutils literal notranslate"><span class="pre">disc_size</span></code>,
+and gaussian smoothed borders.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">'ring'</span></code> model function is a displaced gaussian with parameter
+<code class="docutils literal notranslate"><span class="pre">thickness</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">inv_series_&lt;number&gt;</span></code> model function is the inverse of an
+even polynomial containing <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> parameters
+(signal_mult / (1 + a r**2 + b r**4 + c r*2 + …) <code class="docutils literal notranslate"><span class="pre">signal_mult</span></code> is
+best chosen such that the maximum of the polynomial equals 1.</p></li>
+</ul>
+<p>Define your own model function with a dictionary, containing:</p>
+<ul>
+<li><p>params : list of str
+List of custom parameter names. The list has the same length as
+the <code class="docutils literal notranslate"><span class="pre">p</span></code> ndarray in <code class="docutils literal notranslate"><span class="pre">fun</span></code> and <code class="docutils literal notranslate"><span class="pre">dfun</span></code>. It does not include
+<code class="docutils literal notranslate"><span class="pre">background</span></code>, <code class="docutils literal notranslate"><span class="pre">signal</span></code>, or <code class="docutils literal notranslate"><span class="pre">size</span></code>.</p></li>
+<li><p>fun : callable
+The image model function. It takes arguments <code class="docutils literal notranslate"><span class="pre">(r2,</span> <span class="pre">p,</span> <span class="pre">ndim)</span></code>.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">r2</span></code> is a 1d ndarray containing the squared reduced</dt><dd><p>radial distances (see the above definition).</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code> is an array of extra feature parameters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of dimensions in the image</p></li>
+</ul>
+<p>The function returns an ndarray of the same shape as <code class="docutils literal notranslate"><span class="pre">r2</span></code>,
+containing the feature intensity values up to a maximum of 1.</p>
+</li>
+<li><p>dfun : callable, optional
+The analytical derivative of the image model function <code class="docutils literal notranslate"><span class="pre">fun</span></code>.
+The function takes the same arguments as <code class="docutils literal notranslate"><span class="pre">fun</span></code>.</p>
+<p>It returns a length-two tuple, with the following elements:</p>
+<ol class="arabic simple">
+<li><p>(because of performance considerations)
+the image model function, exactly as returned by <code class="docutils literal notranslate"><span class="pre">fun</span></code></p></li>
+<li><p>the partial derivatives of <code class="docutils literal notranslate"><span class="pre">fun</span></code> in each point <code class="docutils literal notranslate"><span class="pre">r2</span></code> as a
+list of 1d ndarrays. The first element is the derivative with
+respect to <code class="docutils literal notranslate"><span class="pre">r2</span></code>, the following elements w.r.t. the custom
+shape parameters as defined in <code class="docutils literal notranslate"><span class="pre">params</span></code>. Hence, the number
+of elements in this list is <code class="docutils literal notranslate"><span class="pre">len(params)</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+</ol>
+</li>
+<li><p>default : dict, optional
+Default parameter values. For instance <code class="docutils literal notranslate"><span class="pre">dict(thickness=0.2)</span></code></p></li>
+<li><p>continuous : boolean, optional
+Default True. Set this to False if <span class="math notranslate nohighlight">\(f(|r|)\)</span> is not
+continuous at <span class="math notranslate nohighlight">\(r = 0\)</span>. In that case, all pixels closer
+than 1 pixel to the center will be ignored.</p></li>
+</ul>
+</dd>
+<dt><strong>param_mode</strong><span class="classifier">dict, optional</span></dt><dd><p>For each parameter, define whether it should be optimized or be
+kept constant. This also allows for constraining parameters to be equal
+within each cluster or equal for all frames.</p>
+<p>Each parameter can have one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'var'</span></code> : the parameter is allowed to vary for each feature independently</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'const'</span></code> : the parameter is not allowed to vary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'cluster'</span></code> : the parameter is allowed to vary, but is equal
+within each cluster</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'global'</span></code> : the parameter is allowed to vary, but is equal for
+each feature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'frame'</span></code> : Not yet implemented</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'particle'</span></code> : Not yet implemented</p></li>
+</ul>
+<p>Default values for position coordinates and signal is <code class="docutils literal notranslate"><span class="pre">'var'</span></code>, for
+background <code class="docutils literal notranslate"><span class="pre">'cluster'</span></code> and for all others <code class="docutils literal notranslate"><span class="pre">'const'</span></code>. Background
+cannot vary within one cluster, as regions overlap.</p>
+</dd>
+<dt><strong>param_val</strong><span class="classifier">dict, optional</span></dt><dd><p>Default parameter values.</p>
+</dd>
+<dt><strong>constraints</strong><span class="classifier">tuple of dicts, optional</span></dt><dd><p>Provide constraints for the parameters that are optimized. Each
+constraint consists of a dictionary containing the following elements:</p>
+<ul class="simple">
+<li><p>type : str
+Constraint type: ‘eq’ for equality, which means that the constraint
+function result is to be zero. ‘ineq’ for inequality, which means
+that the constraint function result is to be greater than zero.</p></li>
+<li><p>fun : callable
+The function defining the constraint. The function is provided
+a 3d ndarray with on the axes (&lt;cluster&gt;, &lt;feature&gt;, &lt;parameter&gt;)
+parameters are (background, signal, &lt;pos&gt;, &lt;size&gt;, &lt;other&gt;).</p></li>
+<li><p>args : sequence, optional
+Extra arguments to be passed to the function.</p></li>
+<li><p>cluster_size : integer
+Size of the cluster to which the constraint applies</p></li>
+</ul>
+<p>The parameter array that is presented to the constraint function is
+slightly different from the 2D array of per-feature parameters used in
+<code class="docutils literal notranslate"><span class="pre">vect_from_params</span></code>, in the sense that that the first axis (axis 0) is
+extra.</p>
+<p>The 3D array of feature parameters that is presented to the constraint
+function is defined as follows:</p>
+<ul class="simple">
+<li><p>Axis 0, the grouping axis, which  mostly has a length of 1, but in the
+case that the features that are optimized at once belong to different
+clusters (e.g. 1 image with 10 dimers) the length of this axis is the
+number of clusters that are optimized together (in this example, 10).</p></li>
+<li><p>Axis 1, the feature axis, contains the individual features. In the example
+of 10 dimers, this axis would have a size of 2.</p></li>
+<li><p>Axis 2, the parameter axis, contains the parameters. The order is
+<code class="docutils literal notranslate"><span class="pre">['background',</span> <span class="pre">'signal',</span> <span class="pre">&lt;pos&gt;,</span> <span class="pre">&lt;size&gt;,</span> <span class="pre">&lt;extra&gt;]</span></code></p></li>
+</ul>
+</dd>
+<dt><strong>bounds: dict</strong></dt><dd><p>Bounds on parameters, in the following forms:</p>
+<ul class="simple">
+<li><p>Absolute bounds <code class="docutils literal notranslate"><span class="pre">{'x':</span> <span class="pre">[low,</span> <span class="pre">high]}</span></code></p></li>
+<li><p>Difference bounds, one-sided <code class="docutils literal notranslate"><span class="pre">{'x_abs':</span> <span class="pre">max_diff}</span></code></p></li>
+<li><p>Difference bounds, two-sided <code class="docutils literal notranslate"><span class="pre">{'x_abs':</span> <span class="pre">[max_diff_below,</span> <span class="pre">max_diff_above]}</span></code></p></li>
+<li><p>Relative bounds, one-sided <code class="docutils literal notranslate"><span class="pre">{'x_rel':</span> <span class="pre">max_fraction_below}</span></code></p></li>
+<li><p>Relative bounds, two-sided <code class="docutils literal notranslate"><span class="pre">{'x_rel':</span> <span class="pre">[max_fraction_below,</span> <span class="pre">max_fraction_above]}</span></code></p></li>
+</ul>
+<p>When the keyword <cite>pos</cite> is used, this will be distributed to all
+pos_columns (but direct values of each positions will have precedence)
+When the keyword <cite>size</cite> is used, this will be distributed to all sizes,
+in the case of anisotropic sizes (also, direct values have precedence)</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">{'x':</span> <span class="pre">(2,</span> <span class="pre">6),</span> <span class="pre">'x_abs':</span> <span class="pre">(4,</span> <span class="pre">6),</span> <span class="pre">'x_rel':</span> <span class="pre">(1.5,</span> <span class="pre">2.5)</span></code>
+would limit the parameter <code class="docutils literal notranslate"><span class="pre">'x'</span></code> between 2 and 6, between <code class="docutils literal notranslate"><span class="pre">x-4</span></code> and
+<code class="docutils literal notranslate"><span class="pre">x+6</span></code>,  and between <code class="docutils literal notranslate"><span class="pre">x/1.5</span></code> and <code class="docutils literal notranslate"><span class="pre">x*2.5</span></code>. The narrowest bound is
+taken.</p>
+</dd>
+<dt><strong>compute_error</strong><span class="classifier">boolean, optional</span></dt><dd><p>Requires numdifftools to be installed. Default False.
+This is an experimental and untested feature that estimates the error
+in the optimized parameters on a per-feature basis from the curvature
+(diagonal elements of the Hessian) of the objective function in the
+optimized point.</p>
+</dd>
+<dt><strong>pos_columns: list of strings, optional</strong></dt><dd><p>Column names that contain the position coordinates.
+Defaults to <code class="docutils literal notranslate"><span class="pre">['y',</span> <span class="pre">'x']</span></code> or <code class="docutils literal notranslate"><span class="pre">['z',</span> <span class="pre">'y',</span> <span class="pre">'x']</span></code>, if <code class="docutils literal notranslate"><span class="pre">'z'</span></code> exists.</p>
+</dd>
+<dt><strong>t_column: string, optional</strong></dt><dd><p>Column name that denotes the frame index. Default <code class="docutils literal notranslate"><span class="pre">'frame'</span></code>.</p>
+</dd>
+<dt><strong>max_iter: int, optional</strong></dt><dd><p>Max number of whole-pixel shifts in refine. Default 10.</p>
+</dd>
+<dt><strong>max_shift: float, optional</strong></dt><dd><p>Maximum satisfactory out-of-center distance. When the fitted gaussian
+is more out of center, do extra iteration. Default 1.</p>
+</dd>
+<dt><strong>max_rms_dev</strong><span class="classifier">float, optional</span></dt><dd><p>Maximum root mean squared difference between the final fit and the
+(preprocessed) image, in units of the image maximum value. Default 1.</p>
+</dd>
+<dt><strong>residual_factor</strong><span class="classifier">float, optional</span></dt><dd><p>Factor with which the residual is multiplied, something internal inside
+SLSQP makes it work best with this set around 100000. (which is Default)</p>
+</dd>
+<dt><strong>kwargs</strong><span class="classifier">optional</span></dt><dd><p>other arguments are passed directly to scipy.minimize. Defaults are
+<code class="docutils literal notranslate"><span class="pre">dict(method='SLSQP',</span> <span class="pre">tol=1E-6,</span> <span class="pre">options=dict(maxiter=100,</span> <span class="pre">disp=False))</span></code></p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame of refined coordinates. Added columns:</dt><dd></dd>
+</dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>‘cluster’: the cluster id of the feature.</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘cluster_size’: the size of the cluster to which the feature belongs</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘cost’: root mean squared difference between the final fit and</dt><dd><p>the (preprocessed) image, in units of the cluster maximum value. If the
+optimization fails, no error is raised feature fields are unchanged,
+and this field becomes NaN.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>(experimental) standard errors of variable parameters (‘x_std’, etc.) (only if compute_error is true)</dt><dd></dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">FitFunctions</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">vect_from_params</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">vect_to_params</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">wrap_constraint</span></code></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This feature is a recent addition to trackpy that is still in its
+experimental phase. Please report any issues you encounter on Github.</p>
+<p>If you use this specific algorithm for your scientific publications, please
+mention the accompanying publication <a class="reference internal" href="#r35bdcfe93ead-1" id="id1">[1]</a></p>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="r35bdcfe93ead-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>van der Wel C., Kraft D.J. Automated tracking of colloidal clusters</p>
+</div>
+</div>
+<p>with sub-pixel accuracy and precision. J. Phys. Condens. Mat. 29:44001 (2017)
+DOI: <a class="reference external" href="http://dx.doi.org/10.1088/1361-648X/29/4/044001">http://dx.doi.org/10.1088/1361-648X/29/4/044001</a></p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="trackpy.refine_com.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">trackpy.refine_com</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="trackpy.link_iter.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">trackpy.link_iter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2010-2025, Trackpy Contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

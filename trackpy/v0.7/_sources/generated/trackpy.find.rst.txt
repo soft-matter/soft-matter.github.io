@@ -1,0 +1,16 @@
+trackpy.find
+============
+
+.. automodule:: trackpy.find
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      drop_close
+      grey_dilation
+      grey_dilation_legacy
+      percentile_threshold
+      where_close
+   

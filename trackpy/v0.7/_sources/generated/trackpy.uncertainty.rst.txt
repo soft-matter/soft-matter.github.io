@@ -1,0 +1,13 @@
+trackpy.uncertainty
+===================
+
+.. automodule:: trackpy.uncertainty
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      measure_noise
+      static_error
+   

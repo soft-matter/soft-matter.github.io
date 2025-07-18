@@ -1,0 +1,28 @@
+trackpy.motion
+==============
+
+.. automodule:: trackpy.motion
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      compute_drift
+      diagonal_size
+      direction_corr
+      emsd
+      imsd
+      is_diffusive
+      is_localized
+      is_typical
+      min_rolling_theta_entropy
+      msd
+      proximity
+      relate_frames
+      shannon_entropy
+      subtract_drift
+      theta_entropy
+      vanhove
+      velocity_corr
+   

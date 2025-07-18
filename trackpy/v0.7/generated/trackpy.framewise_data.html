@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>trackpy.framewise_data &#8212; trackpy 0.7</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=48f8e935"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'generated/trackpy.framewise_data';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="trackpy.linking" href="trackpy.linking.html" />
+    <link rel="prev" title="trackpy.find" href="trackpy.find.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.7" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">trackpy 0.7</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="ms-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../introduction.html">
+    Introduction to Trackpy
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installing Trackpy
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whatsnew.html">
+    What’s new in the package
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/walkthrough.html">
+    Walkthrough
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/prediction.html">
+    Prediction (Linking)
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/tracking-3d.html">
+    Tracking in 3D
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/uncertainty.html">
+    Uncertainty Estimation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/subnets.html">
+    Advanced Linking
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/adaptive-search.html">
+    Adaptive Linking
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/on-disk.html">
+    Streaming
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/performance.html">
+    Performance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/parallel-locate.html">
+    Parallelized Feature Finding
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/custom-feature-detection.html">
+    Tracking Large Features Such As Bubbles
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../tutorial/brightfield.html">
+    Tracking Particles' Rings in Bright-Field Microscopy
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../introduction.html">
+    Introduction to Trackpy
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installing Trackpy
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whatsnew.html">
+    What’s new in the package
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/walkthrough.html">
+    Walkthrough
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/prediction.html">
+    Prediction (Linking)
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/tracking-3d.html">
+    Tracking in 3D
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/uncertainty.html">
+    Uncertainty Estimation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/subnets.html">
+    Advanced Linking
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/adaptive-search.html">
+    Adaptive Linking
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/on-disk.html">
+    Streaming
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/performance.html">
+    Performance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/parallel-locate.html">
+    Parallelized Feature Finding
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/custom-feature-detection.html">
+    Tracking Large Features Such As Bubbles
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorial/brightfield.html">
+    Tracking Particles' Rings in Bright-Field Microscopy
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.locate.html">trackpy.locate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.batch.html">trackpy.batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link.html">trackpy.link</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.grey_dilation.html">trackpy.grey_dilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.find_link.html">trackpy.find_link</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.refine_com.html">trackpy.refine_com</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.refine_leastsq.html">trackpy.refine_leastsq</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link.html">trackpy.link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_iter.html">trackpy.link_iter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_df_iter.html">trackpy.link_df_iter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_partial.html">trackpy.link_partial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.reconnect_traj_patch.html">trackpy.reconnect_traj_patch</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.proximity.html">trackpy.static.proximity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.pair_correlation_2d.html">trackpy.static.pair_correlation_2d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.pair_correlation_3d.html">trackpy.static.pair_correlation_3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.static.cluster.html">trackpy.static.cluster</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.msd.html">trackpy.motion.msd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.imsd.html">trackpy.motion.imsd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.emsd.html">trackpy.motion.emsd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.compute_drift.html">trackpy.motion.compute_drift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.subtract_drift.html">trackpy.motion.subtract_drift</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.vanhove.html">trackpy.motion.vanhove</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.relate_frames.html">trackpy.motion.relate_frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.velocity_corr.html">trackpy.motion.velocity_corr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.direction_corr.html">trackpy.motion.direction_corr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.is_typical.html">trackpy.motion.is_typical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.diagonal_size.html">trackpy.motion.diagonal_size</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.theta_entropy.html">trackpy.motion.theta_entropy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.motion.min_rolling_theta_entropy.html">trackpy.motion.min_rolling_theta_entropy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.filtering.filter_stubs.html">trackpy.filtering.filter_stubs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.filtering.filter_clusters.html">trackpy.filtering.filter_clusters</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.NullPredict.html">trackpy.predict.NullPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.ChannelPredict.html">trackpy.predict.ChannelPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.DriftPredict.html">trackpy.predict.DriftPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.NearestVelocityPredict.html">trackpy.predict.NearestVelocityPredict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.predictor.html">trackpy.predict.predictor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.predict.instrumented.html">trackpy.predict.instrumented</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.annotate.html">trackpy.annotate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.scatter.html">trackpy.scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_traj.html">trackpy.plot_traj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.annotate3d.html">trackpy.annotate3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.scatter3d.html">trackpy.scatter3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_traj3d.html">trackpy.plot_traj3d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_displacements.html">trackpy.plot_displacements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.subpx_bias.html">trackpy.subpx_bias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.plot_density_profile.html">trackpy.plot_density_profile</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.mass_ecc.html">trackpy.mass_ecc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.mass_size.html">trackpy.mass_size</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.find.percentile_threshold.html">trackpy.find.percentile_threshold</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.bandpass.html">trackpy.preprocessing.bandpass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.lowpass.html">trackpy.preprocessing.lowpass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.scale_to_gamut.html">trackpy.preprocessing.scale_to_gamut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.invert_image.html">trackpy.preprocessing.invert_image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.preprocessing.convert_to_int.html">trackpy.preprocessing.convert_to_int</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.PandasHDFStore.html">trackpy.PandasHDFStore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.PandasHDFStoreBig.html">trackpy.PandasHDFStoreBig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.PandasHDFStoreSingleNode.html">trackpy.PandasHDFStoreSingleNode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.FramewiseData.html">trackpy.FramewiseData</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.quiet.html">trackpy.quiet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.handle_logging.html">trackpy.handle_logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.ignore_logging.html">trackpy.ignore_logging</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.minmass_v03_change.html">trackpy.minmass_v03_change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.minmass_v04_change.html">trackpy.minmass_v04_change</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.utils.fit_powerlaw.html">trackpy.utils.fit_powerlaw</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.diag.performance_report.html">trackpy.diag.performance_report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.diag.dependencies.html">trackpy.diag.dependencies</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.enable_numba.html">trackpy.enable_numba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.disable_numba.html">trackpy.disable_numba</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link_iter.html">trackpy.link_iter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.link.html">trackpy.link</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.SubnetOversizeException.html">trackpy.SubnetOversizeException</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.binary_mask.html">trackpy.masks.binary_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.r_squared_mask.html">trackpy.masks.r_squared_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.x_squared_masks.html">trackpy.masks.x_squared_masks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.cosmask.html">trackpy.masks.cosmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.sinmask.html">trackpy.masks.sinmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.theta_mask.html">trackpy.masks.theta_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.gaussian_kernel.html">trackpy.masks.gaussian_kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.mask_image.html">trackpy.masks.mask_image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trackpy.masks.slice_image.html">trackpy.masks.slice_image</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="trackpy.html">trackpy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trackpy.api.html">trackpy.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.artificial.html">trackpy.artificial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.diag.html">trackpy.diag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.feature.html">trackpy.feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.filtering.html">trackpy.filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.find.html">trackpy.find</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">trackpy.framewise_data</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="trackpy.linking.html">trackpy.linking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.find_link.html">trackpy.linking.find_link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.legacy.html">trackpy.linking.legacy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.linking.html">trackpy.linking.linking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.partial.html">trackpy.linking.partial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.subnet.html">trackpy.linking.subnet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.subnetlinker.html">trackpy.linking.subnetlinker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.linking.utils.html">trackpy.linking.utils</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="trackpy.locate_functions.html">trackpy.locate_functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.locate_functions.brightfield_ring.html">trackpy.locate_functions.brightfield_ring</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.masks.html">trackpy.masks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.motion.html">trackpy.motion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.plots.html">trackpy.plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.predict.html">trackpy.predict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.preprocessing.html">trackpy.preprocessing</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="trackpy.refine.html">trackpy.refine</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.refine.brightfield_ring.html">trackpy.refine.brightfield_ring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.refine.center_of_mass.html">trackpy.refine.center_of_mass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trackpy.refine.least_squares.html">trackpy.refine.least_squares</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.static.html">trackpy.static</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.tracking.html">trackpy.tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.try_numba.html">trackpy.try_numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.uncertainty.html">trackpy.uncertainty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackpy.utils.html">trackpy.utils</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="trackpy.html" class="nav-link">trackpy</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">trackpy.framewise_data</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-trackpy.framewise_data">
+<span id="trackpy-framewise-data"></span><h1>trackpy.framewise_data<a class="headerlink" href="#module-trackpy.framewise_data" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">code_key</span></code>(frame_no)</p></td>
+<td><p>Turn the frame_no into a 'natural name' string idiomatic of HDFStore</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">decode_key</span></code>(key)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.FramewiseData.html#trackpy.FramewiseData" title="trackpy.framewise_data.FramewiseData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FramewiseData</span></code></a>()</p></td>
+<td><p>Abstract base class defining a data container with framewise access.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.PandasHDFStore.html#trackpy.PandasHDFStore" title="trackpy.framewise_data.PandasHDFStore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PandasHDFStore</span></code></a>(filename[, mode, t_column])</p></td>
+<td><p>An interface to an HDF5 file with framewise access, using pandas.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="trackpy.PandasHDFStoreBig.html#trackpy.PandasHDFStoreBig" title="trackpy.framewise_data.PandasHDFStoreBig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PandasHDFStoreBig</span></code></a>(filename[, mode, t_column])</p></td>
+<td><p>Like PandasHDFStore, but keeps a cache of frame numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="trackpy.PandasHDFStoreSingleNode.html#trackpy.PandasHDFStoreSingleNode" title="trackpy.framewise_data.PandasHDFStoreSingleNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PandasHDFStoreSingleNode</span></code></a>(filename[, key, ...])</p></td>
+<td><p>An interface to an HDF5 file with framewise access, using pandas, that is faster for cross-frame queries.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="trackpy.find.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">trackpy.find</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="trackpy.linking.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">trackpy.linking</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2010-2025, Trackpy Contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

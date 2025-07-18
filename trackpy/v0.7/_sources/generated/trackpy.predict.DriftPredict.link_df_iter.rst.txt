@@ -1,0 +1,6 @@
+trackpy.predict.DriftPredict.link\_df\_iter
+===========================================
+
+.. currentmodule:: trackpy.predict
+
+.. automethod:: DriftPredict.link_df_iter

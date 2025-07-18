@@ -1,0 +1,22 @@
+trackpy.linking.subnet
+======================
+
+.. automodule:: trackpy.linking.subnet
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      assign_subnet
+      split_subnet
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      HashBTree
+      HashBase
+      HashKDTree
+      Subnets
+   
